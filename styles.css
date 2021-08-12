@@ -55,3 +55,9 @@ full-height-grow {
     height: 140px;
     
 }
+
+.title {
+    font-weight: 500;
+    margin-bottom: 1rem;
+    margin-top: 0rem;
+}
