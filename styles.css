@@ -61,3 +61,10 @@ full-height-grow {
     margin-bottom: 1rem;
     margin-top: 0rem;
 }
+
+section {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
