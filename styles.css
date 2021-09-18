@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Arial-Black';
-    src: url('./fonts/arial-black.ttf'), url('./fonts/arial-black.ttf');
+    src: url('./fonts_temp/arial-black.ttf'), url('./fonts_temp/arial-black.ttf');
     font-weight: normal;
     font-style: header;
 }
