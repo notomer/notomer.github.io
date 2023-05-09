@@ -1,16 +1,18 @@
 {
   "files": {
-    "main.css": "/static/css/main.073c9b0a.css",
-    "main.js": "/static/js/main.b2d5ad57.js",
+    "main.css": "/static/css/main.41f3da17.css",
+    "main.js": "/static/js/main.6e19cc68.js",
     "static/js/787.24ba9e7b.chunk.js": "/static/js/787.24ba9e7b.chunk.js",
-    "static/media/logo.svg": "/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "static/media/Myriad Pro Regular.ttf": "/static/media/Myriad Pro Regular.c59859cec849233be7f8.ttf",
+    "static/media/Garamond-Light.ttf": "/static/media/Garamond-Light.36dd8fd88e62187103bb.ttf",
+    "static/media/HaloHandletter.otf": "/static/media/HaloHandletter.3b1012ec206760542232.otf",
     "index.html": "/index.html",
-    "main.073c9b0a.css.map": "/static/css/main.073c9b0a.css.map",
-    "main.b2d5ad57.js.map": "/static/js/main.b2d5ad57.js.map",
+    "main.41f3da17.css.map": "/static/css/main.41f3da17.css.map",
+    "main.6e19cc68.js.map": "/static/js/main.6e19cc68.js.map",
     "787.24ba9e7b.chunk.js.map": "/static/js/787.24ba9e7b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.073c9b0a.css",
-    "static/js/main.b2d5ad57.js"
+    "static/css/main.41f3da17.css",
+    "static/js/main.6e19cc68.js"
   ]
 }
