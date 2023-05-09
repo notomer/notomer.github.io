@@ -1,8 +1,21 @@
+@font-face {
+  font-family: "Garamond-Light";
+  src: url("./Fonts/Garamond-Light.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Myriad Pro Regular";
+  src: url("./Fonts/Myriad Pro Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "HaloHandletter";
+  src: url("./Fonts/HaloHandletter.otf") format("opentype");
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: "Garamond-Light", "Myriad Pro Regular", "HaloHandletter", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -10,4 +23,13 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+omer-header {
+  font-family: "HaloHandletter", sans-serif;
+}
+
+body-text {
+  font-family: "Myriad Pro Regular", sans-serif;
+  color: #666666;
 }
