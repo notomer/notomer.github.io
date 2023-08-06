@@ -1,3 +1,4 @@
+/* Define custom fonts using @font-face */
 @font-face {
   font-family: "Garamond-Light";
   src: url("./Fonts/Garamond-Light.ttf") format("truetype");
@@ -13,6 +14,7 @@
   src: url("./Fonts/HaloHandletter.otf") format("opentype");
 }
 
+/* Apply styles to the entire body */
 body {
   margin: 0;
   font-family: "Garamond-Light", "Myriad Pro Regular", "HaloHandletter", sans-serif;
@@ -20,17 +22,18 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Apply styles to the code elements */
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
+/* Apply styles to the 'omer-header' elements */
 omer-header {
   font-family: "HaloHandletter", sans-serif;
 }
 
+/* Apply styles to the 'body-text' elements */
 body-text {
   font-family: "Myriad Pro Regular", sans-serif;
   color: #666666;
 }
-

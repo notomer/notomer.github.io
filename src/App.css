@@ -1,63 +1,47 @@
+body {
+  /* General styles for body element */
+  margin: 0;
+  padding: 0;
+}
+
 .App {
   text-align: center;
+  font-family: Arial, sans-serif;
+  background-color: white; /* Light theme background */
+  color: black; /* Light theme text color */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+/* ... Rest of the existing styles ... */
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: white;
-  min-height: 100vh;
+/* Slideshow styles for mobile devices */
+.project-slider {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: black;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
 }
 
-.App-link {
-  color: #000000;
+.project {
+  flex: 0 0 80%;
+  margin: 0 10px;
+  scroll-snap-align: start;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  .App-header {
+    font-size: calc(10px + 1.5vmin); /* Reduce font size for smaller screens */
   }
-  to {
-    transform: rotate(360deg);
+
+  .grid-container {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Adjust grid layout */
+    grid-gap: 0.5rem; /* Reduce grid gap */
   }
-}
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  grid-gap: 1rem;
-  padding: 1rem;
-}
 
-.grid-item {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  background-color: #fff;
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
-  transition: all 0.2s ease-in-out;
-}
+  .project-slider {
+    flex-wrap: nowrap;
+  }
 
-.grid-item:hover {
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-}
-
-.grid-item-inner {
-  padding: 1rem;
+  .project {
+    flex: 0 0 70%;
+  }
 }

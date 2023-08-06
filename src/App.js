@@ -1,39 +1,90 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import './App.css';
 
 function App() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    // Check if the device is mobile
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    // Add event listener to check for resize and initial device type
+    checkIfMobile();
+    window.addEventListener('resize', checkIfMobile);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener('resize', checkIfMobile);
+    };
+  }, []);
+
   return (
-    <div className="App">
-      <nav className="navbar">
-        <h1 style={{ fontSize: '100px',  marginTop: '-5px' }}>My Portfolio</h1>
-        <omer-header style={{ fontSize: '60px' }}>- Omer's Portfolio.</omer-header>
-        <a href="#card1">Card 1</a>
-        <a href="#card2">Card 2</a>
-        <a href="#card3">Card 3</a>
-      </nav>
-      <div className="grid-container">
-      <a href="mailto:nenad.grujicic@mac.com?subject=Hello%20Nenad" className="grid-item">
-        <div className="grid-item-inner">
-          <h2>eMail Me</h2>
-          <body-text>Call me oldfashioned, but i love emails. <span>nenad.grujicic@mac.com</span></body-text>
-          <img src="https://uploads-ssl.webflow.com/63ad8895973800bcb5d1da22/63f7b0198fb225e8bdbc3bb0_footer_email.svg" alt="" />
+    <div className={`App ${isMobile ? 'mobile' : ''}`}>
+      <div className="header">
+        <img
+          src="https://www.apple.com/ac/structured-data/images/knowledge_graph_logo.png?202303020953"
+          alt="Apple Logo"
+          className="apple-logo"
+        />
+        <div className="header-links">
+          <a href="#about">About</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
         </div>
-      </a>
-      <a href="https://www.linkedin.com/in/nenadgrujicic/" target="_blank" className="grid-item">
-        <div className="grid-item-inner">
-          <h2>LinkedIn</h2>
-          <body-text>I am not posting that often on LinkedIn, but hey, let's connect.</body-text>
-          <img src="https://uploads-ssl.webflow.com/63ad8895973800bcb5d1da22/63f78398af540adcb054224d_footer_linkedin.jpg" alt="" />
-        </div>
-      </a>
-      <a href="http://instagram.com/grujicicdotcom" target="_blank" className="grid-item">
-        <div className="grid-item-inner">
-          <h2>Instagram</h2>
-          <body-text>No design stuff here. Everyday life, hobbies and my daughter Marta.</body-text>
-          <img src="https://uploads-ssl.webflow.com/63ad8895973800bcb5d1da22/63f8f17c17f699ebbd21c5ae_footer_instagram.jpg" alt="" />
-        </div>
-      </a>
-    </div> 
-      <body-text style={{ fontSize: '8px' }}>- Allhumdulilah for everything ❤️</body-text>
+      </div>
+      <div className="content">
+        <section id="about">
+          <h2>About Me</h2>
+          <p>
+            Hello, I'm John Doe, and I'm a web developer. I love coding and building websites that look cool and
+            functional, just like this one!
+          </p>
+        </section>
+        <section id="projects">
+          <h2>My Projects</h2>
+          {isMobile ? (
+            <div className="project-slider">
+              <div className="project">
+                <img src="https://via.placeholder.com/150" alt="Project 1" className="project-image" />
+                <h3>Project 1</h3>
+                <p>This is a description of my first project.</p>
+              </div>
+              <div className="project">
+                <img src="https://via.placeholder.com/150" alt="Project 2" className="project-image" />
+                <h3>Project 2</h3>
+                <p>This is a description of my second project.</p>
+              </div>
+              {/* Add more projects here */}
+            </div>
+          ) : (
+            <>
+              <div className="project">
+                <img src="https://via.placeholder.com/150" alt="Project 1" className="project-image" />
+                <h3>Project 1</h3>
+                <p>This is a description of my first project.</p>
+              </div>
+              <div className="project">
+                <img src="https://via.placeholder.com/150" alt="Project 2" className="project-image" />
+                <h3>Project 2</h3>
+                <p>This is a description of my second project.</p>
+              </div>
+              {/* Add more projects here */}
+            </>
+          )}
+        </section>
+        <section id="contact">
+          <h2>Contact Me</h2>
+          <p>
+            If you want to get in touch, feel free to send me an email at{' '}
+            <a href="mailto:john.doe@example.com">john.doe@example.com</a>.
+          </p>
+        </section>
+      </div>
+      <div className="footer">
+        <p>&copy; {new Date().getFullYear()} John Doe | All rights reserved</p>
+      </div>
     </div>
   );
 }
