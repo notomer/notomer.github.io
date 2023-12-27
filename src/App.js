@@ -24,9 +24,9 @@ function App() {
     <div className={`App ${isMobile ? 'mobile' : ''}`}>
       <div className="header">
         <img
-          src="https://www.apple.com/ac/structured-data/images/knowledge_graph_logo.png?202303020953"
-          alt="Apple Logo"
-          className="apple-logo"
+          src="./images/omer.jpg"
+          alt="Me, Omer"
+          className="omer"
         />
         <div className="header-links">
           <a href="#about">About</a>
