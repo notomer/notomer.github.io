@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
+import EmailEncrypt from './Components/emailencrypt';
+import CarModel from './Components/carmodel';
+
+
 
 function App() {
   const [isMobile, setIsMobile] = useState(false);
@@ -22,24 +26,26 @@ function App() {
 
   return (
     <div className={`App ${isMobile ? 'mobile' : ''}`}>
-      <div className="header">
+      <div className="pfp">
         <img
-          src="./images/omer.jpg"
+          src={"/images/omer.jpg"}
           alt="Me, Omer"
-          className="omer"
+          style={{ width: '10%', height: '10%', borderRadius: '50%', objectFit: 'cover' }}
         />
+      </div>
+      <div className="header">
         <div className="header-links">
           <a href="#about">About</a>
           <a href="#projects">Projects</a>
           <a href="#contact">Contact</a>
+          <a href="#garage">Garage</a>
         </div>
       </div>
       <div className="content">
         <section id="about">
           <h2>About Me</h2>
           <p>
-            Hello, I'm John Doe, and I'm a web developer. I love coding and building websites that look cool and
-            functional, just like this one!
+            I'm Omer, I'm a Software Engineer who likes Coding, Food, and Cars.
           </p>
         </section>
         <section id="projects">
@@ -74,16 +80,22 @@ function App() {
             </>
           )}
         </section>
+        <div className="cars">
+          <section id="garage">
+            <h2>Current Keys</h2>
+            <CarModel usdzUrl={"./Components/P911"} />
+            </section>
+        </div>
         <section id="contact">
           <h2>Contact Me</h2>
           <p>
             If you want to get in touch, feel free to send me an email at{' '}
-            <a href="mailto:john.doe@example.com">john.doe@example.com</a>.
+            <EmailEncrypt />
           </p>
         </section>
       </div>
       <div className="footer">
-        <p>&copy; {new Date().getFullYear()} John Doe | All rights reserved</p>
+        <p>&copy; {new Date().getFullYear()} | notomer </p>
       </div>
     </div>
   );
