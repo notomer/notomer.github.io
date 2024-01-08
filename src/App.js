@@ -3,22 +3,17 @@ import './App.css';
 import EmailEncrypt from './Components/emailencrypt';
 import CarModel from './Components/carmodel';
 
-
-
-function App() {
+const App = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    // Check if the device is mobile
     const checkIfMobile = () => {
       setIsMobile(window.innerWidth <= 768);
     };
 
-    // Add event listener to check for resize and initial device type
     checkIfMobile();
     window.addEventListener('resize', checkIfMobile);
 
-    // Clean up the event listener on component unmount
     return () => {
       window.removeEventListener('resize', checkIfMobile);
     };
@@ -28,51 +23,52 @@ function App() {
     <div className={`App ${isMobile ? 'mobile' : ''}`}>
       <div className="pfp">
         <img
-          src={"/images/omer.jpg"}
+          src={"./images/login.png"}
           alt="Me, Omer"
           style={{ width: '10%', height: '10%', borderRadius: '50%', objectFit: 'cover' }}
         />
       </div>
       <div className="header">
         <div className="header-links">
-          <a href="#about">About</a>
-          <a href="#projects">Projects</a>
+          <a href="#projects">Projects
+           <img src="./images/" alt="Description"/>
+           <p>Your Text Here</p> 
+          </a>
+          <a href="#garage">
+          <img src="./images/garage.png" alt="Car inside of a Circle"/>
+           <p>Garage</p> 
+          </a>
           <a href="#contact">Contact</a>
-          <a href="#garage">Garage</a>
         </div>
       </div>
+
       <div className="content">
-        <section id="about">
-          <h2>About Me</h2>
+        <section id="about" className="section">
           <p>
-            I'm Omer, I'm a Software Engineer who likes Coding, Food, and Cars.
+            I'm Omer, a Software Engineer who likes Coding, Food, and Cars.
           </p>
         </section>
         <section id="projects">
           <h2>My Projects</h2>
           {isMobile ? (
             <div className="project-slider">
-              <div className="project">
-                <img src="https://via.placeholder.com/150" alt="Project 1" className="project-image" />
-                <h3>Project 1</h3>
-                <p>This is a description of my first project.</p>
-              </div>
-              <div className="project">
-                <img src="https://via.placeholder.com/150" alt="Project 2" className="project-image" />
-                <h3>Project 2</h3>
-                <p>This is a description of my second project.</p>
-              </div>
-              {/* Add more projects here */}
             </div>
           ) : (
             <>
               <div className="project">
-                <img src="https://via.placeholder.com/150" alt="Project 1" className="project-image" />
+              <iframe
+                title="Notomer's Website"
+                src="https://notomer.github.io/"
+              ></iframe>
                 <h3>Project 1</h3>
                 <p>This is a description of my first project.</p>
               </div>
               <div className="project">
-                <img src="https://via.placeholder.com/150" alt="Project 2" className="project-image" />
+                <img
+                  src="https://via.placeholder.com/150"
+                  alt="Project 2"
+                  className="project-image"
+                />
                 <h3>Project 2</h3>
                 <p>This is a description of my second project.</p>
               </div>
@@ -81,24 +77,32 @@ function App() {
           )}
         </section>
         <div className="cars">
-          <section id="garage">
+          <section id="garage" className="section">
             <h2>Current Keys</h2>
-            <CarModel usdzUrl={"./Components/P911"} />
-            </section>
+            <CarModel usdzUrl="./Components/P911" />
+          </section>
         </div>
-        <section id="contact">
+
+        <section id="contact" className="section">
           <h2>Contact Me</h2>
           <p>
-            If you want to get in touch, feel free to send me an email at{' '}
-            <EmailEncrypt />
+            If you want to get in touch, shoot me an email <EmailEncrypt />
           </p>
         </section>
       </div>
-      <div className="footer">
-        <p>&copy; {new Date().getFullYear()} | notomer </p>
-      </div>
+      <section id="footer" className="section">
+        <div className="madeby">
+          <p>
+            Researched, designed, and engineered by me,{' '}
+            <span style={{ color: 'black' }}>Omer</span>.
+          </p>
+        </div>
+        <div className="copyright">
+          <p>&copy; {new Date().getFullYear()} | <span style={{ color: 'black' }}>notomer</span></p>
+        </div>
+      </section>
     </div>
   );
-}
+};
 
 export default App;

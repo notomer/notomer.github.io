@@ -12,7 +12,7 @@ const EmailEncrypt = () => {
         window.location.href = `mailto:${atob(encodedEmail)}`;
       }}
     >
-      <img src="/images/mailicon.png" alt="Email Icon" />
+<img src="/images/mailicon.png" alt="Email Icon" style={{ width: '10%', height: '10%' }} />
     </a>
   );
 };

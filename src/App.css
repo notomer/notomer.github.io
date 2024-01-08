@@ -1,17 +1,35 @@
+@font-face {
+  font-family: 'Myriad Pro Regular';
+  src: url('./Fonts/Myriad Pro Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Garamond Light';
+  src: url('./Fonts/Garamond-Light.ttf') format('truetype');
+  font-weight: lighter;
+  font-style: normal;
+}
+
+h1, h2, h3 {
+  font-family: 'Garamond Light', sans-serif;
+  color: black;
+}
+
 body {
-  /* General styles for body element */
+  font-family: 'Myriad Pro Regular', sans-serif;
   margin: 0;
   padding: 0;
+  color: #7D7D7D;
 }
 
-.App {
-  text-align: center;
-  font-family: Arial, sans-serif;
-  background-color: white; /* Light theme background */
-  color: black; /* Light theme text color */
+.pfp-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
 }
-
-/* ... Rest of the existing styles ... */
 
 /* Slideshow styles for mobile devices */
 .project-slider {
@@ -26,34 +44,36 @@ body {
   scroll-snap-align: start;
 }
 
+#footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.madeby, .copyright  {
+  display: inline-block;
+  margin: 0; /* Reset margins */
+}
+
+
 /* Responsive adjustments for smaller screens */
 @media (max-width: 768px) {
-  .App-header {
-    font-size: calc(10px + 1.5vmin); /* Reduce font size for smaller screens */
+  .header {
+    font-size: calc(10px + 1.5vmin);
   }
 
   .grid-container {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Adjust grid layout */
-    grid-gap: 0.5rem; /* Reduce grid gap */
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-gap: 0.5rem;
   }
 
   .project-slider {
     flex-wrap: nowrap;
   }
+}
 
-  /* Your CSS */
-  .pfp {
-    width: 200px; /* Set a specific width and height */
-    height: 200px;
-    border-radius: 50%;
-    overflow: hidden; /* Ensure the image is not overflowing the circular container */
+/* Responsive adjustments for larger screens (desktop) */
+@media (min-width: 769px) {
+  body {
+    padding: 0 300px;
   }
-
-  .pfp img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Maintain aspect ratio and cover the container */
-  }
-
-
 }
