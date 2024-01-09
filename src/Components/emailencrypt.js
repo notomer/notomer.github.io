@@ -5,15 +5,17 @@ const EmailEncrypt = () => {
   const encodedEmail = btoa(email);
 
   return (
-    <a
-      href={`mailto:${atob(encodedEmail)}`}
-      onClick={(e) => {
-        e.preventDefault();
-        window.location.href = `mailto:${atob(encodedEmail)}`;
-      }}
-    >
-<img src="/images/mailicon.png" alt="Email Icon" style={{ width: '10%', height: '10%' }} />
-    </a>
+    <span>
+      <a
+        href={`mailto:${atob(encodedEmail)}`}
+        onClick={(e) => {
+          e.preventDefault();
+          window.location.href = `mailto:${atob(encodedEmail)}`;
+        }}
+      >
+        <span style={{ color: 'black', textDecoration: 'underline' }}>here</span>
+      </a>
+    </span>
   );
 };
 
