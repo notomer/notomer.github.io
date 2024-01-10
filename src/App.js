@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import './App.css';
-import Porsche3d from './Components/Porsche3d';
-import Footer from './Components/Footer';
+import React, { useEffect, useState, lazy, Suspense } from "react";
+import "./App.css";
+import Footer from "./Components/Footer";
+const Porsche3d = lazy(() => import("./Components/Porsche3d"));
 
 const App = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -12,62 +12,64 @@ const App = () => {
     };
 
     checkIfMobile();
-    window.addEventListener('resize', checkIfMobile);
+    window.addEventListener("resize", checkIfMobile);
 
     return () => {
-      window.removeEventListener('resize', checkIfMobile);
+      window.removeEventListener("resize", checkIfMobile);
     };
   }, []);
 
   return (
-    <div className={`App ${isMobile ? 'mobile' : ''}`}>
-
-      <div className='PageSwitcher'>
-      <a href="/" id='Button-Active'>
+    <div className={`App ${isMobile ? "mobile" : ""}`}>
+      <div className="PageSwitcher">
+        <a href="/" className="classic-tab active">
           Portfolio
-      </a>
-      <a href="Contact">
-        Contact 
-      </a>
+          <div className="gloss-layer"></div>
+        </a>
+        <a href="#/Contact" className="classic-tab">
+          Contact
+          <div className="gloss-layer"></div>
+        </a>
       </div>
       <div className="pfp">
         <img
           src={"./images/login.png"}
           alt="Me, Omer"
-          style={{ width: '10%', height: '10%', borderRadius: '50%', objectFit: 'cover' }}
+          style={{
+            width: "10%",
+            height: "10%",
+            borderRadius: "50%",
+            objectFit: "cover",
+          }}
         />
       </div>
       <div className="header">
-        <div className="aqua-tab">
-          <a href="#projects">Projects
-           <p>Your Text Here</p> 
-          </a>
-          <a href="#garage">
-           <p>Garage</p> 
-          </a>
-          <a href="#contact">Contact</a>
-        </div>
+        <a href="#projects">
+          Projects
+          <p>Your Text Here</p>
+        </a>
+        <a href="#garage">
+          <p>Garage</p>
+        </a>
+        <a href="#contact">Contact</a>
       </div>
 
       <div className="content">
-        <section id="about" className="section">
-          <p>
-            I'm Omer, a Software Engineer who likes Coding, Food, and Cars.
-          </p>
+        <section id="about">
+          <p>I'm Omer, a Software Engineer who likes Coding, Food, and Cars.</p>
         </section>
         <section id="projects">
           <h2>My Projects</h2>
           {isMobile ? (
-            <div className="project-slider">
-            </div>
+            <div className="project-slider"></div>
           ) : (
             <>
               <div className="project">
-              <iframe
-                title="Notomer's Website"
-                style={{ width: '150px', height: '150px' }}
-                src="https://notomer.github.io/"
-              ></iframe>
+                <iframe
+                  title="Notomer's Website"
+                  style={{ width: "150px", height: "150px" }}
+                  src="https://notomer.github.io/"
+                ></iframe>
                 <h3>This Website</h3>
                 <p>This is a description of my first project.</p>
               </div>
@@ -87,20 +89,17 @@ const App = () => {
         <div className="cars">
           <section id="garage" className="section">
             <h2>Current Garage</h2>
-            <Porsche3d/>
+            <Suspense fallback={<div>Loading 3D model...</div>}>
+              <Porsche3d />
+            </Suspense>
           </section>
         </div>
-
         <section id="contact" className="section">
           <h2>Contact Me</h2>
-          <p>
-            If you want to get in touch, click the Contact tab on the top.
-
-          </p>
-
+          <p>If you want to get in touch, click the Contact tab on the top.</p>
         </section>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

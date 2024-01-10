@@ -3,7 +3,7 @@ import EmailEncrypt from './emailencrypt';
 
 const SocialLinks = () => {
   return (
-    <div className="contact">
+    <div className="ContactLinks">
       <h2>Connect with Me</h2>
       <ul>
         <li>
