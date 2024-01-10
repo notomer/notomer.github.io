@@ -2,19 +2,21 @@ import React from 'react';
 
 const EmailEncrypt = () => {
   const email = "notomerkhan@gmail.com";
-  const encodedEmail = btoa(email);
+
+  // Obfuscate the email address
+  const obfuscatedEmail = email.split('').map(char => String.fromCharCode(char.charCodeAt(0) + 1)).join('');
 
   return (
     <span>
       <a
-        href={`mailto:${atob(encodedEmail)}`}
+        href={`mailto:${obfuscatedEmail}`}
         onClick={(e) => {
           e.preventDefault();
-          window.location.href = `mailto:${atob(encodedEmail)}`;
+          window.location.href = `mailto:${obfuscatedEmail}`;
         }}
       >
-        <span style={{ color: 'black', textDecoration: 'underline' }}>here</span>
-      </a>
+        My Email
+              </a>
     </span>
   );
 };
