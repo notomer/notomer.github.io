@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/static/css/main.85bd0073.css",
-    "main.js": "/static/js/main.c8b0938c.js",
+    "main.css": "/static/css/main.a7eb5cbf.css",
+    "main.js": "/static/js/main.e94ec069.js",
     "static/js/787.32dd219a.chunk.js": "/static/js/787.32dd219a.chunk.js",
     "static/media/Myriad Pro Regular.ttf": "/static/media/Myriad Pro Regular.c59859cec849233be7f8.ttf",
     "static/media/Myriad Pro Light.otf": "/static/media/Myriad Pro Light.b0bb7658963c5d720ddd.otf",
     "static/media/Garamond-Light.ttf": "/static/media/Garamond-Light.36dd8fd88e62187103bb.ttf",
     "static/media/HaloHandletter.otf": "/static/media/HaloHandletter.3b1012ec206760542232.otf",
     "index.html": "/index.html",
-    "main.85bd0073.css.map": "/static/css/main.85bd0073.css.map",
-    "main.c8b0938c.js.map": "/static/js/main.c8b0938c.js.map",
+    "main.a7eb5cbf.css.map": "/static/css/main.a7eb5cbf.css.map",
+    "main.e94ec069.js.map": "/static/js/main.e94ec069.js.map",
     "787.32dd219a.chunk.js.map": "/static/js/787.32dd219a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.85bd0073.css",
-    "static/js/main.c8b0938c.js"
+    "static/css/main.a7eb5cbf.css",
+    "static/js/main.e94ec069.js"
   ]
 }
