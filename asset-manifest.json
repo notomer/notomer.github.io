@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.a7eb5cbf.css",
-    "main.js": "/static/js/main.bd208d32.js",
+    "main.css": "/static/css/main.378c5133.css",
+    "main.js": "/static/js/main.b6d02229.js",
     "static/js/264.a3a1bb35.chunk.js": "/static/js/264.a3a1bb35.chunk.js",
     "static/js/787.32dd219a.chunk.js": "/static/js/787.32dd219a.chunk.js",
     "static/js/896.aefa9e05.chunk.js": "/static/js/896.aefa9e05.chunk.js",
@@ -10,14 +10,14 @@
     "static/media/Garamond-Light.ttf": "/static/media/Garamond-Light.36dd8fd88e62187103bb.ttf",
     "static/media/HaloHandletter.otf": "/static/media/HaloHandletter.3b1012ec206760542232.otf",
     "index.html": "/index.html",
-    "main.a7eb5cbf.css.map": "/static/css/main.a7eb5cbf.css.map",
-    "main.bd208d32.js.map": "/static/js/main.bd208d32.js.map",
+    "main.378c5133.css.map": "/static/css/main.378c5133.css.map",
+    "main.b6d02229.js.map": "/static/js/main.b6d02229.js.map",
     "264.a3a1bb35.chunk.js.map": "/static/js/264.a3a1bb35.chunk.js.map",
     "787.32dd219a.chunk.js.map": "/static/js/787.32dd219a.chunk.js.map",
     "896.aefa9e05.chunk.js.map": "/static/js/896.aefa9e05.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a7eb5cbf.css",
-    "static/js/main.bd208d32.js"
+    "static/css/main.378c5133.css",
+    "static/js/main.b6d02229.js"
   ]
 }
