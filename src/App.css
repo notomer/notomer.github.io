@@ -136,6 +136,7 @@ classic-tab {
 h1, h2, h3 {
   font-family: 'Myriad Pro Regular', sans-serif;
   color: black;
+  text-align: center;
 }
 
 body {
@@ -204,14 +205,6 @@ img {
   margin: 0; /* Reset margins */
 }
 
-.Contact {
-
-
-}
-
-
-
-
 .header-links p {
   margin: 0; /* Remove default margin for paragraphs inside links */
 }
@@ -248,5 +241,9 @@ img {
   }
   .PageSwitcher a {
     width: 100%;
+  }
+  .car-model-container {
+    width: 10%;
+    height: 30px; 
   }
 }

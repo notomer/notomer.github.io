@@ -4,20 +4,17 @@ import EmailEncrypt from './emailencrypt';
 const SocialLinks = () => {
   return (
     <div className="ContactLinks">
-      <h2>Connect with Me</h2>
-      <ul>
-        <li>
-          <a href="https://www.linkedin.com/in/notomer/" target="_blank" rel="noopener noreferrer">
-            LinkedIn
-          </a>
-        </li>
-        <li>
-          <a href="https://github.com/notomer" target="_blank" rel="noopener noreferrer">
-            GitHub
-          </a>
-        </li>
-        <EmailEncrypt/>
-      </ul>
+      <a href="https://www.linkedin.com/in/notomer/" className="classic-tab" target="_blank" rel="noopener noreferrer" id="linkedin-link">
+        <img src="/images/SetUpAssistant.png" alt="LinkedIn" className="icon rotated-image" />
+        LinkedIn
+        <div className="gloss-layer"></div>
+      </a>
+      <a href="https://github.com/notomer" className="classic-tab" target="_blank" rel="noopener noreferrer" id="github-link">
+        <img src="/images/dev.png" alt="GitHub" className="icon" />
+        GitHub
+        <div className="gloss-layer"></div>
+      </a>
+      <EmailEncrypt className="classic-tab" target="_blank" rel="noopener noreferrer" id="email-link" />
     </div>
   );
 };

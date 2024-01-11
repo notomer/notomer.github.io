@@ -15,7 +15,9 @@ const EmailEncrypt = () => {
           window.location.href = `mailto:${obfuscatedEmail}`;
         }}
       >
+        <img src="/images/mail.png" alt="eMail" className="icon" />
         My Email
+        <div className="gloss-layer"></div>
               </a>
     </span>
   );

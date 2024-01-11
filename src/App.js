@@ -46,7 +46,6 @@ const App = () => {
       <div className="header">
         <a href="#projects">
           Projects
-          <p>Your Text Here</p>
         </a>
         <a href="#garage">
           <p>Garage</p>
@@ -58,7 +57,7 @@ const App = () => {
         <section id="about">
           <p>I'm Omer, a Software Engineer who likes Coding, Food, and Cars.</p>
         </section>
-        <section id="projects">
+        <section className="projects">
           <h2>My Projects</h2>
           {isMobile ? (
             <div className="project-slider"></div>

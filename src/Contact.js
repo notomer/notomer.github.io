@@ -57,7 +57,9 @@ const Contact = () => {
         </p>
       </section>
       <SocialLinks />
+      <div className="contact-page-container">
       <Footer />
+      </div>
     </div>
   );
 };

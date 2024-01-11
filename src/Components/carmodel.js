@@ -3,12 +3,12 @@ import React from 'react';
 
 const CarModel = ({ usdzUrl }) => {
   return (
-    <div style={{ width: '100%', height: '100%' }}>
+    <div className="car-model-container">
       <model-viewer
         src={usdzUrl}
         alt="Car Model"
         camera-controls
-        style={{ width: '100%', height: '100%' }}
+        style={{ width: '30%', height: '30%' }}
       ></model-viewer>
     </div>
   );
