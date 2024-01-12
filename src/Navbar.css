@@ -1,9 +1,22 @@
-.osx-menu-bar {
+body {
+    margin: 0;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  }
+  
+  .osx-menu-bar {
     display: flex;
     align-items: center;
     background-color: #f0f0f0; /* Set your desired background color */
+    width: 100vw; /* Make the menu bar span the full width of the viewport */
+  }
+  
+  .menu-content {
     padding: 10px;
-    width: 100%; /* Make the menu bar span the width of the device */
+    width: 100%; /* Ensure content width is 100% */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
   
   .apple-logo {

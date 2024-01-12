@@ -1,8 +1,8 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import { useGLTF, Stage, PresentationControls } from "@react-three/drei";
+import "../Slideshow.css"
 
-// Array of model objects with titles and image URLs
 const models = [
   {
     url: "/Porsche.glb",
@@ -109,11 +109,7 @@ function Slideshow() {
         dpr={[1, 2]}
         shadows
         camera={{ fov: 45 }}
-        style={{
-          position: "absolute",
-          width: "150px",
-          height: "150px",
-        }}
+
       >
         <ambientLight intensity={0.5} />
         <PresentationControls

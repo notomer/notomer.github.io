@@ -1,7 +1,7 @@
 import React, { useEffect, useState, lazy, Suspense } from "react";
 import "./App.css";
+import Navbar from "./Components/navbar"
 import Footer from "./Components/Footer";
-import navbar from "./Components/navbar"
 const Porsche3d = lazy(() => import("./Components/Slideshow"));
 
 const App = () => {
@@ -32,7 +32,7 @@ const App = () => {
           <div className="gloss-layer"></div>
         </a>
       </div>
-      <navbar/>
+      <Navbar />
       <div className="content">
         <section id="about">
           <p>I'm Omer, a Software Engineer who likes Coding, Food, and Cars.</p>
