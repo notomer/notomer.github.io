@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/static/css/main.378c5133.css",
-    "main.js": "/static/js/main.b6d02229.js",
-    "static/js/264.a3a1bb35.chunk.js": "/static/js/264.a3a1bb35.chunk.js",
+    "main.css": "/static/css/main.0ac71028.css",
+    "main.js": "/static/js/main.e08ee483.js",
+    "static/js/264.bf382c57.chunk.js": "/static/js/264.bf382c57.chunk.js",
     "static/js/787.32dd219a.chunk.js": "/static/js/787.32dd219a.chunk.js",
     "static/js/896.aefa9e05.chunk.js": "/static/js/896.aefa9e05.chunk.js",
     "static/media/Myriad Pro Regular.ttf": "/static/media/Myriad Pro Regular.c59859cec849233be7f8.ttf",
@@ -10,14 +10,14 @@
     "static/media/Garamond-Light.ttf": "/static/media/Garamond-Light.36dd8fd88e62187103bb.ttf",
     "static/media/HaloHandletter.otf": "/static/media/HaloHandletter.3b1012ec206760542232.otf",
     "index.html": "/index.html",
-    "main.378c5133.css.map": "/static/css/main.378c5133.css.map",
-    "main.b6d02229.js.map": "/static/js/main.b6d02229.js.map",
-    "264.a3a1bb35.chunk.js.map": "/static/js/264.a3a1bb35.chunk.js.map",
+    "main.0ac71028.css.map": "/static/css/main.0ac71028.css.map",
+    "main.e08ee483.js.map": "/static/js/main.e08ee483.js.map",
+    "264.bf382c57.chunk.js.map": "/static/js/264.bf382c57.chunk.js.map",
     "787.32dd219a.chunk.js.map": "/static/js/787.32dd219a.chunk.js.map",
     "896.aefa9e05.chunk.js.map": "/static/js/896.aefa9e05.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.378c5133.css",
-    "static/js/main.b6d02229.js"
+    "static/css/main.0ac71028.css",
+    "static/js/main.e08ee483.js"
   ]
 }
