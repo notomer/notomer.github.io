@@ -83,41 +83,35 @@ classic-tab {
   background-image: linear-gradient(#79bbff 30%, #c4e8ff 85%);
 }
 
-.classic-tab:hover {
-  filter: brightness(95%);
-}
-
-.classic-tab,
-.ContactLinks a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-
-
 .ContactLinks a {
   width: 100%;
   height: 60px;
   color: #000;
   background-image: linear-gradient(#e0e0e0 52%, #fff 85%, #e0e0e0 52%);
   border-radius: 15px;
-  justify-content: center;
   align-items: center;
-  margin-right: 0;
   text-decoration: none;
   transition: all .2s;
   display: flex;
   position: relative;
-  bottom: 0;
   box-shadow: inset 0 4px 4px rgba(0, 0, 0, .31);
   margin-bottom: 30px;
+  justify-content: space-around;
+}
+
+.ContactLinks {
+  align-content: center;
+  color: #7D7D7D;
+  position: sticky;
+  top: 0; /* Adjust this value as needed */
 }
 
 
 .ContactLinks ul {
   list-style-type: none;
 }
+
+
 
 .rotated-image {
   transform: rotate(-10deg);
@@ -182,9 +176,9 @@ img {
 }
 
 
-.ContactLinks {
-  align-content: center;
-  color: #7D7D7D;
+.icon span {
+  display: flex;
+  align-items: center;
 }
 
 .header-Contact p {
@@ -208,12 +202,7 @@ img {
   body {
     padding: 15px 50px;
   }
-  .icon {
-    width: 50px;
-    height: 50px; /* Adjust the height if needed */
-    position: fixed;
-    left: 190px;
-  }
+
 
   .contact-page  {
     display: flex;
@@ -231,7 +220,6 @@ img {
   .footer div {
     margin-bottom: 10px; /* Adjust the margin between the div elements */
   }
-  
 }
 
 /* Responsive adjustments for larger screens (desktop) */
@@ -244,10 +232,12 @@ img {
   }
   .icon {
     width: 50px;
-    height: 50px; /* Adjust the height if needed */
-    position: fixed;
-    left: 300px;
+    height: 50px;
+    transition: all .2s;
+    display: inline-block;
+    margin-right: 10px; /* Adjust the margin as needed */
   }
+
 
   .footer {
     display: flex;

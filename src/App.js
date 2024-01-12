@@ -1,6 +1,7 @@
 import React, { useEffect, useState, lazy, Suspense } from "react";
 import "./App.css";
 import Footer from "./Components/Footer";
+import navbar from "./Components/navbar"
 const Porsche3d = lazy(() => import("./Components/Slideshow"));
 
 const App = () => {
@@ -31,28 +32,7 @@ const App = () => {
           <div className="gloss-layer"></div>
         </a>
       </div>
-      <div className="pfp">
-        <img
-          src={"./images/login.png"}
-          alt="Me, Omer"
-          style={{
-            width: "10%",
-            height: "10%",
-            borderRadius: "50%",
-            objectFit: "cover",
-          }}
-        />
-      </div>
-      <div className="header">
-        <a href="#projects">
-          Projects
-        </a>
-        <a href="#garage">
-          <p>Garage</p>
-        </a>
-        <a href="#contact">Contact</a>
-      </div>
-
+      <navbar/>
       <div className="content">
         <section id="about">
           <p>I'm Omer, a Software Engineer who likes Coding, Food, and Cars.</p>

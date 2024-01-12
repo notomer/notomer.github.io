@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./Contact.css";
-import EmailEncrypt from "./Components/emailencrypt";
 import Footer from "./Components/Footer";
 import SocialLinks from "./Components/SocialLinks";
 
@@ -27,7 +26,7 @@ const Contact = () => {
           Portfolio
           <div className="gloss-layer"></div>
         </a>
-        <a href="#/Contact" className="classic-tab active">
+        <a href="Contact" className="classic-tab active">
           Contact
           <div className="gloss-layer"></div>
         </a>
@@ -57,9 +56,7 @@ const Contact = () => {
         </p>
       </section>
       <SocialLinks />
-      <div className="contact-page-container">
       <Footer />
-      </div>
     </div>
   );
 };

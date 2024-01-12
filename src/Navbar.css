@@ -1,0 +1,33 @@
+.osx-menu-bar {
+    display: flex;
+    align-items: center;
+    background-color: #f0f0f0; /* Set your desired background color */
+    padding: 10px;
+    width: 100%; /* Make the menu bar span the width of the device */
+  }
+  
+  .apple-logo {
+    font-family: 'Arial', sans-serif;
+    font-size: 20px;
+    margin-right: 10px;
+  }
+  
+  .pfp {
+    margin-left: auto; /* Push the profile picture to the right */
+  }
+  
+  #header {
+    display: flex;
+    gap: 20px;
+  }
+  
+  #header a {
+    text-decoration: none;
+    color: #333; /* Set your desired text color */
+    font-size: 16px; /* Set your desired font size */
+  }
+  
+  #header p {
+    margin: 0;
+  }
+  
