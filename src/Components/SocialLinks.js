@@ -1,4 +1,4 @@
-import React from 'react';
+import '../Contact.css';
 import EmailEncrypt from './emailencrypt';
 
 const SocialLinks = () => {
