@@ -1,7 +1,7 @@
 import React, { useEffect, useState, lazy, Suspense } from "react";
 import "./App.css";
 import Footer from "./Components/Footer";
-const Porsche3d = lazy(() => import("./Components/Porsche3d"));
+const Porsche3d = lazy(() => import("./Components/Slideshow"));
 
 const App = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -87,7 +87,7 @@ const App = () => {
         </section>
         <div className="cars">
           <section id="garage" className="section">
-            <h2>Current Garage</h2>
+            <h2>Cars</h2>
             <Suspense fallback={<div>Loading 3D model...</div>}>
               <Porsche3d />
             </Suspense>
