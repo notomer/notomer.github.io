@@ -26,7 +26,7 @@ const Contact = () => {
           Portfolio
           <div className="gloss-layer"></div>
         </a>
-        <a href="Contact" className="classic-tab active">
+        <a href="#/Contact" className="classic-tab active">
           Contact
           <div className="gloss-layer"></div>
         </a>

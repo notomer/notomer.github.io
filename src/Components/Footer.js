@@ -5,7 +5,7 @@ const Footer = () => {
     <section className="footer">
       <div id="madeby">
         <p>
-          Researched, designed, and engineered by me,{' '}
+          Researched, Designed, and Engineered by Me,{' '}
           <span style={{ color: 'black' }}>Omer</span>.
         </p>
       </div>
