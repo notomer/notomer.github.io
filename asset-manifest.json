@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.a2cb941b.css",
-    "main.js": "/static/js/main.15e6844a.js",
+    "main.css": "/static/css/main.9752abec.css",
+    "main.js": "/static/js/main.eab0d9ec.js",
     "static/css/287.9548b336.chunk.css": "/static/css/287.9548b336.chunk.css",
     "static/js/287.dc8d4f71.chunk.js": "/static/js/287.dc8d4f71.chunk.js",
     "static/js/787.32dd219a.chunk.js": "/static/js/787.32dd219a.chunk.js",
@@ -11,15 +11,15 @@
     "static/media/Garamond-Light.ttf": "/static/media/Garamond-Light.36dd8fd88e62187103bb.ttf",
     "static/media/HaloHandletter.otf": "/static/media/HaloHandletter.3b1012ec206760542232.otf",
     "index.html": "/index.html",
-    "main.a2cb941b.css.map": "/static/css/main.a2cb941b.css.map",
-    "main.15e6844a.js.map": "/static/js/main.15e6844a.js.map",
+    "main.9752abec.css.map": "/static/css/main.9752abec.css.map",
+    "main.eab0d9ec.js.map": "/static/js/main.eab0d9ec.js.map",
     "287.9548b336.chunk.css.map": "/static/css/287.9548b336.chunk.css.map",
     "287.dc8d4f71.chunk.js.map": "/static/js/287.dc8d4f71.chunk.js.map",
     "787.32dd219a.chunk.js.map": "/static/js/787.32dd219a.chunk.js.map",
     "896.aefa9e05.chunk.js.map": "/static/js/896.aefa9e05.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a2cb941b.css",
-    "static/js/main.15e6844a.js"
+    "static/css/main.9752abec.css",
+    "static/js/main.eab0d9ec.js"
   ]
 }
