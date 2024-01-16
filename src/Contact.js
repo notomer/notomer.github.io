@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Contact.css";
 import Footer from "./Components/Footer";
 import SocialLinks from "./Components/SocialLinks";
+import Navbar from "./Components/navbar";
 
 const Contact = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -31,18 +32,7 @@ const Contact = () => {
           <div className="gloss-layer"></div>
         </a>
       </div>
-      <div className="pfp">
-        <img
-          src={"./images/login.png"}
-          alt="Me, Omer"
-          style={{
-            width: "10%",
-            height: "10%",
-            borderRadius: "50%",
-            objectFit: "cover",
-          }}
-        />
-      </div>
+      <Navbar />
       <section className="Introduction">
         <h1>Hi, I'm Omer!</h1>
         <p>

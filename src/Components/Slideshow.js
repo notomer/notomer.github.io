@@ -7,12 +7,12 @@ const models = [
   {
     url: "/Porsche.glb",
     title: "My dream car is a 911, this is my next car goal.",
-    image: "/911-logo.png",
+    image: "/images/911-logo.png",
   },
   {
     url: "/Tesla.glb",
     title: "I currently drive a Tesla",
-    image: "/t-logo.png",
+    image: "/images/t-logo.png",
   },
 ];
 
@@ -72,13 +72,13 @@ function Slideshow() {
       requestId = requestAnimationFrame(updateRotation);
     }
 
-    // Initial idle timer setup
     resetIdleTimer();
 
     return () => {
       cancelAnimationFrame(requestId);
       clearTimeout(idleTimeout);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rotationEnabled]);
 
   const handleNext = () => {
@@ -93,21 +93,9 @@ function Slideshow() {
 
   return (
     <div className="centered-slideshow-container">
-      <div className="arrow left-arrow" onClick={handlePrev}>
-        {"Back"}
-      </div>
-      <div className="title-container">
-        {models[currentModelIndex].image && (
-          <img
-            alt={models[currentModelIndex].title}
-            src={models[currentModelIndex].image}
-          />
-        )}
-        <p>{models[currentModelIndex].title}</p>
-      </div>
+      <div className="canvas-container">
       <Canvas
         dpr={[1, 2]}
-        shadows
         camera={{ fov: 45 }}
 
       >
@@ -115,7 +103,6 @@ function Slideshow() {
         <PresentationControls
           speed={1.5}
           global
-          zoom={1}
           polar={[-0.1, Math.PI / 4]}
           onPointerDown={() => {
             setRotationEnabled(true);
@@ -133,14 +120,26 @@ function Slideshow() {
               scale={0.001}
               ref={carRef}
               rotation={rotation}
-              // Use the current model from the array
               url={models[currentModelIndex].url}
             />
           </Stage>
         </PresentationControls>
       </Canvas>
+      </div>
+      <div className="arrow left-arrow" onClick={handlePrev}>
+       <img src="./images/arrowL.png" alt="Left Button" />
+      </div>
+      <div className="title-container">
+        {models[currentModelIndex].image && (
+          <img
+            alt={models[currentModelIndex].title}
+            src={models[currentModelIndex].image}
+          />
+        )}
+        <p>{models[currentModelIndex].title}</p>
+      </div>
       <div className="arrow right-arrow" onClick={handleNext}>
-        {"Next"}
+      <img src="./images/arrowR.png" alt="Right Button" />
       </div>
     </div>
   );

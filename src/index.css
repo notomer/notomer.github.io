@@ -27,10 +27,6 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-/* Apply styles to the 'omer-header' elements */
-omer-header {
-  font-family: "HaloHandletter", sans-serif;
-}
 
 /* Apply styles to the 'body-text' elements */
 body-text {

@@ -1,6 +1,5 @@
 import React from 'react';
 import EmailEncrypt from './emailencrypt';
-
 const SocialLinks = () => {
   return (
     <div className="ContactLinks">

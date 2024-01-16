@@ -1,8 +1,4 @@
-body {
-    margin: 0;
-    overflow-x: hidden; /* Prevent horizontal scrolling */
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
-  }
+
   
   .osx-menu-bar {
     display: flex;
@@ -16,16 +12,10 @@ body {
     width: 100%; /* Ensure content width is 100% */
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
   }
   
-  .apple-logo {
-    font-family: 'Arial', sans-serif;
-    font-size: 20px;
-    margin-right: 10px;
-  }
-  
-  .pfp {
+    .pfp {
     margin-left: auto; /* Push the profile picture to the right */
   }
   

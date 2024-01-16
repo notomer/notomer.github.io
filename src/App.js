@@ -1,8 +1,8 @@
-import React, { useEffect, useState, lazy, Suspense } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import Navbar from "./Components/navbar"
 import Footer from "./Components/Footer";
-const Porsche3d = lazy(() => import("./Components/Slideshow"));
+import GreetingsCarousel from "./Components/GreetingsCarousel";
 
 const App = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -65,12 +65,13 @@ const App = () => {
             </>
           )}
         </section>
-        <div className="cars">
-          <section id="garage" className="section">
-            <h2>Cars</h2>
-            <Suspense fallback={<div>Loading 3D model...</div>}>
-              <Porsche3d />
-            </Suspense>
+        <div className="readne">
+          <section id="About" className="section">
+            <h2>About</h2>
+            <GreetingsCarousel/>
+            <p>
+            I'm Omer, a dedicated software engineer with a genuine passion for cars, Legos, and coding. I like exploring and disassembling things—it's not just a hobby but a habit, I find myself taking apart everything either physically or mentally. My journey is fueled by a profound love for understanding the world around me, the intricate details of both digital and mechanical spaces. Currently, my focus is on a theoretical approach to Machine Learning, aiming to gain a deep understanding then create meaningful contributions to our current understandings.
+            </p>
           </section>
         </div>
         <section id="contact" className="section">

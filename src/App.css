@@ -19,6 +19,73 @@
   font-style: normal;
 }
 
+.centered-text {
+  text-align: center;
+}
+
+.fade-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3vh;
+  height: 5vh; /* Adjust the height as needed */
+}
+
+.fade-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3vh;
+  height: 5vh; /* Adjust the height as needed */
+}
+
+#greetings-text {
+  font-size: 1.5em;
+  color: black;
+  text-align: center;
+}
+
+@keyframes fadeInOut {
+  0%, 100% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+
+
+
+body {
+  font-family: 'Myriad Pro regular', sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #7D7D7D;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.025),
+    rgba(0, 0, 0, 0.025) 2px,
+    #fff 2px,
+    #fff
+  ),
+  linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.025),
+    rgba(0, 0, 0, 0.025) 2px,
+    #fff 2px,
+    #fff
+  );
+  text-align: center;
+}
+
+
 classic-tab {
   background-image: linear-gradient(#79bbff 30%, #c4e8ff 85%);
 }
@@ -162,22 +229,6 @@ h1, h2, h3 {
   text-align: center;
 }
 
-body {
-  font-family: 'Myriad Pro regular', sans-serif;
-  margin: 0;
-  padding: 0;
-  color: #7D7D7D;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.025),
-    rgba(0, 0, 0, 0.025) 2px,
-    #fff 2px,
-    #fff
- );
- /* The rectangle in which to repeat. 
- It can be fully wide in this case */
- background-size: 100% 4px;
-}
 
 img {
   pointer-events: none;
@@ -260,7 +311,7 @@ img {
 /* Responsive adjustments for larger screens (desktop) */
 @media (min-width: 769px) {
   body {
-    padding: 40px 250px;
+    padding: 40px 450px;
   }
   .PageSwitcher a {
     width: 100%;
@@ -270,3 +321,5 @@ img {
     height: 30px; 
   }
 }
+
+

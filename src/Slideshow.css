@@ -1,40 +1,115 @@
 .centered-slideshow-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-  }
-  
-  .title-container {
-    display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    margin: 0 20px; /* Adjust the margin as needed */
+    height: 100vh; /* Adjust the height as needed */
+  }
+
+  .canvas-container {
+    width: 30%;
+    height: 30%;
   }
   
-  .title-container img {
-    max-height: 50px; /* Set the maximum height of the image to 50px */
-    margin-right: 10px; /* Add some margin to separate the image from the text */
-  }
-  
-  .title-container p {
-    margin: 0;
-  }
   
   .arrow {
+    width: 15vw;
+    height: 15vw;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-image: linear-gradient(#cacaca, #fff 85%);
+    transition: all 0.2s;
+    position: relative;
+    transform: none;
+    box-shadow: 0 3px 4px -1px rgba(0, 0, 0, 0.64),
+      inset 0 -3px 5px rgba(0, 0, 0, 0.38);
+    background-color: #f8f8f8;
+    border-radius: 100vw;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+
+  }
+
+.left-arrow, .right-arrow {
+  cursor: pointer;
+  color: #fff;
+  font-size: 40px;
+}
+.w-slider {
+  text-align: center;
+}
+
+.div-block-64 {
+  width: 70%;
+  position: absolute;
+  top: 0.05vw;
+  bottom: auto;
+  left: 15%;
+  right: 0%;
+}
+
+section {
+  display: block;
+}
+.left-arrow,
+.right-arrow {
+  cursor: pointer;
+  color: #fff;
+  font-size: 40px;
+}
+.w-slider {
+  text-align: center;
+}
+
+.left-arrow {
+  order: -1;
+}
+
+.right-arrow {
+  order: 1;
+}
+
+.title-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+  position: relative; /* Add position relative to the title container */
+}
+
+.title-container img {
+  width: 100px; /* Adjust the width of the image as needed */
+  height: 100px; /* Adjust the height of the image as needed */
+  margin-bottom: 10px;
+}
+
+.title-container p {
+  margin: 0;
+}
+
+canvas {
+  width: 5px;
+  height: 5px;
+  margin: 10px;
+  position: relative;
+}
+
+
+@media (max-width: 768px) {
+    .arrow {
+      width: 10vw;
+      height: 20vw;
+      margin-left: 10px;
+      margin-right: 10px;
+      border-radius: 50%;
+    }
+  }
+  
+  .left-arrow, .right-arrow {
     cursor: pointer;
-    font-size: 24px;
+    color: #fff;
+    font-size: 40px;
   }
-  
-  .left-arrow {
-    order: -1; /* Move the left arrow to the left side */
+  .w-slider {
+    text-align: center;
   }
-  
-  .right-arrow {
-    order: 1; /* Move the right arrow to the right side */
-  }
-  
-  /* Add more styles as needed */
   
