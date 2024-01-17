@@ -1,25 +1,19 @@
 {
   "files": {
-    "main.css": "/static/css/main.9752abec.css",
-    "main.js": "/static/js/main.eab0d9ec.js",
-    "static/css/287.9548b336.chunk.css": "/static/css/287.9548b336.chunk.css",
-    "static/js/287.dc8d4f71.chunk.js": "/static/js/287.dc8d4f71.chunk.js",
+    "main.css": "/static/css/main.09dc99b1.css",
+    "main.js": "/static/js/main.167ba304.js",
     "static/js/787.32dd219a.chunk.js": "/static/js/787.32dd219a.chunk.js",
-    "static/js/896.aefa9e05.chunk.js": "/static/js/896.aefa9e05.chunk.js",
     "static/media/Myriad Pro Regular.ttf": "/static/media/Myriad Pro Regular.c59859cec849233be7f8.ttf",
     "static/media/Myriad Pro Light.otf": "/static/media/Myriad Pro Light.b0bb7658963c5d720ddd.otf",
     "static/media/Garamond-Light.ttf": "/static/media/Garamond-Light.36dd8fd88e62187103bb.ttf",
     "static/media/HaloHandletter.otf": "/static/media/HaloHandletter.3b1012ec206760542232.otf",
     "index.html": "/index.html",
-    "main.9752abec.css.map": "/static/css/main.9752abec.css.map",
-    "main.eab0d9ec.js.map": "/static/js/main.eab0d9ec.js.map",
-    "287.9548b336.chunk.css.map": "/static/css/287.9548b336.chunk.css.map",
-    "287.dc8d4f71.chunk.js.map": "/static/js/287.dc8d4f71.chunk.js.map",
-    "787.32dd219a.chunk.js.map": "/static/js/787.32dd219a.chunk.js.map",
-    "896.aefa9e05.chunk.js.map": "/static/js/896.aefa9e05.chunk.js.map"
+    "main.09dc99b1.css.map": "/static/css/main.09dc99b1.css.map",
+    "main.167ba304.js.map": "/static/js/main.167ba304.js.map",
+    "787.32dd219a.chunk.js.map": "/static/js/787.32dd219a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.9752abec.css",
-    "static/js/main.eab0d9ec.js"
+    "static/css/main.09dc99b1.css",
+    "static/js/main.167ba304.js"
   ]
 }
