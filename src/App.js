@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import Navbar from "./Components/navbar";
 import Footer from "./Components/Footer";
 import GreetingsCarousel from "./Components/GreetingsCarousel";
 import ProjectCarousel from "./Components/ProjectCarousel";
@@ -24,6 +23,7 @@ const App = () => {
   return (
     <div className={`App ${isMobile ? "mobile" : ""}`}>
       <div className="main-content">
+        ≈{" "}
         <div className="PageSwitcher">
           <a href="/" className="classic-tab active">
             Portfolio
@@ -34,11 +34,12 @@ const App = () => {
             <div className="gloss-layer"></div>
           </a>
         </div>
-      </div>
-      <Navbar />
-      <div className="main-content">
+        <div className="bar"></div>
+        <div></div>
         <div className="content">
-          <GreetingsCarousel />
+          <h1>
+            <GreetingsCarousel />
+          </h1>
           <section id="sintro">
             <p>
               I'm Omer, a Software Engineer who likes Coding, Food, and Cars.

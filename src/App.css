@@ -40,26 +40,28 @@
   height: '50px';
 }
 
+.App {
+  background: 
+  linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.025),
+    rgba(0, 0, 0, 0.025) 2px,
+    #fff 2px,
+    #fff
+  ),
+  linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.025),
+    rgba(0, 0, 0, 0.025) 2px,
+    #fff 2px,
+    #fff
+  );
+}
+
 body {
   font-family: 'Myriad Pro regular', sans-serif;
   color: #7D7D7D;
-  background: 
-    linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.025),
-      rgba(0, 0, 0, 0.025) 2px,
-      #fff 2px,
-      #fff
-    ),
-    linear-gradient(
-      to right,
-      rgba(0, 0, 0, 0.025),
-      rgba(0, 0, 0, 0.025) 2px,
-      #fff 2px,
-      #fff
-    );
   text-align: center;
-
 }
 
 classic-tab {
@@ -89,7 +91,6 @@ classic-tab {
   bottom: 0;
   box-shadow: inset 0 4px 4px rgba(0, 0, 0, .31);
   display: flex;
-  
 }
 
 .PageSwitcher #Button-Active {
@@ -161,6 +162,14 @@ classic-tab {
   position: relative;
 }
 
+.bar {
+  height: 0.5px;
+  width: 100vw;
+  background-color: #7d7d7d;
+  justify-content: center;
+  align-items: center;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -194,8 +203,8 @@ classic-tab {
 
 
 .content {
-  margin-top: 40px; /* Adjust margin to prevent content from being hidden under the menu bar */
-  padding: 20px; /* Adjust padding for your content */
+  margin-top: 30px; /* Adjust margin to prevent content from being hidden under the menu bar */
+  padding: 5px; /* Adjust padding for your content */
 }
 
 
@@ -216,35 +225,11 @@ img {
 }
 
 
-.pfp-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 50%;
-}
-
-
-/* Slideshow styles for mobile devices */
-.project-slider {
-  display: flex;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-}
-
 .project {
   flex: 0 0 80%;
   margin: 0 10px;
   scroll-snap-align: start;
 }
-
-.pfp, .header  {
-  display: inline-block;
-  margin: 0; /* Reset margins */
-}
-
-
-
-
 
 #madeby, #copyright {
   display: inline-block;
@@ -274,7 +259,7 @@ img {
     padding: 0;
   }
   .main-content {
-    padding: 15px 50px;
+    padding: 10px 50px;
   }
 }
 
