@@ -3,6 +3,7 @@ import "./App.css";
 import Navbar from "./Components/navbar"
 import Footer from "./Components/Footer";
 import GreetingsCarousel from "./Components/GreetingsCarousel";
+import ProjectCarousel from "./Components/ProjectCarousel";
 
 const App = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -34,43 +35,20 @@ const App = () => {
       </div>
       <Navbar />
       <div className="content">
-        <section id="about">
+        <GreetingsCarousel/>
+        <section id="sintro">
           <p>I'm Omer, a Software Engineer who likes Coding, Food, and Cars.</p>
         </section>
         <section className="projects">
           <h2>My Projects</h2>
-          {isMobile ? (
+          {isMobile && <ProjectCarousel /> }
             <div className="project-slider"></div>
-          ) : (
-            <>
-              <div className="project">
-                <iframe
-                  title="Notomer's Website"
-                  style={{ width: "150px", height: "150px" }}
-                  src="https://notomer.github.io/"
-                ></iframe>
-                <h3>This Website</h3>
-                <p>This is a description of my first project.</p>
-              </div>
-              <div className="project">
-                <img
-                  src="https://via.placeholder.com/150"
-                  alt="Project 2"
-                  className="project-image"
-                />
-                <h3>Project 2</h3>
-                <p>This is a description of my second project.</p>
-              </div>
-              {/* Add more projects here */}
-            </>
-          )}
         </section>
-        <div className="readne">
+        <div className="About">
           <section id="About" className="section">
             <h2>About</h2>
-            <GreetingsCarousel/>
             <p>
-            I'm Omer, a dedicated software engineer with a genuine passion for cars, Legos, and coding. I like exploring and disassembling things—it's not just a hobby but a habit, I find myself taking apart everything either physically or mentally. My journey is fueled by a profound love for understanding the world around me, the intricate details of both digital and mechanical spaces. Currently, my focus is on a theoretical approach to Machine Learning, aiming to gain a deep understanding then create meaningful contributions to our current understandings.
+            Hi..... Again. I'm Omer, a software engineer with a genuine passion for cars, Legos, and coding. I like exploring and disassembling things—it's not just a hobby but a habit, I find myself taking apart everything either physically or mentally. My journey is fueled by a profound love for understanding the world around me, the intricate details of both digital and mechanical spaces. Currently, my focus is on a theoretical approach to Machine Learning, aiming to gain a deep understanding then create meaningful contributions to our current understandings.
             </p>
           </section>
         </div>

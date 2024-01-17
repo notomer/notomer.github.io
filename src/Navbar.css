@@ -1,22 +1,22 @@
-
-  
-  .osx-menu-bar {
+.osx-menu-bar {
     display: flex;
     align-items: center;
-    background-color: #f0f0f0; /* Set your desired background color */
-    width: 100vw; /* Make the menu bar span the full width of the viewport */
+    justify-content: flex-start; /* Center the content horizontally */
+    background-color: #f0f0f0;
+    max-width: 100vw;
+    box-sizing: border-box; /* Include padding in the width calculation */
   }
   
   .menu-content {
     padding: 10px;
-    width: 100%; /* Ensure content width is 100% */
     display: flex;
     align-items: center;
     justify-content: space-around;
+    box-sizing: border-box; /* Include padding in the width calculation */
   }
   
-    .pfp {
-    margin-left: auto; /* Push the profile picture to the right */
+  .pfp {
+    margin-left: auto;
   }
   
   #header {
@@ -26,8 +26,8 @@
   
   #header a {
     text-decoration: none;
-    color: #333; /* Set your desired text color */
-    font-size: 16px; /* Set your desired font size */
+    color: #333;
+    font-size: 16px;
   }
   
   #header p {
