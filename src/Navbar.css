@@ -4,15 +4,12 @@
     justify-content: flex-start; /* Center the content horizontally */
     background-color: #f0f0f0;
     max-width: 100vw;
-    box-sizing: border-box; /* Include padding in the width calculation */
   }
   
   .menu-content {
-    padding: 10px;
     display: flex;
     align-items: center;
     justify-content: space-around;
-    box-sizing: border-box; /* Include padding in the width calculation */
   }
   
   .pfp {

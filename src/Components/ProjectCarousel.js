@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../App.css'; 
+import '../Slideshow.css'; 
 
 const ProjectCarousel = () => {
   const slides = [
