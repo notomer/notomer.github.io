@@ -1,61 +1,66 @@
-import React, { useState } from 'react';
-import '../Slideshow.css'; 
+import React, { useState } from "react";
+import "../Slideshow.css"; // Import the CSS file
 
 const ProjectCarousel = () => {
-  const slides = [
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const images = [
     {
-      image: '/images/t-logo.png', // Replace with your image file path
-      text: 'Explanation for Slide 1',
+      filename: "images/login.png",
+      description: "This Website",
+      paragraph:
+        "The goal of this website was to force myself to learn React, I'm not a great at creative work so this took me a while. But I did it, and got to implement solutions in creative ways. My GitHub contains this website, feel free to take a look!",
     },
     {
-      image: 'image2.jpg',
-      text: 'Explanation for Slide 2',
+      filename: "images/apple.png",
+      description: "My Work at Apple",
+      paragraph:
+        "At Apple, I worked on the cloud build platform, streamlining deployment and delivery. I had developed 3 main tools. First, an Error Extraction tool, a tool that automatically extracts build log errors and emails it to the person who kicked off the job. Second, I converted a tool originally which required instalation and setup to be deployed over CLI without the need of adiditonal dependencies. Lastly, i had begun the development of automated AddressSanitizer (aka ASan) installation, ASan is a memory error detector. These roots for iOS builds originally needed to be manually installed, per iOS version, this tool aimed to eliminate that.",
     },
     {
-      image: 'image3.jpg',
-      text: 'Explanation for Slide 3',
+      filename: "images/vision.png",
+      description: "Machine Learning Work",
+      paragraph:
+        "This next chapter I want to focus on Machine Learning. Right now, I've been looking at using coreML Swift framework in my applications. I've also been taking a look at using ML at the gym, my biggest concern is my from being correct, I was inspired by the PoseNet model and am currently researching a development of my own model",
     },
   ];
 
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const goToSlide = (index) => {
-    setCurrentIndex(index);
+  const handlePrev = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex > 0 ? prevIndex - 1 : images.length - 1
+    );
   };
 
-  const goToNextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex < images.length - 1 ? prevIndex + 1 : 0
+    );
   };
 
-  const goToPrevSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + slides.length) % slides.length);
-  };
+  /* Your JSX structure */
 
   return (
-    <div className="ProjectCarousel-container">
-      {slides.map((slide, index) => (
-        <div
-          key={index}
-          className={`slide ${index === currentIndex ? 'active' : ''}`}
-          style={{ backgroundImage: `url(${slide.image})` }}
-        >
-          <div className="slide-content">
-            <p>{slide.text}</p>
-          </div>
-        </div>
-      ))}
-
-      <div className="navigation">
-        <button onClick={goToPrevSlide}>&#8249;</button>
-        {slides.map((_, index) => (
-          <span
+    <div className="image-slider">
+      <button className="arrow prev-button" onClick={handlePrev}>
+        <img src="/images/arrowL.png" alt="Previous" />
+      </button>
+      <div className="slider-container">
+        {images.map((image, index) => (
+          <div
             key={index}
-            className={`dot ${index === currentIndex ? 'active-dot' : ''}`}
-            onClick={() => goToSlide(index)}
-          ></span>
+            className={`slide-image ${currentIndex === index ? "active" : ""}`}
+          >
+            <img src={`/${image.filename}`} alt={`Slide ${index + 1}`} />
+          </div>
         ))}
-        <button onClick={goToNextSlide}>&#8250;</button>
+        <h3 className="image-description">
+          {images[currentIndex].description}
+        </h3>
+        <p className="image-paragraph">{images[currentIndex].paragraph}</p>
       </div>
+      <button className="arrow next-button" onClick={handleNext}>
+        <img src="/images/arrowR.png" alt="Next" />
+      </button>
     </div>
   );
 };

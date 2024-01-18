@@ -1,28 +1,25 @@
-  
-  
-  .arrow {
-    width: 15vw;
-    height: 15vw;
-    margin-left: 10px;
-    margin-right: 10px;
-    background-image: linear-gradient(#cacaca, #fff 85%);
-    transition: all 0.2s;
-    position: relative;
-    transform: none;
-    box-shadow: 0 3px 4px -1px rgba(0, 0, 0, 0.64),
-      inset 0 -3px 5px rgba(0, 0, 0, 0.38);
-    background-color: #f8f8f8;
-    border-radius: 100vw;
-    justify-content: center;
-    align-items: center;
-    display: flex;
+.arrow {
+  margin-left: 10px;
+  margin-right: 10px;
+  background-image: linear-gradient(#cacaca, #fff 85%);
+  transition: all 0.2s;
+  position: relative;
+  transform: none;
+  box-shadow: 0 3px 4px -1px rgba(0, 0, 0, 0.64),
+    inset 0 -3px 5px rgba(0, 0, 0, 0.38);
+  background-color: #f8f8f8;
+  border-radius: 100vw;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
 
-  }
-
-.left-arrow, .right-arrow {
+.prev-button,
+.next-button {
   cursor: pointer;
   color: #fff;
   font-size: 40px;
+  align-items: center;
 }
 .w-slider {
   text-align: center;
@@ -40,20 +37,46 @@
 section {
   display: block;
 }
-.left-arrow,
-.right-arrow {
-  cursor: pointer;
-  color: #fff;
-  font-size: 40px;
-}
+
 .w-slider {
   text-align: center;
 }
 
-.left-arrow {
+.prev-buttons {
   order: -1;
 }
 
-.right-arrow {
+.next-button {
   order: 1;
+}
+
+.slide-image {
+  width: auto;
+  height: 10vh;
+  transition: transform 0.5s ease; /* Add a smooth slide animation */
+}
+
+.slide-image {
+  width: auto;
+  height: 10vh;
+  transition: transform 0.5s ease; /* Add a smooth slide animation */
+}
+
+.image-slider {
+  background-color: #f8f8f8;
+  border-radius: 10px;
+}
+
+.slider-container {
+  transition: opacity 0.5s ease;
+}
+
+/* Fade in when the slide is visible */
+.slider-container.active {
+  opacity: 1;
+}
+
+/* Fade out when the slide is not visible */
+.slider-container:not(.active) {
+  opacity: 0;
 }

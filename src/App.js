@@ -23,7 +23,6 @@ const App = () => {
   return (
     <div className={`App ${isMobile ? "mobile" : ""}`}>
       <div className="main-content">
-        ≈{" "}
         <div className="PageSwitcher">
           <a href="/" className="classic-tab active">
             Portfolio
@@ -34,8 +33,6 @@ const App = () => {
             <div className="gloss-layer"></div>
           </a>
         </div>
-        <div className="bar"></div>
-        <div></div>
         <div className="content">
           <h1>
             <GreetingsCarousel />
@@ -47,8 +44,8 @@ const App = () => {
           </section>
           <section className="projects">
             <h2>My Projects</h2>
-            {isMobile && <ProjectCarousel />}
-            <div className="project-slider"></div>
+            {isMobile}
+            <ProjectCarousel />
           </section>
           <div className="About">
             <section id="About" className="section">
