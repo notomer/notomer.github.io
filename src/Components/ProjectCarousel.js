@@ -37,22 +37,17 @@ const ProjectCarousel = () => {
     );
   };
 
-  /* Your JSX structure */
-
   return (
     <div className="image-slider">
       <button className="arrow prev-button" onClick={handlePrev}>
         <img src="/images/arrowL.png" alt="Previous" />
       </button>
       <div className="slider-container">
-        {images.map((image, index) => (
-          <div
-            key={index}
-            className={`slide-image ${currentIndex === index ? "active" : ""}`}
-          >
-            <img src={`/${image.filename}`} alt={`Slide ${index + 1}`} />
-          </div>
-        ))}
+        <img
+          className="slide-image"
+          src={`/${images[currentIndex].filename}`}
+          alt={`Slide ${currentIndex + 1}`}
+        />
         <h3 className="image-description">
           {images[currentIndex].description}
         </h3>
