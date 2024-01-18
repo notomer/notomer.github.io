@@ -71,12 +71,19 @@ section {
   transition: opacity 0.5s ease;
 }
 
-/* Fade in when the slide is visible */
-.slider-container.active {
-  opacity: 1;
+.image-slider {
+  position: relative;
 }
 
-/* Fade out when the slide is not visible */
-.slider-container:not(.active) {
-  opacity: 0;
+.slide-image {
+  width: auto;
+  height: 10vh;
+  transition: opacity 0.5s ease; /* Add a smooth fade transition */
+  border-radius: 10px; /* Optional: Add border-radius for rounded corners */
 }
+
+.image-slider h3,
+.image-slider p {
+  transition: opacity 0.5s ease; /* Add the same transition to other elements if needed */
+}
+

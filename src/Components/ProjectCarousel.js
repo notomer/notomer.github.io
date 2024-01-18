@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../Slideshow.css"; // Import the CSS file
+import "../Slideshow.css"; 
 
 const ProjectCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -26,23 +26,30 @@ const ProjectCarousel = () => {
   ];
 
   const handlePrev = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex > 0 ? prevIndex - 1 : images.length - 1
-    );
+    setCurrentIndex((prevIndex) => {
+      const newIndex = prevIndex === 0 ? images.length - 1 : prevIndex - 1;
+      return newIndex;
+    });
+  };
+  
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) => {
+      const newIndex = prevIndex === images.length - 1 ? 0 : prevIndex + 1;
+      return newIndex;
+    });
   };
 
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex < images.length - 1 ? prevIndex + 1 : 0
-    );
-  };
+
+  console.log("currentIndex before return:", currentIndex);
+  
 
   return (
     <div className="image-slider">
       <button className="arrow prev-button" onClick={handlePrev}>
         <img src="/images/arrowL.png" alt="Previous" />
       </button>
-      <div className="slider-container">
+      <div className={`slider-container ${currentIndex === 0 ? 'active' : ''}`}>
+      {console.log("Rendered with currentIndex:", currentIndex)}
         <img
           className="slide-image"
           src={`/${images[currentIndex].filename}`}
