@@ -15,7 +15,7 @@ const ProjectCarousel = () => {
       filename: "images/apple.png",
       description: "My Work at Apple",
       paragraph:
-        "At Apple, I worked on the cloud build platform, streamlining deployment and delivery. I had developed 3 main tools. First, an Error Extraction tool, a tool that automatically extracts build log errors and emails it to the person who kicked off the job. Second, I converted a tool originally which required instalation and setup to be deployed over CLI without the need of adiditonal dependencies. Lastly, i had begun the development of automated AddressSanitizer (aka ASan) installation, ASan is a memory error detector. These roots for iOS builds originally needed to be manually installed, per iOS version, this tool aimed to eliminate that.",
+        "At Apple, I worked on the cloud build platform, streamlining deployment and delivery. I had developed 3 main tools. Firstly, a clang & compiler error extraction tool, that automatically detects and finds build warnings and errors and emails the code author based on their compilation flags and build requirements. Second, I converted a command line tool originally which required complicated installation steps and setup to be deployed over CLI without the need of additional dependencies by using a trampoline command and self-contained dependency resolution. Lastly, i had begun the development of automated AddressSanitizer (aka ASan) installation, ASan is a memory error detector. These roots for iOS builds originally needed to be manually installed, per iOS version, this tool aimed to eliminate that.",
     },
     {
       filename: "images/vision.png",
