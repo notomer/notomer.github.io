@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.e78cd317.css",
-    "main.js": "/static/js/main.80e0e021.js",
+    "main.js": "/static/js/main.6eca1c55.js",
     "static/js/787.32dd219a.chunk.js": "/static/js/787.32dd219a.chunk.js",
     "static/media/Myriad Pro Regular.ttf": "/static/media/Myriad Pro Regular.c59859cec849233be7f8.ttf",
     "static/media/Myriad Pro Light.otf": "/static/media/Myriad Pro Light.b0bb7658963c5d720ddd.otf",
@@ -9,11 +9,11 @@
     "static/media/HaloHandletter.otf": "/static/media/HaloHandletter.3b1012ec206760542232.otf",
     "index.html": "/index.html",
     "main.e78cd317.css.map": "/static/css/main.e78cd317.css.map",
-    "main.80e0e021.js.map": "/static/js/main.80e0e021.js.map",
+    "main.6eca1c55.js.map": "/static/js/main.6eca1c55.js.map",
     "787.32dd219a.chunk.js.map": "/static/js/787.32dd219a.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e78cd317.css",
-    "static/js/main.80e0e021.js"
+    "static/js/main.6eca1c55.js"
   ]
 }
