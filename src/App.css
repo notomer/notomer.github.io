@@ -1,0 +1,316 @@
+@font-face {
+  font-family: "Myriad Pro Regular";
+  src: url("./Fonts/Myriad Pro Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Myriad Pro Light";
+  src: url("./Fonts/Myriad Pro Light.otf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Garamond Light";
+  src: url("./Fonts/Garamond-Light.ttf") format("truetype");
+  font-weight: lighter;
+  font-style: normal;
+}
+
+.centered-text {
+  text-align: center;
+}
+
+.fade-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1vh;
+  height: 3vh; /* Adjust the height as needed */
+  margin-bottom: 1vh;
+  white-space: nowrap;
+}
+
+#greetings-text {
+  font-size: 1.5em;
+  color: black;
+  text-align: center;
+  height: "50px";
+}
+
+.App {
+  background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.025),
+      rgba(0, 0, 0, 0.025) 2px,
+      #fff 2px,
+      #fff
+    ),
+    linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.025),
+      rgba(0, 0, 0, 0.025) 2px,
+      #fff 2px,
+      #fff
+    );
+}
+
+body {
+  font-family: "Myriad Pro regular", sans-serif;
+  color: #7d7d7d;
+  text-align: center;
+}
+
+classic-tab {
+  background-image: linear-gradient(#79bbff 30%, #c4e8ff 85%);
+}
+
+.PageSwitcher {
+  display: flex;
+  justify-content: center;
+}
+
+.PageSwitcher a {
+  display: inline-block;
+  height: 60px;
+  color: #000;
+  background-image: linear-gradient(#e0e0e0 52%, #fff 85%);
+  border-bottom: 0 #a1a1a1; /* Is this intentional? It looks like an incomplete border property */
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  justify-content: center;
+  align-items: center;
+  margin-right: 0;
+  text-decoration: none;
+  transition: all 0.2s;
+  position: relative;
+  bottom: 0;
+  box-shadow: inset 0 4px 4px rgba(0, 0, 0, 0.31);
+  display: flex;
+}
+
+.PageSwitcher #Button-Active {
+  background-image: linear-gradient(#79bbff 30%, #c4e8ff 85%);
+}
+
+.centered-slideshow-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  /* Additional styling as needed */
+}
+
+.left-arrow {
+  left: 0;
+}
+
+.right-arrow {
+  right: 0;
+}
+
+.glosseffect {
+  width: 95%;
+  height: 50%;
+  opacity: 1;
+  background-image: linear-gradient(
+    to top,
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.84)
+  );
+  border-top: 2px solid #fff;
+  border-radius: 10px 10px 0 0;
+  position: absolute;
+  top: 2%;
+  left: 2.5%;
+}
+
+.gloss-layer {
+  width: 95%;
+  height: 50%;
+  opacity: 1;
+  background-image: linear-gradient(
+    to top,
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.84)
+  );
+  border-top: 2px solid #fff;
+  border-radius: 10px 10px 0 0;
+  position: absolute;
+  top: 2%;
+  left: 2.5%;
+}
+
+.text-block-5.current {
+  text-shadow: 0 2px 1px rgba(0, 0, 0, 0.15);
+}
+
+.text-block-5 {
+  z-index: 10;
+  text-shadow: 0 2px #fff;
+  padding-top: 7px;
+  font-family: Myriadpro, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1vw;
+  text-decoration: none;
+  position: relative;
+}
+
+.bar {
+  height: 0.5px;
+  width: 100vw;
+  background-color: #7d7d7d;
+  justify-content: center;
+  align-items: center;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.classic-tab.active {
+  background-image: linear-gradient(#79bbff 30%, #c4e8ff 85%);
+}
+
+.classic-tab {
+  width: 100%;
+  height: 60px;
+  color: #000;
+  background-image: linear-gradient(#e0e0e0 52%, #fff 85%);
+  border-bottom: 0 #a1a1a1;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px; /* Add this line for bottom-left corner */
+  border-bottom-right-radius: 15px; /* Add this line for bottom-right corner */
+  justify-content: center;
+  align-items: center;
+  margin-right: 0;
+  text-decoration: none;
+  transition: all 0.2s;
+  display: flex;
+  position: relative;
+  bottom: 0;
+  box-shadow: inset 0 4px 4px rgba(0, 0, 0, 0.31);
+}
+
+.classic-tab:hover {
+  filter: brightness(95%);
+}
+
+.content {
+  padding: 5px; /* Adjust padding for your content */
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Myriad Pro Regular", sans-serif;
+  color: black;
+  text-align: center;
+}
+
+img {
+  pointer-events: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+.project {
+  flex: 0 0 80%;
+  margin: 0 10px;
+  scroll-snap-align: start;
+}
+
+#madeby,
+#copyright {
+  display: inline-block;
+  margin: 0; /* Reset margins */
+}
+
+.header-links p {
+  margin: 0; /* Remove default margin for paragraphs inside links */
+}
+
+@media (max-width: 768px) {
+  .header {
+    font-size: calc(10px + 1.5vmin);
+  }
+  .PageSwitcher a {
+    width: 100%;
+  }
+  .main-content {
+    padding: 10px 50px;
+  }
+
+  .arrow {
+    width: 5px;
+    height: 30px;
+  }
+  .arrow > img {
+    width: auto;
+    height: 10px;
+  }
+  .image-slider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+  }
+  .slider-container {
+    margin-top: 10px;
+    order: 1; /* Set order to make the container appear first */
+  }
+  .prev-button,
+  .next-button {
+    background-color: #ddd;
+    border: none;
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+  }
+}
+
+/* Responsive adjustments for larger screens (desktop) */
+@media (min-width: 769px) {
+  .arrow {
+    width: 70px;
+    height: 45px;
+  }
+  .arrow > img {
+    width: auto;
+    height: 15px;
+  }
+  .main-content {
+    padding: 20px 300px;
+  }
+  .PageSwitcher a {
+    width: 100%;
+  }
+  .footer {
+    display: flex;
+    justify-content: space-between;
+  }
+  .image-slider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+.prev-button:hover,
+.next-button:hover {
+  filter: brightness(0.9);
+}

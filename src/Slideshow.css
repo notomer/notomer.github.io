@@ -1,0 +1,89 @@
+.arrow {
+  margin-left: 10px;
+  margin-right: 10px;
+  background-image: linear-gradient(#cacaca, #fff 85%);
+  transition: all 0.2s;
+  position: relative;
+  transform: none;
+  box-shadow: 0 3px 4px -1px rgba(0, 0, 0, 0.64),
+    inset 0 -3px 5px rgba(0, 0, 0, 0.38);
+  background-color: #f8f8f8;
+  border-radius: 100vw;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.prev-button,
+.next-button {
+  cursor: pointer;
+  color: #fff;
+  font-size: 40px;
+  align-items: center;
+}
+.w-slider {
+  text-align: center;
+}
+
+.div-block-64 {
+  width: 70%;
+  position: absolute;
+  top: 0.05vw;
+  bottom: auto;
+  left: 15%;
+  right: 0%;
+}
+
+section {
+  display: block;
+}
+
+.w-slider {
+  text-align: center;
+}
+
+.prev-buttons {
+  order: -1;
+}
+
+.next-button {
+  order: 1;
+}
+
+.slide-image {
+  width: auto;
+  height: 10vh;
+  transition: transform 0.5s ease; /* Add a smooth slide animation */
+}
+
+.slide-image {
+  width: auto;
+  height: 10vh;
+  transition: transform 0.5s ease; /* Add a smooth slide animation */
+}
+
+.image-slider {
+  background-color: #f8f8f8;
+  border-radius: 10px;
+}
+
+.slider-container {
+  transition: opacity 0.5s ease;
+}
+
+.image-slider {
+  position: relative;
+}
+
+.slide-image {
+  width: auto;
+  height: 10vh;
+  transition: opacity 0.5s ease; /* Add a smooth fade transition */
+  border-radius: 10px; /* Optional: Add border-radius for rounded corners */
+}
+
+.image-slider h3,
+.image-slider p {
+  transition: opacity 0.5s ease; /* Add the same transition to other elements if needed */
+}
+
