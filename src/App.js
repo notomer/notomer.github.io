@@ -3,6 +3,7 @@ import "./App.css";
 import Footer from "./Components/Footer";
 import GreetingsCarousel from "./Components/GreetingsCarousel";
 import ProjectCarousel from "./Components/ProjectCarousel";
+import KonamiCode from "./Components/KonamiCode";
 
 const App = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -22,6 +23,7 @@ const App = () => {
 
   return (
     <div className={`App ${isMobile ? "mobile" : ""}`}>
+      <KonamiCode />
       <div className="main-content">
         <div className="PageSwitcher">
           <a href="/" className="classic-tab active">
