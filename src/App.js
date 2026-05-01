@@ -610,10 +610,6 @@ function App() {
                 <img src="/images/mail.png" alt="" />
                 <span>Email</span>
               </a>
-              <a href="/resume.pdf" target="_blank" rel="noreferrer">
-                <img src="/images/pages.webp" alt="" />
-                <span>Resume</span>
-              </a>
             </div>
           </div>
         </section>
