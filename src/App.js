@@ -312,9 +312,9 @@ function App() {
         </a>
         <nav className="nav-links" aria-label="Primary">
           <a href="#building">ProxKey</a>
-          <a href="#garage">Garage</a>
           <a href="#work">Work</a>
           <a href="#experience">Experience</a>
+          <a href="#garage">Garage</a>
           <a href="#contact">Contact</a>
         </nav>
       </header>
@@ -450,46 +450,6 @@ function App() {
           </div>
         </section>
 
-        <section
-          className="garage section-shell"
-          id="garage"
-          data-reveal
-          onClick={() => openGarage(0)}
-        >
-          <div className="garage-intro">
-            <p className="section-kicker">Garage</p>
-            <h2>Machines I use, ride, and admire.</h2>
-            <p>
-              A small collection of engineering, design, and obsession. Part
-              utility, part motion, part private product wall.
-            </p>
-          </div>
-          <div className="garage-preview-grid">
-            {garageItems.map((item, index) => (
-              <button
-                className="garage-card"
-                key={item.title}
-                type="button"
-                onClick={(event) => {
-                  event.stopPropagation();
-                  openGarage(index);
-                }}
-              >
-                <span className="garage-card-status">{item.status}</span>
-                <span className="garage-card-image-wrap">
-                  <img
-                    className={item.imageClass}
-                    src={item.image}
-                    alt={item.title}
-                  />
-                </span>
-                <strong>{item.title}</strong>
-                <span>{item.note}</span>
-              </button>
-            ))}
-          </div>
-        </section>
-
         <section className="areas band section-shell" id="work">
           <div className="section-heading" data-reveal>
             <p className="section-kicker">Areas of Work</p>
@@ -542,6 +502,46 @@ function App() {
           <div className="principle-grid" data-reveal>
             {principles.map((principle) => (
               <p key={principle}>{principle}</p>
+            ))}
+          </div>
+        </section>
+
+        <section
+          className="garage section-shell"
+          id="garage"
+          data-reveal
+          onClick={() => openGarage(0)}
+        >
+          <div className="garage-intro">
+            <p className="section-kicker">Garage</p>
+            <h2>Machines I use, ride, and admire.</h2>
+            <p>
+              A small collection of engineering, design, and obsession. Part
+              utility, part motion, part private product wall.
+            </p>
+          </div>
+          <div className="garage-preview-grid">
+            {garageItems.map((item, index) => (
+              <button
+                className="garage-card"
+                key={item.title}
+                type="button"
+                onClick={(event) => {
+                  event.stopPropagation();
+                  openGarage(index);
+                }}
+              >
+                <span className="garage-card-status">{item.status}</span>
+                <span className="garage-card-image-wrap">
+                  <img
+                    className={item.imageClass}
+                    src={item.image}
+                    alt={item.title}
+                  />
+                </span>
+                <strong>{item.title}</strong>
+                <span>{item.note}</span>
+              </button>
             ))}
           </div>
         </section>
