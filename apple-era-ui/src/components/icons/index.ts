@@ -1,0 +1,11 @@
+export { PaletteIcon } from './PaletteIcon';
+export { LinkIcon } from './sets/LinkIcon';
+export { GithubIcon } from './sets/GithubIcon';
+export { MailIcon } from './sets/MailIcon';
+export { ExternalIcon } from './sets/ExternalIcon';
+export { ArrowRightIcon } from './sets/ArrowRightIcon';
+export { ArrowLeftIcon } from './sets/ArrowLeftIcon';
+export { TagIcon } from './sets/TagIcon';
+export { CalendarIcon } from './sets/CalendarIcon';
+export { CodeIcon } from './sets/CodeIcon';
+export { PhoneIcon } from './sets/PhoneIcon'; 

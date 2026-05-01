@@ -1,0 +1,82 @@
+@import "tailwindcss";
+@import "../styles/themes.css";
+
+/* Global application of variables */
+@theme inline {
+  --color-background: var(--bg);
+  --color-foreground: var(--fg);
+}
+
+:root { color-scheme: light; }
+
+/* Terminal-specific overrides */
+:root[data-theme='terminal'] {
+  color-scheme: dark;
+}
+
+/* Backdrops and textures for specific themes */
+/* Brushed metal noise texture via embedded SVG */
+:root[data-theme='brushed-metal'] body {
+  background-image:
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.25) 0, rgba(255,255,255,0.25) 1px, transparent 1px, transparent 3px),
+    linear-gradient(#eff2f5, #cfd5db),
+    var(--metal-noise);
+  background-blend-mode: soft-light, normal, normal;
+  background-size: auto, auto, 160px 160px;
+}
+
+/* Aqua pinstripes */
+:root[data-theme='aqua'] body {
+  background-image:
+    var(--pinstripe),
+    linear-gradient(180deg, #ffffff, #E8E8E8);
+}
+
+/* Leopard glass backdrops */
+:root[data-theme='leopard-glass'] .glass {
+  background: var(--surface);
+  backdrop-filter: blur(var(--blur)) saturate(120%);
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+/* Terminal styles */
+:root[data-theme='terminal'] .btn {
+  text-transform: none;
+}
+
+/* Additional global overrides if needed */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}

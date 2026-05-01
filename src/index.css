@@ -1,4 +1,3 @@
-/* Define custom fonts using @font-face */
 @font-face {
   font-family: "Garamond-Light";
   src: url("./Fonts/Garamond-Light.ttf") format("truetype");
@@ -14,22 +13,17 @@
   src: url("./Fonts/HaloHandletter.otf") format("opentype");
 }
 
-/* Apply styles to the entire body */
+html {
+  scroll-padding-top: 92px;
+}
+
 body {
   margin: 0;
-  font-family: "Garamond-Light", "Myriad Pro Regular", "HaloHandletter", sans-serif;
+  font-family: "Myriad Pro Regular", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Apply styles to the code elements */
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
-}
-
-
-/* Apply styles to the 'body-text' elements */
-body-text {
-  font-family: "Myriad Pro Regular", sans-serif;
-  color: #666666;
 }

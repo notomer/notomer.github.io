@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Contact.css";
 import Footer from "./Components/Footer";
 import SocialLinks from "./Components/SocialLinks";
+import Navbar from "./Components/navbar";
 const Contact = () => {
   const [isMobile, setIsMobile] = useState(false);
 
@@ -21,6 +22,7 @@ const Contact = () => {
   return (
     <div className={`App ${isMobile ? "mobile" : ""}`}>
       <div className="main-content">
+      <Navbar />
       <div className="PageSwitcher">
         <a href="/" className="classic-tab">
           Portfolio
