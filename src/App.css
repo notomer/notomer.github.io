@@ -90,6 +90,10 @@ a {
   text-decoration: none;
 }
 
+main > section {
+  scroll-margin-top: 132px;
+}
+
 img {
   display: block;
   max-width: 100%;
@@ -400,10 +404,50 @@ img {
   line-height: 0.9;
 }
 
-.hero h1 span {
+.hero h1 > span {
   display: block;
   color: #2e3137;
   font-style: italic;
+}
+
+.taste-word {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: baseline;
+  border-radius: 0.12em;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(198, 228, 255, 0.88)),
+    linear-gradient(90deg, rgba(61, 142, 232, 0.18), rgba(61, 142, 232, 0.44));
+  box-shadow:
+    inset 0 0.02em 0 rgba(255, 255, 255, 0.92),
+    inset 0 -0.05em 0.14em rgba(38, 118, 214, 0.26),
+    0 0.05em 0.18em rgba(42, 120, 214, 0.14);
+  color: #163b68;
+  padding: 0 0.18em 0.02em 0.12em;
+}
+
+.taste-word > span {
+  display: inline-block;
+  font-style: italic;
+  white-space: nowrap;
+  clip-path: inset(0 100% 0 0);
+  animation: taste-type 1.12s steps(5, end) 520ms both;
+}
+
+.taste-word::after {
+  content: "";
+  position: absolute;
+  top: 0.14em;
+  bottom: 0.16em;
+  left: 0.12em;
+  width: 0.035em;
+  border-radius: 999px;
+  background: #0b67c7;
+  box-shadow: 0 0 0.14em rgba(42, 120, 214, 0.34);
+  animation:
+    taste-cursor-type 1.12s steps(5, end) 520ms both,
+    taste-cursor-blink 780ms steps(1, end) 1.72s infinite;
 }
 
 .hero-text {
@@ -851,27 +895,49 @@ img {
   line-height: 1.35;
 }
 
-.adjacent-grid {
-  display: grid;
-  gap: 14px;
-  grid-template-columns: repeat(4, 1fr);
-  margin-top: 16px;
+.console-pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.small-panel {
-  min-height: 108px;
-  border: 1px solid rgba(255, 255, 255, 0.74);
-  border-bottom-color: rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(238, 241, 245, 0.84));
-  box-shadow: 0 12px 28px rgba(17, 19, 24, 0.07), inset 0 1px 0 rgba(255, 255, 255, 0.96);
-  padding: 18px;
+.console-pill {
+  position: relative;
+  display: inline-flex;
+  min-height: 32px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid rgba(214, 225, 236, 0.26);
+  border-radius: 1000px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.24), rgba(126, 139, 154, 0.24) 46%, rgba(34, 39, 46, 0.32)),
+    rgba(255, 255, 255, 0.08);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -10px 18px rgba(0, 0, 0, 0.2),
+    0 8px 18px rgba(0, 0, 0, 0.2);
+  color: rgba(247, 250, 253, 0.88);
+  font-size: 0.73rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 0 12px;
 }
 
-.small-panel span {
-  color: #373d45;
-  font-size: 1.05rem;
-  font-weight: 600;
+.console-pill::before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  width: calc(100% - 16px);
+  height: 34%;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.08));
+  filter: blur(0.5px);
+  transform: translateX(-50%);
 }
 
 .garage {
@@ -925,6 +991,8 @@ img {
 .garage-card {
   position: relative;
   display: grid;
+  align-content: start;
+  row-gap: 8px;
   min-height: 330px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.78);
@@ -946,7 +1014,7 @@ img {
   content: "";
   position: absolute;
   right: auto;
-  bottom: 122px;
+  bottom: 132px;
   left: 18px;
   width: min(214px, calc(100% - 36px));
   height: 24px;
@@ -966,26 +1034,53 @@ img {
 .garage-card-status {
   position: relative;
   z-index: 2;
+  display: inline-flex;
+  min-width: 96px;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
   justify-self: start;
-  border: 1px solid rgba(17, 19, 24, 0.1);
+  overflow: hidden;
+  border: 1px solid rgba(17, 19, 24, 0.13);
   border-radius: 1000px;
-  background: rgba(255, 255, 255, 0.68);
-  color: #5c646e;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(214, 238, 255, 0.86) 48%, rgba(146, 202, 250, 0.52)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(42, 120, 214, 0.16));
+  box-shadow:
+    0 0.375em 0.5em rgba(0, 0, 0, 0.12),
+    0 0.125em 0.125em rgba(42, 120, 214, 0.18),
+    inset 0 0.25em 0.25em rgba(255, 255, 255, 0.62),
+    inset 0 -0.32em 0.6em rgba(42, 120, 214, 0.24);
+  color: #314d69;
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.12em;
-  padding: 7px 10px;
+  padding: 0 18px;
+  text-align: center;
   text-transform: uppercase;
+}
+
+.garage-card-status::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  width: calc(100% - 18px);
+  height: 34%;
+  border-radius: 999px;
+  background: linear-gradient(rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.24));
+  filter: blur(1px);
+  transform: translateX(-50%);
 }
 
 .garage-card-image-wrap {
   position: relative;
   z-index: 1;
   display: grid;
-  height: 124px;
+  height: 108px;
   align-items: end;
   justify-items: start;
-  margin: 8px 0 4px;
+  margin: 20px 0 0;
 }
 
 .garage-card img {
@@ -1000,16 +1095,22 @@ img {
 
 .garage-card img.canyon,
 .garage-card img.porsche {
-  height: 92px;
-  max-height: 92px;
+  height: 86px;
+  max-height: 86px;
 }
 
 .garage-card img.model-y {
-  transform: translateX(-94px) scaleX(-1);
+  transform: scaleX(-1);
 }
 
 .garage-card img.canyon {
-  width: min(186px, 100%);
+  width: min(158px, 100%);
+  opacity: 1;
+  filter:
+    contrast(1.72)
+    brightness(0.68)
+    saturate(1.14)
+    drop-shadow(0 18px 24px rgba(17, 19, 24, 0.2));
 }
 
 .garage-card img.porsche {
@@ -1021,7 +1122,7 @@ img {
 }
 
 .garage-card img.model-y.flip-x {
-  transform: translateX(-94px) scaleX(-1);
+  transform: scaleX(-1);
 }
 
 .garage-card strong {
@@ -1040,6 +1141,48 @@ img {
   font-weight: 300;
   line-height: 1.42;
   margin-top: 8px;
+}
+
+.garage-open-cta {
+  position: relative;
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  justify-self: start;
+  overflow: hidden;
+  border: 1px solid rgba(17, 19, 24, 0.18);
+  border-radius: 1000px;
+  background: linear-gradient(rgba(160, 160, 160, 0.625), rgba(255, 255, 255, 0.625));
+  box-shadow:
+    0 0.375em 0.5em rgba(0, 0, 0, 0.16),
+    0 0.125em 0.125em rgba(0, 0, 0, 0.22),
+    inset 0 0.25em 0.25em rgba(0, 0, 0, 0.22),
+    inset 0 0.375em 0.5em 0.25em #bbbbbb;
+  color: #20252c;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  padding: 0 24px;
+}
+
+.garage-open-cta::before {
+  content: "";
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  z-index: 1;
+  width: calc(100% - 0.875em);
+  height: 33%;
+  border-radius: 2em 2em 0.5em 0.5em;
+  background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.3));
+  filter: blur(1px);
+  transform: translateX(-50%);
+}
+
+.garage-open-cta span {
+  position: relative;
+  z-index: 2;
 }
 
 .garage-modal-overlay {
@@ -1069,11 +1212,19 @@ img {
   animation: garage-modal-in 260ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.garage-close {
+.garage-mobile-topbar {
   position: absolute;
   top: 18px;
   right: 18px;
-  z-index: 3;
+  z-index: 4;
+}
+
+.garage-mobile-topbar > span,
+.garage-mobile-segmented {
+  display: none;
+}
+
+.garage-close {
   display: grid;
   width: 40px;
   height: 40px;
@@ -1086,6 +1237,23 @@ img {
   cursor: pointer;
   font-size: 1.45rem;
   line-height: 1;
+}
+
+.garage-status-pill {
+  display: inline-flex;
+  width: max-content;
+  min-height: 34px;
+  align-items: center;
+  border: 1px solid rgba(17, 19, 24, 0.1);
+  border-radius: 1000px;
+  background: rgba(255, 255, 255, 0.68);
+  color: #5d6670;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  margin: 0 0 18px;
+  padding: 0 13px;
+  text-transform: uppercase;
 }
 
 .garage-modal-stage {
@@ -1135,6 +1303,14 @@ img {
 
 .garage-product-visual img.flip-x {
   transform: scaleX(-1);
+}
+
+.garage-product-visual img.canyon {
+  filter:
+    contrast(1.38)
+    brightness(0.8)
+    saturate(1.08)
+    drop-shadow(0 26px 34px rgba(17, 19, 24, 0.18));
 }
 
 .garage-product-copy p:not(.section-kicker) {
@@ -1274,22 +1450,28 @@ body.garage-open {
 
 .experience-stack {
   display: grid;
-  gap: 1px;
+  gap: 16px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   margin-top: 52px;
-  border: 1px solid rgba(17, 19, 24, 0.09);
-  border-radius: 8px;
-  overflow: hidden;
-  background: rgba(17, 19, 24, 0.09);
+  border: 0;
+  border-radius: 0;
+  overflow: visible;
+  background: transparent;
 }
 
 .experience-row {
   display: grid;
-  gap: 36px;
-  grid-template-columns: 170px 1fr;
+  gap: 22px;
+  grid-template-columns: 1fr;
   align-items: start;
+  min-height: 318px;
+  border: 1px solid rgba(17, 19, 24, 0.09);
+  border-bottom-color: rgba(0, 0, 0, 0.14);
+  border-radius: 8px;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(247, 248, 250, 0.92));
-  padding: 32px 36px;
+  box-shadow: var(--soft-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.96);
+  padding: 26px 24px;
 }
 
 .experience-meta {
@@ -1346,41 +1528,18 @@ body.garage-open {
   margin: 0;
   color: var(--ink);
   font-family: "Omer Garamond", Georgia, serif;
-  font-size: clamp(1.8rem, 3vw, 3rem);
+  font-size: clamp(1.75rem, 2.5vw, 2.52rem);
   font-weight: 300;
   line-height: 1.05;
 }
 
 .experience-row p {
-  max-width: 720px;
+  max-width: 100%;
   margin: 13px 0 0;
   color: #48505a;
-  font-size: 1.04rem;
+  font-size: 0.98rem;
   font-weight: 300;
-  line-height: 1.58;
-}
-
-.principle-grid {
-  display: grid;
-  gap: 1px;
-  grid-template-columns: repeat(5, 1fr);
-  margin-top: 46px;
-  border: 1px solid rgba(17, 19, 24, 0.09);
-  border-radius: 8px;
-  overflow: hidden;
-  background: rgba(17, 19, 24, 0.09);
-}
-
-.principle-grid p {
-  min-height: 160px;
-  margin: 0;
-  background: rgba(255, 255, 255, 0.82);
-  color: #242932;
-  font-family: "Omer Garamond", Georgia, serif;
-  font-size: clamp(1.55rem, 2.4vw, 2.38rem);
-  font-weight: 300;
-  line-height: 1.05;
-  padding: 24px;
+  line-height: 1.52;
 }
 
 .contact-panel {
@@ -1502,7 +1661,60 @@ body.garage-open {
   }
 }
 
-@media (max-width: 980px) {
+@keyframes taste-type {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes taste-cursor-type {
+  from {
+    left: 0.12em;
+  }
+  to {
+    left: calc(100% - 0.14em);
+  }
+}
+
+@keyframes taste-cursor-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes mobile-garage-sheet-in {
+  from {
+    opacity: 0;
+    transform: translateY(36px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes garage-product-enter {
+  from {
+    opacity: 0;
+    scale: 0.98;
+    translate: 0 8px;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+    translate: 0 0;
+  }
+}
+
+@media (max-width: 1040px) {
   .section-shell {
     width: min(100% - 34px, 760px);
   }
@@ -1511,6 +1723,10 @@ body.garage-open {
     align-items: stretch;
     flex-direction: column;
     gap: 8px;
+  }
+
+  .brand-chip {
+    justify-content: center;
   }
 
   .nav-links {
@@ -1546,10 +1762,6 @@ body.garage-open {
     grid-template-columns: 1fr;
   }
 
-  .garage-preview-grid {
-    grid-template-columns: 1fr;
-  }
-
   .garage-modal {
     overflow-y: auto;
   }
@@ -1567,17 +1779,15 @@ body.garage-open {
     padding: 12px 4px 4px;
   }
 
-  .adjacent-grid,
-  .principle-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+}
 
-  .principle-grid p:last-child {
-    grid-column: 1 / -1;
+@media (max-width: 820px) {
+  .experience-stack {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 760px) {
   .section-shell {
     width: min(100% - 24px, 560px);
   }
@@ -1585,6 +1795,7 @@ body.garage-open {
   .topbar {
     top: 8px;
     width: calc(100% - 16px);
+    align-items: center;
   }
 
   .brand-chip {
@@ -1593,7 +1804,7 @@ body.garage-open {
 
   .nav-links {
     overflow-x: auto;
-    justify-content: flex-start;
+    justify-content: center;
   }
 
   .nav-links a {
@@ -1629,16 +1840,20 @@ body.garage-open {
   }
 
   .hero-visual {
-    min-height: 398px;
+    min-height: auto;
   }
 
   .product-window {
+    position: relative;
+    inset: auto;
     width: 100%;
-    min-height: 376px;
+    min-height: 420px;
+    overflow: hidden;
+    transform: none;
   }
 
   .signal-stage {
-    min-height: 336px;
+    min-height: 380px;
     padding: 28px 16px 28px;
   }
 
@@ -1694,6 +1909,7 @@ body.garage-open {
 
   .garage {
     gap: 28px;
+    cursor: default;
   }
 
   .garage-intro h2,
@@ -1701,81 +1917,215 @@ body.garage-open {
     font-size: clamp(2.45rem, 13vw, 3.8rem);
   }
 
+  .garage-intro p:not(.section-kicker) {
+    font-size: 1.02rem;
+  }
+
+  .garage-preview-grid {
+    display: flex;
+    grid-template-columns: none;
+    gap: 12px;
+    overflow-x: auto;
+    margin-right: -12px;
+    padding: 2px 12px 16px 0;
+    scroll-snap-type: x mandatory;
+  }
+
   .garage-card {
-    min-height: 280px;
+    flex: 0 0 min(78vw, 320px);
+    min-height: 236px;
+    border-radius: 18px;
+    padding: 14px;
+    scroll-snap-align: start;
+  }
+
+  .garage-card::after {
+    bottom: 84px;
+    left: 14px;
+    width: min(178px, calc(100% - 28px));
+  }
+
+  .garage-card-status {
+    min-width: 78px;
+    min-height: 32px;
+    font-size: 0.62rem;
+    padding: 0 12px;
   }
 
   .garage-card-image-wrap {
-    height: 112px;
-    margin-bottom: 4px;
+    height: 92px;
+    margin: 14px 0 0;
   }
 
   .garage-card img {
-    width: min(206px, 100%);
-    height: 92px;
-    max-height: 92px;
+    width: min(194px, 100%);
+    height: 82px;
+    max-height: 82px;
   }
 
   .garage-card img.canyon,
   .garage-card img.porsche {
-    height: 86px;
-    max-height: 86px;
+    height: 76px;
+    max-height: 76px;
   }
 
   .garage-card img.model-y,
   .garage-card img.model-y.flip-x {
-    transform: translateX(-82px) scaleX(-1);
+    transform: scaleX(-1);
   }
 
   .garage-card img.canyon {
-    width: min(178px, 100%);
+    width: min(154px, 100%);
   }
 
   .garage-card img.porsche {
-    width: min(166px, 100%);
+    width: min(154px, 100%);
+  }
+
+  .garage-card strong {
+    font-size: 1.05rem;
+  }
+
+  .garage-card > span:last-child {
+    display: none;
+  }
+
+  .garage-open-cta {
+    width: calc(100% - 12px);
+    min-height: 46px;
+    justify-self: stretch;
   }
 
   .garage-modal-overlay {
     align-items: stretch;
-    padding: 10px;
+    place-items: stretch;
+    padding: 0;
+    background: rgba(16, 18, 22, 0.46);
   }
 
   .garage-modal {
-    max-height: calc(100svh - 20px);
+    width: 100%;
+    min-height: 100svh;
+    max-height: 100svh;
+    overflow-y: auto;
+    border: 0;
+    border-radius: 0;
+    background:
+      radial-gradient(circle at 50% 18%, rgba(255, 255, 255, 0.96), rgba(234, 237, 242, 0.66) 42%, transparent 70%),
+      linear-gradient(180deg, #fbfaf8, #eef1f5 58%, #f8f7f4);
+    animation: mobile-garage-sheet-in 280ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .garage-mobile-topbar {
+    position: sticky;
+    top: 0;
+    right: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: calc(env(safe-area-inset-top) + 14px) 16px 10px;
+    background: rgba(250, 251, 252, 0.74);
+    backdrop-filter: blur(18px) saturate(140%);
+  }
+
+  .garage-mobile-topbar > span {
+    display: block;
+    color: #626a74;
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .garage-close {
+    width: 38px;
+    height: 38px;
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(12px);
+  }
+
+  .garage-mobile-segmented {
+    display: flex;
+    gap: 4px;
+    margin: 0 16px 8px;
+    border: 1px solid rgba(17, 19, 24, 0.08);
+    border-radius: 1000px;
+    background: rgba(255, 255, 255, 0.62);
+    box-shadow: inset 0 1px 2px rgba(17, 19, 24, 0.08);
+    padding: 4px;
+  }
+
+  .garage-mobile-segmented button {
+    flex: 1;
+    min-height: 34px;
+    border: 0;
+    border-radius: 1000px;
+    background: transparent;
+    color: #5f6873;
+    font: inherit;
+    font-size: 0.78rem;
+    font-weight: 800;
+  }
+
+  .garage-mobile-segmented button.active {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(210, 232, 255, 0.86));
+    box-shadow: 0 4px 12px rgba(42, 120, 214, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.98);
+    color: #123b6f;
   }
 
   .garage-modal-stage {
-    gap: 22px;
-    padding: 58px 18px 24px;
+    gap: 18px;
+    padding: 10px 18px 24px;
   }
 
   .garage-product-visual {
-    min-height: 220px;
+    min-height: clamp(240px, 43svh, 360px);
   }
 
   .garage-product-visual img {
-    max-height: 210px;
+    width: min(100%, 420px);
+    max-height: min(42svh, 320px);
+    animation: garage-product-enter 280ms ease both;
+  }
+
+  .garage-product-copy {
+    animation: garage-product-enter 300ms ease both;
+  }
+
+  .garage-status-pill {
+    min-height: 30px;
+    font-size: 0.68rem;
+    margin-bottom: 14px;
+  }
+
+  .garage-product-copy p:not(.section-kicker):not(.garage-owned-line) {
+    margin-top: 16px;
+    font-size: 1.02rem;
+    line-height: 1.52;
+  }
+
+  .garage-tags {
+    gap: 7px;
+    margin-top: 18px;
+  }
+
+  .garage-tags span {
+    font-size: 0.72rem;
+    padding: 7px 10px;
+  }
+
+  .garage-product-copy .garage-owned-line {
+    margin-top: 22px;
+    border-top: 1px solid rgba(17, 19, 24, 0.08);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.52);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.84);
+    color: #68717d;
+    padding: 14px;
   }
 
   .garage-modal-controls {
-    grid-template-columns: 34px 1fr 34px;
-    padding: 12px;
-  }
-
-  .garage-arrow {
-    width: 34px;
-    height: 34px;
-  }
-
-  .garage-tabs {
-    overflow-x: auto;
-    justify-content: flex-start;
-  }
-
-  .garage-tabs button {
-    flex: 0 0 auto;
-    font-size: 0.78rem;
-    padding: 9px 11px;
+    display: none;
   }
 
   .proxkey-console {
@@ -1788,20 +2138,15 @@ body.garage-open {
     gap: 5px;
   }
 
-  .adjacent-grid,
-  .principle-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .principle-grid p {
-    min-height: 112px;
-  }
-
   .area-item,
   .experience-row {
     grid-template-columns: 1fr;
     gap: 14px;
     padding: 22px 18px;
+  }
+
+  .experience-stack {
+    grid-template-columns: 1fr;
   }
 
   .contact-panel {

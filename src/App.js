@@ -1,40 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./App.css";
 
 const areas = [
   {
     title: "AI Systems",
     copy:
-      "Designing systems that can reason over messy context, preserve intent, and turn model output into decisions people can trust.",
+      "Reasoning over messy context and turning model output into decisions people can trust.",
   },
   {
     title: "Developer Tooling",
     copy:
-      "Building tools for the moments where engineers need less surface area, clearer feedback, and faster paths from failure to action.",
+      "Tools that make failure clearer, feedback faster, and engineering work easier to move.",
   },
   {
     title: "Product Design in Software",
     copy:
-      "Treating interface, workflow, and system behavior as one product problem instead of separate layers of polish.",
+      "Interface, workflow, and system behavior treated as one product surface.",
   },
   {
     title: "Automation and Workflow Systems",
     copy:
-      "Creating automation that removes repetitive work without hiding the reasoning, control, or context that teams still need.",
+      "Automation that removes repeat work while preserving context and control.",
   },
   {
     title: "Systems-Focused Engineering",
     copy:
-      "Working close to the boundaries between infrastructure, product requirements, and the human expectations around reliability.",
+      "Engineering close to infrastructure, product requirements, and reliability expectations.",
   },
-];
-
-const principles = [
-  "Clarity over noise.",
-  "Taste matters.",
-  "Useful tools earn trust.",
-  "Good software should feel inevitable.",
-  "Systems should serve people, not overwhelm them.",
 ];
 
 const experience = [
@@ -78,35 +70,38 @@ const adjacentWork = [
 const garageItems = [
   {
     title: "Model Y Long Range",
-    status: "Current",
+    shortTitle: "Model Y",
+    status: "Owned",
     statusDetail: "Owned",
     image: "/images/model-y.avif",
     imageClass: "flip-x model-y",
     description:
-      "My daily driver. Quiet, minimal, and fast in the way good design usually is. Practical enough for real life, refined enough to still feel special.",
-    tags: ["Daily Driver", "Long Range", "Electric", "Minimal Utility"],
+      "My daily driver. Quiet, minimal, and practical, but still sharp in the way good engineering always is.",
+    tags: ["Electric", "Long Range", "Daily Driver", "Minimal Utility"],
     note: "Electric daily utility, stripped down to what matters.",
   },
   {
     title: "Canyon Endurace CF 7 AXS",
+    shortTitle: "Endurace",
     status: "Owned",
-    statusDetail: "Road Bike",
+    statusDetail: "Owned",
     image: "/images/canyon-endurace.png",
     imageClass: "canyon",
     description:
-      "A machine built around efficiency and feel. Fast without being harsh, clean without trying too hard, and engineered in a way that makes every detail feel intentional.",
-    tags: ["Road Bike", "Carbon Frame", "AXS", "Endurance Geometry"],
+      "A road bike built around precision and feel. Fast, clean, and intentional, without ever feeling overdone.",
+    tags: ["Carbon Frame", "AXS", "Road Bike", "Endurance"],
     note: "Precision, speed, and clean mechanical intent.",
   },
   {
     title: "911 GT2 RS",
+    shortTitle: "GT2 RS",
     status: "Dream",
-    statusDetail: "Aspirational",
+    statusDetail: "Dream",
     image: "/images/porsche-911-gt2-rs.avif",
     imageClass: "porsche",
     description:
-      "The dream. Extreme, disciplined, and unapologetically engineered. Less of a car, more of a statement about what happens when performance is pushed to its edge.",
-    tags: ["Dream Machine", "Rear Engine", "Track Focused", "Icon"],
+      "The dream machine. Extreme, disciplined, and beautifully excessive, with performance pushed all the way to the edge.",
+    tags: ["Dream Car", "Track Focused", "Rear Engine", "Icon"],
     note: "The dream machine. Sharp, excessive, inevitable.",
   },
 ];
@@ -235,6 +230,7 @@ const useAnimatedBeachballFavicon = () => {
 function App() {
   const [isGarageOpen, setIsGarageOpen] = useState(false);
   const [activeGarageIndex, setActiveGarageIndex] = useState(0);
+  const garageTouchStart = useRef(null);
 
   useAnimatedBeachballFavicon();
 
@@ -301,6 +297,49 @@ function App() {
 
   const closeGarage = () => setIsGarageOpen(false);
 
+  const showPreviousGarageItem = () => {
+    setActiveGarageIndex(
+      (current) => (current - 1 + garageItems.length) % garageItems.length
+    );
+  };
+
+  const showNextGarageItem = () => {
+    setActiveGarageIndex((current) => (current + 1) % garageItems.length);
+  };
+
+  const handleGarageTouchStart = (event) => {
+    garageTouchStart.current = {
+      x: event.touches[0].clientX,
+      y: event.touches[0].clientY,
+    };
+  };
+
+  const handleGarageTouchEnd = (event) => {
+    if (garageTouchStart.current === null) {
+      return;
+    }
+
+    const deltaX = event.changedTouches[0].clientX - garageTouchStart.current.x;
+    const deltaY = event.changedTouches[0].clientY - garageTouchStart.current.y;
+    garageTouchStart.current = null;
+
+    if (deltaY > 92 && Math.abs(deltaY) > Math.abs(deltaX) * 1.25) {
+      closeGarage();
+      return;
+    }
+
+    if (Math.abs(deltaX) < 48 || Math.abs(deltaX) < Math.abs(deltaY)) {
+      return;
+    }
+
+    if (deltaX < 0) {
+      showNextGarageItem();
+      return;
+    }
+
+    showPreviousGarageItem();
+  };
+
   const activeGarageItem = garageItems[activeGarageIndex];
 
   return (
@@ -327,7 +366,13 @@ function App() {
             </div>
             <h1>
               Building software, systems, and products{" "}
-              <span>with taste.</span>
+              <span className="taste-line">
+                with{" "}
+                <span className="taste-word" aria-label="taste">
+                  <span aria-hidden="true">taste</span>
+                </span>
+                .
+              </span>
             </h1>
             <p className="hero-text">
               I am focused on software engineering, AI systems, developer
@@ -438,22 +483,21 @@ function App() {
                 <strong>route owner, likely cause, next check</strong>
                 <em>ready</em>
               </div>
+              <div className="console-pill-row" aria-label="Work themes">
+                {adjacentWork.map((item) => (
+                  <span className="console-pill" key={item}>
+                    {item}
+                  </span>
+                ))}
+              </div>
             </div>
-          </div>
-
-          <div className="adjacent-grid" data-reveal>
-            {adjacentWork.map((item) => (
-              <article className="small-panel" key={item}>
-                <span>{item}</span>
-              </article>
-            ))}
           </div>
         </section>
 
         <section className="areas band section-shell" id="work">
           <div className="section-heading" data-reveal>
             <p className="section-kicker">Areas of Work</p>
-            <h2>Systems, tools, and products built for clearer technical work.</h2>
+            <h2>Clearer systems and tools.</h2>
           </div>
           <div className="area-list">
             {areas.map((area) => (
@@ -494,18 +538,6 @@ function App() {
           </div>
         </section>
 
-        <section className="principles band section-shell" id="principles">
-          <div className="section-heading centered" data-reveal>
-            <p className="section-kicker">Principles</p>
-            <h2>Quiet rules for serious work.</h2>
-          </div>
-          <div className="principle-grid" data-reveal>
-            {principles.map((principle) => (
-              <p key={principle}>{principle}</p>
-            ))}
-          </div>
-        </section>
-
         <section
           className="garage section-shell"
           id="garage"
@@ -516,8 +548,7 @@ function App() {
             <p className="section-kicker">Garage</p>
             <h2>Machines I use, ride, and admire.</h2>
             <p>
-              A small collection of engineering, design, and obsession. Part
-              utility, part motion, part private product wall.
+              A personal collection of design, engineering, and obsession.
             </p>
           </div>
           <div className="garage-preview-grid">
@@ -544,6 +575,16 @@ function App() {
               </button>
             ))}
           </div>
+          <button
+            className="garage-open-cta"
+            type="button"
+            onClick={(event) => {
+              event.stopPropagation();
+              openGarage(0);
+            }}
+          >
+            <span>Open Garage</span>
+          </button>
         </section>
 
         <section className="contact section-shell" id="contact">
@@ -585,16 +626,35 @@ function App() {
           aria-modal="true"
           aria-labelledby="garage-modal-title"
           onClick={closeGarage}
+          onTouchStart={handleGarageTouchStart}
+          onTouchEnd={handleGarageTouchEnd}
         >
           <div className="garage-modal" onClick={(event) => event.stopPropagation()}>
-            <button
-              className="garage-close"
-              type="button"
-              aria-label="Close garage"
-              onClick={closeGarage}
-            >
-              ×
-            </button>
+            <div className="garage-mobile-topbar">
+              <span>Garage</span>
+              <button
+                className="garage-close"
+                type="button"
+                aria-label="Close garage"
+                onClick={closeGarage}
+              >
+                ×
+              </button>
+            </div>
+            <div className="garage-mobile-segmented" role="tablist" aria-label="Garage items">
+              {garageItems.map((item, index) => (
+                <button
+                  className={index === activeGarageIndex ? "active" : ""}
+                  key={item.title}
+                  type="button"
+                  role="tab"
+                  aria-selected={index === activeGarageIndex}
+                  onClick={() => setActiveGarageIndex(index)}
+                >
+                  {item.shortTitle}
+                </button>
+              ))}
+            </div>
             <div className="garage-modal-stage">
               <div className="garage-product-visual">
                 <img
@@ -604,7 +664,7 @@ function App() {
                 />
               </div>
               <div className="garage-product-copy">
-                <p className="section-kicker">{activeGarageItem.statusDetail}</p>
+                <p className="garage-status-pill">{activeGarageItem.status}</p>
                 <h2 id="garage-modal-title">{activeGarageItem.title}</h2>
                 <p>{activeGarageItem.description}</p>
                 <div className="garage-tags" aria-label="Highlights">
@@ -623,12 +683,7 @@ function App() {
                 className="garage-arrow"
                 type="button"
                 aria-label="Previous garage item"
-                onClick={() =>
-                  setActiveGarageIndex(
-                    (current) =>
-                      (current - 1 + garageItems.length) % garageItems.length
-                  )
-                }
+                onClick={showPreviousGarageItem}
               >
                 ‹
               </button>
@@ -650,11 +705,7 @@ function App() {
                 className="garage-arrow"
                 type="button"
                 aria-label="Next garage item"
-                onClick={() =>
-                  setActiveGarageIndex(
-                    (current) => (current + 1) % garageItems.length
-                  )
-                }
+                onClick={showNextGarageItem}
               >
                 ›
               </button>
