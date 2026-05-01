@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <style>
+    @media (prefers-reduced-motion: no-preference) {
+      .wheel {
+        animation: spin 1.08s linear infinite;
+        transform-origin: 32px 32px;
+      }
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+  <defs>
+    <filter id="soft" x="-12%" y="-12%" width="124%" height="124%">
+      <feGaussianBlur stdDeviation="0.45" />
+    </filter>
+    <radialGradient id="shade" cx="34%" cy="26%" r="72%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.7" />
+      <stop offset="40%" stop-color="#ffffff" stop-opacity="0.06" />
+      <stop offset="100%" stop-color="#111318" stop-opacity="0.34" />
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="30" fill="#f4f6f8" />
+  <g class="wheel" filter="url(#soft)">
+    <path d="M32 32 L32.00 4.00 A28 28 0 0 1 46.00 7.75 Z" fill="#9ED110" />
+    <path d="M32 32 L46.00 7.75 A28 28 0 0 1 56.25 18.00 Z" fill="#50B517" />
+    <path d="M32 32 L56.25 18.00 A28 28 0 0 1 60.00 32.00 Z" fill="#179067" />
+    <path d="M32 32 L60.00 32.00 A28 28 0 0 1 56.25 46.00 Z" fill="#476EAF" />
+    <path d="M32 32 L56.25 46.00 A28 28 0 0 1 46.00 56.25 Z" fill="#9f49ac" />
+    <path d="M32 32 L46.00 56.25 A28 28 0 0 1 32.00 60.00 Z" fill="#CC42A2" />
+    <path d="M32 32 L32.00 60.00 A28 28 0 0 1 18.00 56.25 Z" fill="#FF3BA7" />
+    <path d="M32 32 L18.00 56.25 A28 28 0 0 1 7.75 46.00 Z" fill="#FF5800" />
+    <path d="M32 32 L7.75 46.00 A28 28 0 0 1 4.00 32.00 Z" fill="#FF8100" />
+    <path d="M32 32 L4.00 32.00 A28 28 0 0 1 7.75 18.00 Z" fill="#FEAC00" />
+    <path d="M32 32 L7.75 18.00 A28 28 0 0 1 18.00 7.75 Z" fill="#FFCC00" />
+    <path d="M32 32 L18.00 7.75 A28 28 0 0 1 32.00 4.00 Z" fill="#EDE604" />
+  </g>
+  <circle cx="32" cy="32" r="30" fill="url(#shade)" />
+  <ellipse cx="25" cy="18" rx="14" ry="8" fill="#ffffff" opacity="0.26" />
+  <circle cx="32" cy="32" r="30" fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.72" />
+  <circle cx="32" cy="32" r="5.2" fill="#f8fafc" opacity="0.88" />
+</svg>
