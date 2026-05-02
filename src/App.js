@@ -32,28 +32,24 @@ const areas = [
 const experience = [
   {
     label: "Apple CI",
-    image: "/images/apple.png",
     title: "Apple software engineering internship",
     copy:
       "Engineering work shaped by CI, platform quality, and an environment where implementation detail and product reliability are held to the same standard.",
   },
   {
     label: "Genius Bar",
-    image: "/images/gb.png",
     title: "Apple Genius Bar and retail perspective",
     copy:
       "A close view of how people explain technical problems, build trust, compare products, and decide whether technology feels useful.",
   },
   {
     label: "Georgia Tech",
-    image: "/images/gt.png",
     title: "Graduate technical study",
     copy:
       "Graduate-level work centered on computing, AI, and the deeper technical questions behind ambitious products.",
   },
   {
     label: "George Mason",
-    image: "/images/gmu.png",
     title: "Computing foundation",
     copy:
       "An undergraduate path that built the engineering base for systems thinking, product judgment, and technical depth.",
@@ -180,7 +176,7 @@ const createBeachballFavicon = (angle = 0) => {
 
 const useAnimatedBeachballFavicon = () => {
   useEffect(() => {
-    const favicon = document.querySelector('link[rel~="icon"]');
+    let favicon = document.querySelector('link[rel~="icon"]');
 
     if (!favicon) {
       return undefined;
@@ -193,34 +189,66 @@ const useAnimatedBeachballFavicon = () => {
       ? window.matchMedia("(prefers-reduced-motion: reduce)")
       : null;
     let angle = 0;
+    let rafId = 0;
+    let lastTimestamp = 0;
+
+    const createFaviconLink = (href) => {
+      const link = document.createElement("link");
+      link.setAttribute("rel", "icon");
+      link.setAttribute("type", "image/svg+xml");
+      link.setAttribute("sizes", "any");
+      link.setAttribute("href", href);
+      return link;
+    };
+
+    const setFavicon = (href) => {
+      const newFavicon = createFaviconLink(href);
+      if (favicon && favicon.parentNode) {
+        favicon.parentNode.removeChild(favicon);
+      }
+      document.head.appendChild(newFavicon);
+      favicon = newFavicon;
+    };
 
     const updateFavicon = () => {
-      favicon.setAttribute("href", createBeachballFavicon(angle));
-      favicon.setAttribute("type", "image/svg+xml");
-      angle = (angle + 24) % 360;
+      setFavicon(createBeachballFavicon(angle));
+      angle = (angle + 8) % 360;
+    };
+
+    const animate = (timestamp) => {
+      if (!lastTimestamp) {
+        lastTimestamp = timestamp;
+      }
+
+      if (timestamp - lastTimestamp >= 45) {
+        updateFavicon();
+        lastTimestamp = timestamp;
+      }
+
+      rafId = window.requestAnimationFrame(animate);
     };
 
     updateFavicon();
 
     if (!supportsMotionPreference || reducedMotion.matches) {
       return () => {
-        if (originalHref) {
+        if (favicon && originalHref) {
           favicon.setAttribute("href", originalHref);
         }
-        if (originalType) {
+        if (favicon && originalType) {
           favicon.setAttribute("type", originalType);
         }
       };
     }
 
-    const timer = window.setInterval(updateFavicon, 90);
+    rafId = window.requestAnimationFrame(animate);
 
     return () => {
-      window.clearInterval(timer);
-      if (originalHref) {
+      window.cancelAnimationFrame(rafId);
+      if (favicon && originalHref) {
         favicon.setAttribute("href", originalHref);
       }
-      if (originalType) {
+      if (favicon && originalType) {
         favicon.setAttribute("type", originalType);
       }
     };
@@ -235,7 +263,7 @@ function App() {
   useAnimatedBeachballFavicon();
 
   useEffect(() => {
-    document.title = "Omer Khan | Software, AI, and Product Systems";
+    document.title = "From, Omer";
 
     const revealItems = document.querySelectorAll("[data-reveal]");
 
@@ -518,15 +546,6 @@ function App() {
             {experience.map((item) => (
               <article className="experience-row" key={item.title} data-reveal>
                 <div className="experience-meta">
-                  <span className="institution-mark">
-                    <img
-                      className={`institution-logo ${item.label
-                        .toLowerCase()
-                        .replace(/\s+/g, "-")}`}
-                      src={item.image}
-                      alt=""
-                    />
-                  </span>
                   <span>{item.label}</span>
                 </div>
                 <div>
@@ -595,7 +614,6 @@ function App() {
             </div>
             <div className="contact-links">
               <a href="https://github.com/notomer" target="_blank" rel="noreferrer">
-                <img src="/images/dev.png" alt="" />
                 <span>GitHub</span>
               </a>
               <a
@@ -603,11 +621,9 @@ function App() {
                 target="_blank"
                 rel="noreferrer"
               >
-                <img className="tilt-left" src="/images/SetUpAssistant.png" alt="" />
                 <span>LinkedIn</span>
               </a>
               <a href="mailto:notomerkhan@gmail.com">
-                <img src="/images/mail.png" alt="" />
                 <span>Email</span>
               </a>
             </div>

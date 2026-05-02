@@ -1476,52 +1476,16 @@ body.garage-open {
 
 .experience-meta {
   display: grid;
-  gap: 10px;
   align-content: start;
   justify-items: start;
 }
 
-.experience-meta > span:last-child {
+.experience-meta > span {
   color: var(--soft);
   font-size: 0.76rem;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-}
-
-.institution-mark {
-  display: flex;
-  width: 118px;
-  height: 56px;
-  align-items: center;
-  justify-content: flex-start;
-  overflow: hidden;
-}
-
-.institution-mark img {
-  width: auto;
-  height: auto;
-  max-width: 88px;
-  max-height: 52px;
-  object-fit: contain;
-  object-position: left center;
-}
-
-.institution-logo.apple-ci {
-  max-width: 50px;
-  max-height: 42px;
-  transform: translateX(-2px);
-}
-
-.institution-logo.genius-bar {
-  max-width: 66px;
-  max-height: 42px;
-  transform: translateX(-4px);
-}
-
-.institution-logo.georgia-tech {
-  max-width: 66px;
-  max-height: 39px;
 }
 
 .experience-row h3 {
@@ -1561,7 +1525,6 @@ body.garage-open {
   position: relative;
   min-height: 62px;
   align-items: center;
-  gap: 14px;
   overflow: hidden;
   border: 1px solid rgba(17, 19, 24, 0.18);
   border-radius: 1000px;
@@ -1573,7 +1536,8 @@ body.garage-open {
     inset 0 0.375em 0.5em 0.25em #bbbbbb;
   color: #20252c;
   font-weight: 600;
-  padding: 0 20px;
+  justify-content: center;
+  padding: 0 28px;
   transition: transform 180ms ease, box-shadow 180ms ease;
 }
 
@@ -1619,20 +1583,6 @@ body.garage-open {
     inset 0 0.375em 0.5em 0.25em rgba(124, 184, 246, 0.72),
     0 0 0.5em rgba(52, 106, 227, 0.38);
   outline: none;
-}
-
-.contact-links img {
-  position: relative;
-  z-index: 2;
-  width: 30px;
-  height: 30px;
-  border-radius: 7px;
-  object-fit: cover;
-}
-
-.contact-links img.tilt-left {
-  transform: rotate(-20deg);
-  transform-origin: center;
 }
 
 .contact-links span {
