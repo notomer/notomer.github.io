@@ -29,30 +29,83 @@ const areas = [
   },
 ];
 
-const experience = [
+const readingList = [
   {
-    label: "Apple CI",
-    title: "Apple software engineering internship",
-    copy:
-      "Engineering work shaped by CI, platform quality, and an environment where implementation detail and product reliability are held to the same standard.",
+    title: "How to Win Friends and Influence People",
+    author: "Dale Carnegie",
+    image: "https://covers.openlibrary.org/b/isbn/0671027034-L.jpg",
+    summary:
+      "A practical guide to earning trust, listening well, and making people feel respected.",
   },
   {
-    label: "Genius Bar",
-    title: "Apple Genius Bar and retail perspective",
-    copy:
-      "A close view of how people explain technical problems, build trust, compare products, and decide whether technology feels useful.",
+    title: "Steve Jobs",
+    author: "Walter Isaacson",
+    image: "https://covers.openlibrary.org/b/isbn/1451648537-L.jpg",
+    summary:
+      "A biography of Jobs's intensity, taste, contradictions, and product-building obsession.",
   },
   {
-    label: "Georgia Tech",
-    title: "Graduate technical study",
-    copy:
-      "Graduate-level work centered on computing, AI, and the deeper technical questions behind ambitious products.",
+    title: "The Mom Test",
+    author: "Rob Fitzpatrick",
+    image: "https://covers.openlibrary.org/b/isbn/1492180742-L.jpg",
+    summary:
+      "A short manual for asking customer questions that reveal truth instead of polite encouragement.",
   },
   {
-    label: "George Mason",
-    title: "Computing foundation",
-    copy:
-      "An undergraduate path that built the engineering base for systems thinking, product judgment, and technical depth.",
+    title: "Flowers for Algernon",
+    author: "Daniel Keyes",
+    image: "https://covers.openlibrary.org/b/isbn/015603008X-L.jpg",
+    summary:
+      "A moving novel about intelligence, dignity, loneliness, and what progress can cost.",
+  },
+  {
+    title: "Shoe Dog",
+    author: "Phil Knight",
+    image: "https://covers.openlibrary.org/b/isbn/1501135929-L.jpg",
+    summary:
+      "Nike's origin story told as a messy, stubborn, high-risk founder memoir.",
+  },
+  {
+    title: "Zero to One",
+    author: "Peter Thiel with Blake Masters",
+    image: "https://covers.openlibrary.org/b/isbn/0804139296-L.jpg",
+    summary:
+      "A startup book about building monopolistic, non-obvious companies instead of copying what exists.",
+  },
+  {
+    title: "Make Something Wonderful",
+    author: "Steve Jobs Archive",
+    image: "https://book.stevejobsarchive.com/og-image.jpg",
+    summary:
+      "A curated collection of Steve Jobs's words on craft, ambition, creativity, and building.",
+  },
+  {
+    title: "The Psychology of Money",
+    author: "Morgan Housel",
+    image: "https://covers.openlibrary.org/b/isbn/0857197681-L.jpg",
+    summary:
+      "Short lessons on how behavior, patience, luck, and ego shape financial outcomes.",
+  },
+  {
+    title: "Atomic Habits",
+    author: "James Clear",
+    image: "https://covers.openlibrary.org/b/isbn/0735211299-L.jpg",
+    summary:
+      "A system for making tiny behavior changes compound into durable personal results.",
+  },
+  {
+    title: "The Mountain Is You",
+    author: "Brianna Wiest",
+    image: "https://covers.openlibrary.org/b/isbn/1949759229-L.jpg",
+    summary:
+      "A self-reflection book about turning self-sabotage into emotional ownership and change.",
+  },
+  {
+    title: "Surrounded by Idiots",
+    author: "Thomas Erikson",
+    image: "https://covers.openlibrary.org/b/isbn/1250179947-L.jpg",
+    summary:
+      "A pop-psychology framework for understanding communication styles and avoiding needless conflict.",
   },
 ];
 
@@ -248,7 +301,7 @@ function App() {
         </a>
         <nav className="nav-links" aria-label="Primary">
           <a href="#work">Work</a>
-          <a href="#experience">Experience</a>
+          <a href="#reading">Reading</a>
           <a href="#contact">Contact</a>
         </nav>
       </header>
@@ -309,7 +362,7 @@ function App() {
           </div>
         </section>
 
-        <section className="about band section-shell" id="about">
+        <section className="about band section-shell era-platinum" id="about">
           <div className="section-kicker" data-reveal>
             About
           </div>
@@ -337,7 +390,7 @@ function App() {
         </section>
 
 
-        <section className="areas band section-shell" id="work">
+        <section className="areas band section-shell era-aqua" id="work">
           <div className="section-heading" data-reveal>
             <p className="section-kicker">Areas of Work</p>
             <h2>Clearer systems and tools.</h2>
@@ -352,27 +405,26 @@ function App() {
           </div>
         </section>
 
-        <section className="experience section-shell" id="experience">
+        <section className="experience section-shell era-ios7" id="reading">
           <div className="section-heading" data-reveal>
-            <p className="section-kicker">Experience</p>
-            <h2>Environments that shaped how I think and build.</h2>
+            <p className="section-kicker">Reading List</p>
+            <h2>My reading list.</h2>
           </div>
           <div className="experience-stack">
-            {experience.map((item) => (
-              <article className="experience-row" key={item.title} data-reveal>
-                <div className="experience-meta">
-                  <span>{item.label}</span>
-                </div>
+            {readingList.map((book) => (
+              <article className="experience-row book-row" key={book.title} data-reveal>
+                <img src={book.image} alt={`${book.title} cover`} loading="lazy" />
                 <div>
-                  <h3>{item.title}</h3>
-                  <p>{item.copy}</p>
+                  <h3>{book.title}</h3>
+                  <p className="book-author">{book.author}</p>
+                  <p>{book.summary}</p>
                 </div>
               </article>
             ))}
           </div>
         </section>
 
-        <section className="contact section-shell" id="contact">
+        <section className="contact section-shell era-bigsur" id="contact">
           <div className="contact-panel" data-reveal>
             <div>
               <p className="section-kicker">Contact</p>
