@@ -8,5 +8,5 @@ test('renders the Omer Khan identity page', () => {
       name: /building software, systems, and products with taste/i,
     })
   ).toBeInTheDocument();
-  expect(screen.getByRole('heading', { name: /proxkey/i })).toBeInTheDocument();
+  expect(screen.getByRole('heading', { name: /clearer systems and tools/i })).toBeInTheDocument();
 });

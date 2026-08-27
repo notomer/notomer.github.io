@@ -71,7 +71,6 @@ const Navbar = () => {
       </div>
       <div id="header">
         <a href="#projects">Projects</a>
-        <a href="#garage">Garage</a>
         <a href="#contact">Contact</a>
         <div className="date">{formattedDate}</div>
         <div className="time">{formattedTime}</div>

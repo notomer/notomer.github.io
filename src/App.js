@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 
 const areas = [
@@ -53,52 +53,6 @@ const experience = [
     title: "Computing foundation",
     copy:
       "An undergraduate path that built the engineering base for systems thinking, product judgment, and technical depth.",
-  },
-];
-
-const adjacentWork = [
-  "AI systems",
-  "Developer tools",
-  "Workflow automation",
-  "Infrastructure-aware products",
-];
-
-const garageItems = [
-  {
-    title: "Model Y Long Range",
-    shortTitle: "Model Y",
-    status: "Owned",
-    statusDetail: "Owned",
-    image: "/images/model-y.avif",
-    imageClass: "flip-x model-y",
-    description:
-      "My daily driver. Quiet, minimal, and practical, but still sharp in the way good engineering always is.",
-    tags: ["Electric", "Long Range", "Daily Driver", "Minimal Utility"],
-    note: "Electric daily utility, stripped down to what matters.",
-  },
-  {
-    title: "Canyon Endurace CF 7 AXS",
-    shortTitle: "Endurace",
-    status: "Owned",
-    statusDetail: "Owned",
-    image: "/images/canyon-endurace.png",
-    imageClass: "canyon",
-    description:
-      "A road bike built around precision and feel. Fast, clean, and intentional, without ever feeling overdone.",
-    tags: ["Carbon Frame", "AXS", "Road Bike", "Endurance"],
-    note: "Precision, speed, and clean mechanical intent.",
-  },
-  {
-    title: "911 GT2 RS",
-    shortTitle: "GT2 RS",
-    status: "Dream",
-    statusDetail: "Dream",
-    image: "/images/porsche-911-gt2-rs.avif",
-    imageClass: "porsche",
-    description:
-      "The dream machine. Extreme, disciplined, and beautifully excessive, with performance pushed all the way to the edge.",
-    tags: ["Dream Car", "Track Focused", "Rear Engine", "Icon"],
-    note: "The dream machine. Sharp, excessive, inevitable.",
   },
 ];
 
@@ -256,10 +210,6 @@ const useAnimatedBeachballFavicon = () => {
 };
 
 function App() {
-  const [isGarageOpen, setIsGarageOpen] = useState(false);
-  const [activeGarageIndex, setActiveGarageIndex] = useState(0);
-  const garageTouchStart = useRef(null);
-
   useAnimatedBeachballFavicon();
 
   useEffect(() => {
@@ -289,87 +239,6 @@ function App() {
     return () => observer.disconnect();
   }, []);
 
-  useEffect(() => {
-    if (!isGarageOpen) {
-      document.body.classList.remove("garage-open");
-      return undefined;
-    }
-
-    const handleKeyDown = (event) => {
-      if (event.key === "Escape") {
-        setIsGarageOpen(false);
-      }
-      if (event.key === "ArrowRight") {
-        setActiveGarageIndex((current) => (current + 1) % garageItems.length);
-      }
-      if (event.key === "ArrowLeft") {
-        setActiveGarageIndex(
-          (current) => (current - 1 + garageItems.length) % garageItems.length
-        );
-      }
-    };
-
-    document.body.classList.add("garage-open");
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      document.body.classList.remove("garage-open");
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [isGarageOpen]);
-
-  const openGarage = (index = 0) => {
-    setActiveGarageIndex(index);
-    setIsGarageOpen(true);
-  };
-
-  const closeGarage = () => setIsGarageOpen(false);
-
-  const showPreviousGarageItem = () => {
-    setActiveGarageIndex(
-      (current) => (current - 1 + garageItems.length) % garageItems.length
-    );
-  };
-
-  const showNextGarageItem = () => {
-    setActiveGarageIndex((current) => (current + 1) % garageItems.length);
-  };
-
-  const handleGarageTouchStart = (event) => {
-    garageTouchStart.current = {
-      x: event.touches[0].clientX,
-      y: event.touches[0].clientY,
-    };
-  };
-
-  const handleGarageTouchEnd = (event) => {
-    if (garageTouchStart.current === null) {
-      return;
-    }
-
-    const deltaX = event.changedTouches[0].clientX - garageTouchStart.current.x;
-    const deltaY = event.changedTouches[0].clientY - garageTouchStart.current.y;
-    garageTouchStart.current = null;
-
-    if (deltaY > 92 && Math.abs(deltaY) > Math.abs(deltaX) * 1.25) {
-      closeGarage();
-      return;
-    }
-
-    if (Math.abs(deltaX) < 48 || Math.abs(deltaX) < Math.abs(deltaY)) {
-      return;
-    }
-
-    if (deltaX < 0) {
-      showNextGarageItem();
-      return;
-    }
-
-    showPreviousGarageItem();
-  };
-
-  const activeGarageItem = garageItems[activeGarageIndex];
-
   return (
     <div className="identity-site">
       <header className="topbar" aria-label="Site navigation">
@@ -378,10 +247,8 @@ function App() {
           <span>Omer Khan</span>
         </a>
         <nav className="nav-links" aria-label="Primary">
-          <a href="#building">ProxKey</a>
           <a href="#work">Work</a>
           <a href="#experience">Experience</a>
-          <a href="#garage">Garage</a>
           <a href="#contact">Contact</a>
         </nav>
       </header>
@@ -407,10 +274,7 @@ function App() {
               tooling, and products that turn complexity into clarity.
             </p>
             <div className="hero-actions" aria-label="Primary links">
-              <a href="#building" className="aqua-button primary">
-                <span>View ProxKey</span>
-              </a>
-              <a href="#contact" className="aqua-button">
+              <a href="#contact" className="aqua-button primary">
                 <span>Contact</span>
               </a>
             </div>
@@ -423,7 +287,7 @@ function App() {
                 <span />
                 <span />
                 <span />
-                <strong>ProxKey signal view</strong>
+                <strong>Signal view</strong>
               </div>
               <div className="signal-stage">
                 <div className="portrait-ring">
@@ -472,55 +336,6 @@ function App() {
           </div>
         </section>
 
-        <section className="building section-shell" id="building">
-          <div className="section-heading centered" data-reveal>
-            <p className="section-kicker">What I am Building</p>
-            <h2>ProxKey</h2>
-            <p>
-              An AI-powered engineering intelligence platform built to turn
-              logs, incidents, CI failures, support context, and operational
-              noise into actionable signal.
-            </p>
-          </div>
-
-          <div className="proxkey-panel" data-reveal>
-            <div className="proxkey-copy">
-              <span className="mini-label">Engineering intelligence</span>
-              <h3>More than a summarizer. A system for extracting signal from chaos.</h3>
-              <p>
-                ProxKey is being designed for modern engineering teams that
-                spend too much time stitching together fragments: failed builds,
-                logs, alerts, support reports, and incident notes. The goal is
-                to convert that scattered context into useful action without
-                flattening the details that matter.
-              </p>
-            </div>
-            <div className="proxkey-console" aria-label="ProxKey interface preview">
-              <div className="console-row top">
-                <span>noise</span>
-                <strong>build failed</strong>
-                <em>42 traces</em>
-              </div>
-              <div className="console-row">
-                <span>context</span>
-                <strong>support spike tied to auth callback</strong>
-                <em>high confidence</em>
-              </div>
-              <div className="console-row action">
-                <span>action</span>
-                <strong>route owner, likely cause, next check</strong>
-                <em>ready</em>
-              </div>
-              <div className="console-pill-row" aria-label="Work themes">
-                {adjacentWork.map((item) => (
-                  <span className="console-pill" key={item}>
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
 
         <section className="areas band section-shell" id="work">
           <div className="section-heading" data-reveal>
@@ -557,55 +372,6 @@ function App() {
           </div>
         </section>
 
-        <section
-          className="garage section-shell"
-          id="garage"
-          data-reveal
-          onClick={() => openGarage(0)}
-        >
-          <div className="garage-intro">
-            <p className="section-kicker">Garage</p>
-            <h2>Machines I use, ride, and admire.</h2>
-            <p>
-              A personal collection of design, engineering, and obsession.
-            </p>
-          </div>
-          <div className="garage-preview-grid">
-            {garageItems.map((item, index) => (
-              <button
-                className="garage-card"
-                key={item.title}
-                type="button"
-                onClick={(event) => {
-                  event.stopPropagation();
-                  openGarage(index);
-                }}
-              >
-                <span className="garage-card-status">{item.status}</span>
-                <span className="garage-card-image-wrap">
-                  <img
-                    className={item.imageClass}
-                    src={item.image}
-                    alt={item.title}
-                  />
-                </span>
-                <strong>{item.title}</strong>
-                <span>{item.note}</span>
-              </button>
-            ))}
-          </div>
-          <button
-            className="garage-open-cta"
-            type="button"
-            onClick={(event) => {
-              event.stopPropagation();
-              openGarage(0);
-            }}
-          >
-            <span>Open Garage</span>
-          </button>
-        </section>
-
         <section className="contact section-shell" id="contact">
           <div className="contact-panel" data-reveal>
             <div>
@@ -630,101 +396,6 @@ function App() {
           </div>
         </section>
       </main>
-
-      {isGarageOpen && (
-        <div
-          className="garage-modal-overlay"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="garage-modal-title"
-          onClick={closeGarage}
-          onTouchStart={handleGarageTouchStart}
-          onTouchEnd={handleGarageTouchEnd}
-        >
-          <div className="garage-modal" onClick={(event) => event.stopPropagation()}>
-            <div className="garage-mobile-topbar">
-              <span>Garage</span>
-              <button
-                className="garage-close"
-                type="button"
-                aria-label="Close garage"
-                onClick={closeGarage}
-              >
-                ×
-              </button>
-            </div>
-            <div className="garage-mobile-segmented" role="tablist" aria-label="Garage items">
-              {garageItems.map((item, index) => (
-                <button
-                  className={index === activeGarageIndex ? "active" : ""}
-                  key={item.title}
-                  type="button"
-                  role="tab"
-                  aria-selected={index === activeGarageIndex}
-                  onClick={() => setActiveGarageIndex(index)}
-                >
-                  {item.shortTitle}
-                </button>
-              ))}
-            </div>
-            <div className="garage-modal-stage">
-              <div className="garage-product-visual">
-                <img
-                  className={activeGarageItem.imageClass}
-                  src={activeGarageItem.image}
-                  alt={activeGarageItem.title}
-                />
-              </div>
-              <div className="garage-product-copy">
-                <p className="garage-status-pill">{activeGarageItem.status}</p>
-                <h2 id="garage-modal-title">{activeGarageItem.title}</h2>
-                <p>{activeGarageItem.description}</p>
-                <div className="garage-tags" aria-label="Highlights">
-                  {activeGarageItem.tags.map((tag) => (
-                    <span key={tag}>{tag}</span>
-                  ))}
-                </div>
-                <p className="garage-owned-line">
-                  Owned: Model Y Long Range, Canyon Endurace CF 7 AXS. Dreaming
-                  of: 911 GT2 RS.
-                </p>
-              </div>
-            </div>
-            <div className="garage-modal-controls">
-              <button
-                className="garage-arrow"
-                type="button"
-                aria-label="Previous garage item"
-                onClick={showPreviousGarageItem}
-              >
-                ‹
-              </button>
-              <div className="garage-tabs" role="tablist" aria-label="Garage items">
-                {garageItems.map((item, index) => (
-                  <button
-                    className={index === activeGarageIndex ? "active" : ""}
-                    key={item.title}
-                    type="button"
-                    role="tab"
-                    aria-selected={index === activeGarageIndex}
-                    onClick={() => setActiveGarageIndex(index)}
-                  >
-                    {item.title}
-                  </button>
-                ))}
-              </div>
-              <button
-                className="garage-arrow"
-                type="button"
-                aria-label="Next garage item"
-                onClick={showNextGarageItem}
-              >
-                ›
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
