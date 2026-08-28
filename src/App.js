@@ -1,31 +1,69 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
+import atomicHabitsCover from "./images/books/atomic-habits.jpg";
+import flowersForAlgernonCover from "./images/books/flowers-for-algernon.jpg";
+import howToWinFriendsCover from "./images/books/how-to-win-friends.jpg";
+import makeSomethingWonderfulCover from "./images/books/make-something-wonderful.jpg";
+import shoeDogCover from "./images/books/shoe-dog.jpg";
+import steveJobsCover from "./images/books/steve-jobs.jpg";
+import surroundedByIdiotsCover from "./images/books/surrounded-by-idiots.jpg";
+import theMomTestCover from "./images/books/the-mom-test.jpg";
+import theMountainIsYouCover from "./images/books/the-mountain-is-you.jpg";
+import thePsychologyOfMoneyCover from "./images/books/the-psychology-of-money.jpg";
+import zeroToOneCover from "./images/books/zero-to-one.jpg";
 
-const areas = [
+const work = [
   {
+    number: "01",
     title: "AI Systems",
     copy:
       "Reasoning over messy context and turning model output into decisions people can trust.",
   },
   {
+    number: "02",
     title: "Developer Tooling",
     copy:
       "Tools that make failure clearer, feedback faster, and engineering work easier to move.",
   },
   {
+    number: "03",
     title: "Product Design in Software",
-    copy:
-      "Interface, workflow, and system behavior treated as one product surface.",
+    copy: "Interface, workflow, and system behavior treated as one product surface.",
   },
   {
-    title: "Automation and Workflow Systems",
-    copy:
-      "Automation that removes repeat work while preserving context and control.",
+    number: "04",
+    title: "Automation & Workflow Systems",
+    copy: "Automation that removes repeat work while preserving context and control.",
   },
   {
+    number: "05",
     title: "Systems-Focused Engineering",
     copy:
       "Engineering close to infrastructure, product requirements, and reliability expectations.",
+  },
+];
+
+const experience = [
+  {
+    place: "Leidos",
+    role: "AI Engineer",
+    copy: "Applied AI systems, engineering systems, backend and infrastructure.",
+  },
+  {
+    place: "Apple",
+    role: "Software Engineering / Technical",
+    copy:
+      "Engineering experience shaped by platform quality, CI, tooling, and customer-facing systems.",
+  },
+  {
+    place: "Georgia Tech",
+    role: "M.S. Computer Science",
+    copy: "Artificial intelligence and computing.",
+  },
+  {
+    place: "George Mason",
+    role: "Computational & Data Sciences",
+    copy: "Undergraduate computing foundation.",
   },
 ];
 
@@ -33,77 +71,77 @@ const readingList = [
   {
     title: "How to Win Friends and Influence People",
     author: "Dale Carnegie",
-    image: "https://covers.openlibrary.org/b/isbn/0671027034-L.jpg",
+    image: howToWinFriendsCover,
     summary:
       "A practical guide to earning trust, listening well, and making people feel respected.",
   },
   {
     title: "Steve Jobs",
     author: "Walter Isaacson",
-    image: "https://covers.openlibrary.org/b/isbn/1451648537-L.jpg",
+    image: steveJobsCover,
     summary:
       "A biography of Jobs's intensity, taste, contradictions, and product-building obsession.",
   },
   {
     title: "The Mom Test",
     author: "Rob Fitzpatrick",
-    image: "https://covers.openlibrary.org/b/isbn/1492180742-L.jpg",
+    image: theMomTestCover,
     summary:
       "A short manual for asking customer questions that reveal truth instead of polite encouragement.",
   },
   {
     title: "Flowers for Algernon",
     author: "Daniel Keyes",
-    image: "https://covers.openlibrary.org/b/isbn/015603008X-L.jpg",
+    image: flowersForAlgernonCover,
     summary:
       "A moving novel about intelligence, dignity, loneliness, and what progress can cost.",
   },
   {
     title: "Shoe Dog",
     author: "Phil Knight",
-    image: "https://covers.openlibrary.org/b/isbn/1501135929-L.jpg",
+    image: shoeDogCover,
     summary:
       "Nike's origin story told as a messy, stubborn, high-risk founder memoir.",
   },
   {
     title: "Zero to One",
     author: "Peter Thiel with Blake Masters",
-    image: "https://covers.openlibrary.org/b/isbn/0804139296-L.jpg",
+    image: zeroToOneCover,
     summary:
       "A startup book about building monopolistic, non-obvious companies instead of copying what exists.",
   },
   {
     title: "Make Something Wonderful",
     author: "Steve Jobs Archive",
-    image: "https://book.stevejobsarchive.com/og-image.jpg",
+    image: makeSomethingWonderfulCover,
     summary:
       "A curated collection of Steve Jobs's words on craft, ambition, creativity, and building.",
   },
   {
     title: "The Psychology of Money",
     author: "Morgan Housel",
-    image: "https://covers.openlibrary.org/b/isbn/0857197681-L.jpg",
+    image: thePsychologyOfMoneyCover,
     summary:
       "Short lessons on how behavior, patience, luck, and ego shape financial outcomes.",
   },
   {
     title: "Atomic Habits",
     author: "James Clear",
-    image: "https://covers.openlibrary.org/b/isbn/0735211299-L.jpg",
+    image: atomicHabitsCover,
     summary:
       "A system for making tiny behavior changes compound into durable personal results.",
   },
   {
     title: "The Mountain Is You",
     author: "Brianna Wiest",
-    image: "https://covers.openlibrary.org/b/isbn/1949759229-L.jpg",
+    image: theMountainIsYouCover,
     summary:
       "A self-reflection book about turning self-sabotage into emotional ownership and change.",
   },
   {
     title: "Surrounded by Idiots",
     author: "Thomas Erikson",
-    image: "https://covers.openlibrary.org/b/isbn/1250179947-L.jpg",
+    image: surroundedByIdiotsCover,
     summary:
       "A pop-psychology framework for understanding communication styles and avoiding needless conflict.",
   },
@@ -263,7 +301,47 @@ const useAnimatedBeachballFavicon = () => {
 };
 
 function App() {
+  const [activeBook, setActiveBook] = useState(null);
+  const [isBookClosing, setIsBookClosing] = useState(false);
+  const [experienceIndex, setExperienceIndex] = useState(0);
+
+  const openBook = (book, event) => {
+    const sectionBox = event.currentTarget
+      .closest("section")
+      .getBoundingClientRect();
+    const bookBox = event.currentTarget.getBoundingClientRect();
+
+    setIsBookClosing(false);
+    setActiveBook({
+      ...book,
+      x:
+        bookBox.left +
+        bookBox.width / 2 -
+        (sectionBox.left + sectionBox.width / 2),
+      y:
+        bookBox.top +
+        bookBox.height / 2 -
+        (sectionBox.top + sectionBox.height / 2),
+    });
+  };
+
+  const closeBook = () => {
+    setIsBookClosing(true);
+    window.setTimeout(() => {
+      setActiveBook(null);
+      setIsBookClosing(false);
+    }, 900);
+  };
+
   useAnimatedBeachballFavicon();
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setExperienceIndex((current) => (current + 1) % experience.length);
+    }, 4300);
+
+    return () => window.clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     document.title = "From, Omer";
@@ -284,13 +362,28 @@ function App() {
           }
         });
       },
-      { rootMargin: "0px 0px -12% 0px", threshold: 0.15 }
+      { rootMargin: "0px 0px -4% 0px", threshold: 0.08 }
     );
 
     revealItems.forEach((item) => observer.observe(item));
 
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    if (!activeBook) {
+      return undefined;
+    }
+
+    const closeOnEscape = (event) => {
+      if (event.key === "Escape") {
+        closeBook();
+      }
+    };
+
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [activeBook]);
 
   return (
     <div className="identity-site">
@@ -300,136 +393,169 @@ function App() {
           <span>Omer Khan</span>
         </a>
         <nav className="nav-links" aria-label="Primary">
+          <a href="#about">About</a>
           <a href="#work">Work</a>
-          <a href="#reading">Reading</a>
-          <a href="#contact">Contact</a>
+          <a href="#experience">Experience</a>
+          <a href="#reading">Library</a>
+          <a href="#contact">Elsewhere</a>
         </nav>
       </header>
 
       <main>
         <section className="hero section-shell" id="top">
           <div className="hero-copy" data-reveal>
-            <div className="hero-eyebrow-row">
-              <p className="eyebrow">Omer Khan</p>
+            <div className="hero-title-row">
+              <h1>Omer Khan</h1>
+              <BeachBall className="hero-beachball-inline" />
             </div>
-            <h1>
-              Building software, systems, and products{" "}
-              <span className="taste-line">
-                with{" "}
-                <span className="taste-word" aria-label="taste">
-                  <span aria-hidden="true">taste</span>
-                </span>
-                .
-              </span>
-            </h1>
-            <p className="hero-text">
-              I am focused on software engineering, AI systems, developer
-              tooling, and products that turn complexity into clarity.
+            <p className="hero-text hero-lede">
+              AI Engineer at Leidos. Previously Apple.
             </p>
-            <div className="hero-actions" aria-label="Primary links">
-              <a href="#contact" className="aqua-button primary">
-                <span>Contact</span>
-              </a>
-            </div>
-          </div>
-
-          <div className="hero-visual" aria-label="Animated product stage">
-            <div className="reflection-plane" />
-            <div className="product-window" data-reveal>
-              <div className="window-bar">
-                <span />
-                <span />
-                <span />
-                <strong>Signal view</strong>
-              </div>
-              <div className="signal-stage">
-                <div className="portrait-ring">
-                  <img src="/images/login.png" alt="Omer Khan" />
-                </div>
-                <BeachBall className="hero-beachball" />
-                <div className="signal-card glass-card">
-                  <p>Incident context</p>
-                  <strong>13 noisy inputs</strong>
-                  <span>logs, CI output, support notes</span>
-                </div>
-                <div className="signal-card glass-card offset">
-                  <p>Recovered signal</p>
-                  <strong>3 next actions</strong>
-                  <span>owner, cause, confidence</span>
-                </div>
-              </div>
-            </div>
+            <p className="hero-text">
+              I build software and spend a lot of time thinking about AI,
+              systems, and how technology can be made more useful.<span className="hero-cursor" aria-hidden="true" />
+            </p>
           </div>
         </section>
 
-        <section className="about band section-shell era-platinum" id="about">
-          <div className="section-kicker" data-reveal>
-            About
-          </div>
+        <section className="about band section-shell era-aqua-about" id="about">
           <div className="editorial-grid" data-reveal>
-            <h2>
-              Software should make difficult work feel clearer, quieter, and
-              more deliberate.
-            </h2>
+            <div>
+              <p className="section-kicker">About</p>
+              <h2>Software should make difficult work feel clearer, quieter, and more deliberate.</h2>
+            </div>
             <div className="editorial-copy">
               <p>
-                My work sits at the intersection of engineering, product
-                thinking, and systems design. I am drawn to software that
-                reduces noise, sharpens decisions, and feels intentional in how
-                it works.
+                I'm an AI Engineer at Leidos, working on applied AI systems and
+                the infrastructure behind them.
               </p>
               <p>
-                An Apple background shaped how I think about polish,
-                communication, CI discipline, and the distance between a
-                technical system and the person relying on it. That perspective
-                now informs the AI tools, product systems, and automation I am
-                building.
+                Before Leidos, I spent several years at Apple across technical
+                and software engineering roles, including work on developer
+                infrastructure and automation.
               </p>
             </div>
           </div>
         </section>
 
 
-        <section className="areas band section-shell era-aqua" id="work">
+        <section className="areas band section-shell era-leopard" id="work">
           <div className="section-heading" data-reveal>
             <p className="section-kicker">Areas of Work</p>
             <h2>Clearer systems and tools.</h2>
           </div>
           <div className="area-list">
-            {areas.map((area) => (
-              <article className="area-item" key={area.title} data-reveal>
-                <h3>{area.title}</h3>
-                <p>{area.copy}</p>
+            {work.map((item) => (
+              <article className="area-item" key={item.title} data-reveal>
+                <span>{item.number}</span>
+                <h3>{item.title}</h3>
+                <p>{item.copy}</p>
               </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="experience section-shell era-flat" id="experience">
+          <div className="section-heading centered" data-reveal>
+            <h2>Experience</h2>
+          </div>
+          <div className="experience-carousel" data-reveal>
+            {experience.map((item, index) => {
+              const offset = (index - experienceIndex + experience.length) % experience.length;
+              const state = offset === 0 ? "active" : offset === 1 ? "next" : offset === experience.length - 1 ? "prev" : "hidden";
+
+              return (
+                <article className={`experience-card experience-card-${index} is-${state}`} key={item.place}>
+                  <p className="experience-role">{item.role}</p>
+                  <h3>{item.place}</h3>
+                  <p>{item.copy}</p>
+                </article>
+              );
+            })}
+          </div>
+          <div className="experience-dots" aria-label="Choose experience item">
+            {experience.map((item, index) => (
+              <button
+                aria-label={`Show ${item.place}`}
+                aria-current={index === experienceIndex}
+                className={index === experienceIndex ? "is-active" : ""}
+                key={item.place}
+                onClick={() => setExperienceIndex(index)}
+                type="button"
+              />
             ))}
           </div>
         </section>
 
         <section className="experience section-shell era-ios7" id="reading">
           <div className="section-heading" data-reveal>
-            <p className="section-kicker">Reading List</p>
-            <h2>My reading list.</h2>
+            <p className="section-kicker">Library</p>
+            <h2>Books worth keeping around.</h2>
+            <p>What I'm reading and what I've finished.</p>
           </div>
           <div className="bookshelf">
-            {readingList.map((book) => (
-              <details className="book" key={book.title} data-reveal>
-                <summary data-title={book.title}>
+            <div className="bookshelf-track">
+              {readingList.map((book) => (
+                <button
+                  className="book"
+                  key={book.title}
+                  type="button"
+                  data-reveal
+                  data-title={book.title}
+                  onClick={(event) => openBook(book, event)}
+                >
                   <span className="book-spine">
                     <img src={book.image} alt="" loading="lazy" />
-                    <span>{book.title}</span>
                   </span>
-                </summary>
-                <div className="book-popover">
-                  <img src={book.image} alt={`${book.title} cover`} loading="lazy" />
-                  <div>
-                    <h3>{book.title}</h3>
-                    <p className="book-author">{book.author}</p>
-                    <p>{book.summary}</p>
-                  </div>
-                </div>
-              </details>
-            ))}
+                </button>
+              ))}
+              {readingList.map((book) => (
+                <span className="book" key={`${book.title}-loop`} aria-hidden="true">
+                  <span className="book-spine">
+                    <img src={book.image} alt="" loading="lazy" />
+                  </span>
+                </span>
+              ))}
+            </div>
           </div>
+          {activeBook && (
+            <div
+              className={`book-popover-backdrop${isBookClosing ? " is-closing" : ""}`}
+              onClick={closeBook}
+            >
+              <div
+                className="book-popover"
+                style={{
+                  "--cover": `url(${activeBook.image})`,
+                  "--open-x": `${activeBook.x}px`,
+                  "--open-y": `${activeBook.y}px`,
+                }}
+                onClick={(event) => event.stopPropagation()}
+              >
+                <button
+                  className="book-popover-close"
+                  type="button"
+                  aria-label="Close book details"
+                  onClick={closeBook}
+                >
+                  ×
+                </button>
+                <img
+                  className="book-cover-flip"
+                  src={activeBook.image}
+                  alt=""
+                  loading="lazy"
+                />
+                <div className="book-page-left">
+                  <h3>{activeBook.title}</h3>
+                  <p className="book-author">{activeBook.author}</p>
+                </div>
+                <div className="book-page-right">
+                  <p>{activeBook.summary}</p>
+                </div>
+              </div>
+            </div>
+          )}
         </section>
 
         <section className="contact section-shell era-bigsur" id="contact">
