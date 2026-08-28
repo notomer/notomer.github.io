@@ -6,7 +6,7 @@ const ProjectCarousel = () => {
 
   const images = [
     {
-      filename: "images/login.png",
+      filename: "images/site_preview.jpeg",
       description: "This Website",
       paragraph:
         "The goal of this website was to force myself to learn React, I'm not a great at creative work so this took me a while. But I did it, and got to implement solutions in creative ways. My GitHub contains this website, feel free to take a look!",

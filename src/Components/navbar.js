@@ -57,17 +57,8 @@ const Navbar = () => {
 
   return (
     <div className="osx-menu-bar">
-      <div className="pfp">
-        <img
-          src={"./images/login.png"}
-          alt="Me, Omer"
-          style={{
-            width: "30px",
-            height: "30px",
-            borderRadius: "50%",
-            objectFit: "cover",
-          }}
-        />
+      <div className="pfp" aria-label="OK monogram">
+        OK
       </div>
       <div id="header">
         <a href="#projects">Projects</a>

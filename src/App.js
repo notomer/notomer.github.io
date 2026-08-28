@@ -388,9 +388,9 @@ function App() {
   return (
     <div className="identity-site">
       <header className="topbar" aria-label="Site navigation">
-        <a className="brand-chip" href="#top" aria-label="Omer Khan home">
-          <img src="/images/login.png" alt="" />
-          <span>Omer Khan</span>
+        <a className="brand-chip" href="#top" aria-label="Omer home">
+          <span className="brand-monogram" aria-hidden="true">OK</span>
+          <span>Omer</span>
         </a>
         <nav className="nav-links" aria-label="Primary">
           <a href="#about">About</a>
@@ -405,7 +405,7 @@ function App() {
         <section className="hero section-shell" id="top">
           <div className="hero-copy" data-reveal>
             <div className="hero-title-row">
-              <h1>Omer Khan</h1>
+              <h1>Omer</h1>
               <BeachBall className="hero-beachball-inline" />
             </div>
             <p className="hero-text hero-lede">
