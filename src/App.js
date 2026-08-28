@@ -410,16 +410,24 @@ function App() {
             <p className="section-kicker">Reading List</p>
             <h2>My reading list.</h2>
           </div>
-          <div className="experience-stack">
+          <div className="bookshelf">
             {readingList.map((book) => (
-              <article className="experience-row book-row" key={book.title} data-reveal>
-                <img src={book.image} alt={`${book.title} cover`} loading="lazy" />
-                <div>
-                  <h3>{book.title}</h3>
-                  <p className="book-author">{book.author}</p>
-                  <p>{book.summary}</p>
+              <details className="book" key={book.title} data-reveal>
+                <summary data-title={book.title}>
+                  <span className="book-spine">
+                    <img src={book.image} alt="" loading="lazy" />
+                    <span>{book.title}</span>
+                  </span>
+                </summary>
+                <div className="book-popover">
+                  <img src={book.image} alt={`${book.title} cover`} loading="lazy" />
+                  <div>
+                    <h3>{book.title}</h3>
+                    <p className="book-author">{book.author}</p>
+                    <p>{book.summary}</p>
+                  </div>
                 </div>
-              </article>
+              </details>
             ))}
           </div>
         </section>
