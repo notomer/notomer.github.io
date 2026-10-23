@@ -2329,6 +2329,14 @@ body.garage-open {
   font-weight: 800;
 }
 
+.experience-toggle svg {
+  display: block;
+  width: 24px;
+  height: 24px;
+  margin: auto;
+  fill: currentColor;
+}
+
 .experience-toggle:focus-visible {
   outline: 3px solid #3175d8;
   outline-offset: 3px;

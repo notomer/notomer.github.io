@@ -512,7 +512,13 @@ function App() {
               aria-label={isExperiencePlaying ? "Pause experience carousel" : "Play experience carousel"}
               onClick={() => setIsExperiencePlaying((playing) => !playing)}
             >
-              {isExperiencePlaying ? "Ⅱ" : "▶"}
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                {isExperiencePlaying ? (
+                  <path d="M8 5h3v14H8zm5 0h3v14h-3z" />
+                ) : (
+                  <path d="M8 5.5a1.5 1.5 0 0 1 2.3-1.3l9 6.5a1.6 1.6 0 0 1 0 2.6l-9 6.5A1.5 1.5 0 0 1 8 18.5z" />
+                )}
+              </svg>
             </button>
           </div>
         </section>
