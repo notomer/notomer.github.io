@@ -1864,10 +1864,11 @@ body.garage-open {
 
 .contact-ipod {
   display: grid;
-  width: 415px;
+  width: 312px;
   max-width: 100%;
-  justify-self: center;
-  justify-items: center;
+  height: 519px;
+  justify-self: end;
+  justify-items: end;
 }
 
 .ipod-body {
@@ -1882,6 +1883,8 @@ body.garage-open {
   background: linear-gradient(42deg, #e8e8e8, #fff 149%);
   box-shadow: inset 0 -1px 3px 2px rgba(168, 168, 168, 0.67), inset -1px 0 2px 5px #fff, -1px 1px 0 3px rgba(146, 146, 146, 0.47), 2px 1px 0 3px #e7e7e7;
   padding-top: 30px;
+  transform: scale(0.75);
+  transform-origin: top right;
 }
 
 .ipod-screen {
