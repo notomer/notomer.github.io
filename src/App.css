@@ -2344,8 +2344,8 @@ body.garage-open {
 
 .experience-dots button {
   position: relative;
-  width: 10px;
-  height: 10px;
+  width: 18px;
+  height: 18px;
   overflow: hidden;
   border: 0;
   border-radius: 999px;
@@ -2355,7 +2355,7 @@ body.garage-open {
 }
 
 .experience-dots button.is-active {
-  width: 46px;
+  width: 72px;
   background: rgba(17, 19, 24, 0.18);
 }
 
