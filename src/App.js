@@ -317,6 +317,10 @@ function App() {
     setContactIndex((current) => (current + direction + contacts.length) % contacts.length);
   };
 
+  const selectContact = (index) => {
+    setContactIndex(index);
+  };
+
   const openBook = (book, event) => {
     const sectionBox = event.currentTarget
       .closest("section")
@@ -590,19 +594,47 @@ function App() {
               <p className="section-kicker">Contact</p>
               <h2>For meaningful software, thoughtful products, and ambitious technical work.</h2>
             </div>
-            <div className="contact-ipod" aria-label="Contact selector">
-              <div className="ipod-screen" aria-live="polite">
-                <span>CONTACTS</span>
-                <a href={contacts[contactIndex].href} target={contactIndex < 2 ? "_blank" : undefined} rel={contactIndex < 2 ? "noreferrer" : undefined}>
-                  {contacts[contactIndex].label}
-                </a>
-                <small>{String(contactIndex + 1).padStart(2, "0")} / {String(contacts.length).padStart(2, "0")}</small>
-              </div>
-              <div className="ipod-wheel" aria-label="Choose a contact">
-                <button type="button" aria-label="Previous contact" onClick={() => moveContact(-1)}>‹</button>
-                <span>MENU</span>
-                <button type="button" aria-label="Next contact" onClick={() => moveContact(1)}>›</button>
-                <span className="ipod-wheel-center" aria-hidden="true">●</span>
+            <div className="contact-ipod" aria-label="iPod contact menu">
+              <div className="ipod-body">
+                <div className="ipod-screen">
+                  <div className="ipod-screen-title">
+                    <span>Contacts</span>
+                    <span className="ipod-battery" aria-hidden="true" />
+                  </div>
+                  <ul className="ipod-contact-list" role="listbox" aria-label="Contact links">
+                    {contacts.map((contact, index) => (
+                      <li
+                        className={index === contactIndex ? "selected" : ""}
+                        key={contact.label}
+                        role="option"
+                        aria-selected={index === contactIndex}
+                      >
+                        <a
+                          href={contact.href}
+                          target={index < 2 ? "_blank" : undefined}
+                          rel={index < 2 ? "noreferrer" : undefined}
+                          onFocus={() => selectContact(index)}
+                          onClick={() => selectContact(index)}
+                        >
+                          {contact.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="ipod-wheel" aria-label="iPod click wheel">
+                  <button type="button" aria-label="Menu" onClick={() => setContactIndex(0)}>MENU</button>
+                  <button type="button" aria-label="Previous contact" onClick={() => moveContact(-1)}>‹</button>
+                  <button type="button" aria-label="Next contact" onClick={() => moveContact(1)}>›</button>
+                  <button type="button" aria-label="Playback disabled" disabled>Ⅱ</button>
+                  <a
+                    className="ipod-wheel-center"
+                    href={contacts[contactIndex].href}
+                    target={contactIndex < 2 ? "_blank" : undefined}
+                    rel={contactIndex < 2 ? "noreferrer" : undefined}
+                    aria-label={`Open ${contacts[contactIndex].label}`}
+                  />
+                </div>
               </div>
             </div>
           </div>
