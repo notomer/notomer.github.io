@@ -1862,13 +1862,112 @@ body.garage-open {
   pointer-events: none;
 }
 
-.contact-links {
+.contact-ipod {
   display: grid;
-  gap: 10px;
+  justify-items: center;
+  gap: 18px;
+  width: min(100%, 330px);
+  justify-self: center;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 30px;
+  background: linear-gradient(145deg, #f5f6f8, #c8cbd0 48%, #eceef1);
+  box-shadow: 0 18px 34px rgba(20, 27, 36, 0.25), inset 0 2px 3px white;
+  padding: 18px 20px 22px;
 }
 
-.contact-panel h2,
-.contact-links a {
+.ipod-screen {
+  display: grid;
+  width: 100%;
+  min-height: 132px;
+  align-content: center;
+  gap: 10px;
+  border: 5px solid #8c9297;
+  border-radius: 8px;
+  background: linear-gradient(145deg, #d9edc8, #abc991);
+  box-shadow: inset 0 2px 10px rgba(27, 45, 20, 0.22);
+  color: #24351e;
+  padding: 12px 16px;
+  text-shadow: 0 1px rgba(255, 255, 255, 0.55);
+}
+
+.ipod-screen > span,
+.ipod-screen small {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+
+.ipod-screen > a {
+  color: inherit;
+  font-size: 1.45rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.ipod-screen > a:focus-visible,
+.ipod-wheel button:focus-visible {
+  outline: 3px solid #3175d8;
+  outline-offset: 3px;
+}
+
+.ipod-wheel {
+  position: relative;
+  display: grid;
+  width: 184px;
+  height: 184px;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  align-items: center;
+  justify-items: center;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #fff, #d8dadd);
+  box-shadow: 0 4px 10px rgba(27, 32, 39, 0.22), inset 0 2px 5px white;
+  color: #858b92;
+}
+
+.ipod-wheel > span:first-of-type {
+  grid-area: 1 / 2;
+  font-size: 0.63rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.ipod-wheel button {
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #858b92;
+  cursor: pointer;
+  font: inherit;
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.ipod-wheel button:first-child {
+  grid-area: 2 / 1;
+}
+
+.ipod-wheel button:nth-of-type(2) {
+  grid-area: 2 / 3;
+}
+
+.ipod-wheel-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  width: 68px;
+  height: 68px;
+  place-items: center;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #e4e6e9, #fafafa);
+  box-shadow: inset 0 1px 4px rgba(35, 40, 46, 0.18);
+  color: transparent;
+  transform: translate(-50%, -50%);
+}
+.contact-panel h2 {
   font-family: var(--contact-font, "SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif);
 }
 
@@ -1890,89 +1989,6 @@ body.garage-open {
   letter-spacing: -0.04em;
 }
 
-.contact-links a {
-  display: flex;
-  position: relative;
-  min-height: 62px;
-  align-items: center;
-  overflow: hidden;
-  border: 1px solid rgba(17, 19, 24, 0.18);
-  border-radius: var(--contact-button-radius, 1000px);
-  background: var(--contact-button-bg, linear-gradient(rgba(160, 160, 160, 0.625), rgba(255, 255, 255, 0.625)));
-  box-shadow: var(--contact-button-shadow,
-    0 0.375em 0.5em rgba(0, 0, 0, 0.16),
-    0 0.125em 0.125em rgba(0, 0, 0, 0.22),
-    inset 0 0.25em 0.25em rgba(0, 0, 0, 0.28),
-    inset 0 0.375em 0.5em 0.25em #bbbbbb);
-  color: #20252c;
-  font-weight: 600;
-  justify-content: center;
-  padding: 0 28px;
-  transition: border-radius 700ms ease, background 700ms ease, transform 180ms ease, box-shadow 700ms ease;
-}
-
-.contact-links a::before,
-.contact-links a::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  z-index: 1;
-  height: 33%;
-  transform: translateX(-50%);
-  pointer-events: none;
-}
-
-.contact-links a::before {
-  display: none;
-  top: 5%;
-  width: calc(100% - 0.875em);
-  border-radius: 2em 2em 0.5em 0.5em;
-  background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.3));
-  filter: blur(1px);
-}
-
-.era-bigsur .contact-links a::before {
-  display: block;
-}
-
-.contact-links a::after {
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: inherit;
-  background:
-    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.46) 0 6px, transparent 6px 12px),
-    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.18) 0 6px, transparent 6px 12px);
-  filter: none;
-  opacity: 0;
-  mix-blend-mode: soft-light;
-}
-
-.contact-liquid .contact-links a::after,
-.contact-macos9 .contact-links a::after,
-.contact-mavericks .contact-links a::after {
-  animation: button-pixel-resolve 820ms steps(5, end) both;
-}
-
-.contact-links a:hover,
-.contact-links a:focus-visible,
-.contact-links a:active {
-  border-color: var(--contact-button-hover-border, rgba(42, 120, 214, 0.74));
-  background: var(--contact-button-hover-bg, var(--contact-button-bg));
-  background-size: var(--contact-button-hover-bg-size, auto);
-  color: #071a31;
-  transform: translateY(-1px);
-  animation: var(--contact-button-hover-animation, none);
-  box-shadow: var(--contact-button-hover-shadow, var(--contact-button-shadow));
-  outline: none;
-}
-
-.contact-links span {
-  position: relative;
-  z-index: 2;
-  letter-spacing: 0.02em;
-  text-shadow: 0 0.25em 0.2em rgba(0, 0, 0, 0.2);
-}
 
 .era-aqua-about,
 .era-leopard,
@@ -2103,13 +2119,16 @@ body.garage-open {
   height: min(46vw, 470px);
   min-height: 330px;
   margin-top: 44px;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .experience-card {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 15%;
   display: flex;
+  width: 70%;
+  height: 100%;
   flex-direction: column;
   justify-content: flex-end;
   border-radius: 28px;
@@ -2118,7 +2137,7 @@ body.garage-open {
   box-shadow: 0 24px 80px rgba(50, 70, 92, 0.24);
   opacity: 0;
   padding: 44px;
-  transform: translateX(120%) scale(0.92);
+  transform: translateX(125%) scale(0.92);
   transition: opacity 700ms ease, transform 700ms cubic-bezier(0.16, 1, 0.3, 1), filter 700ms ease;
   animation: experience-gradient 8s ease-in-out infinite alternate;
 }
@@ -2144,7 +2163,7 @@ body.garage-open {
 .experience-card.is-prev,
 .experience-card.is-next {
   z-index: 2;
-  opacity: 0;
+  opacity: 0.72;
   filter: brightness(0.56);
   pointer-events: none;
 }
@@ -2189,15 +2208,39 @@ body.garage-open {
   line-height: 1.45;
 }
 
+.experience-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 28px;
+}
+
 .experience-dots {
   display: flex;
   justify-content: center;
   gap: 14px;
   width: max-content;
-  margin: 28px auto 0;
   border-radius: 999px;
   background: rgba(17, 19, 24, 0.08);
   padding: 14px 18px;
+}
+
+.experience-toggle {
+  width: 52px;
+  height: 52px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(17, 19, 24, 0.08);
+  color: var(--ink);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+}
+
+.experience-toggle:focus-visible {
+  outline: 3px solid #3175d8;
+  outline-offset: 3px;
 }
 
 .experience-dots button {
@@ -2225,6 +2268,10 @@ body.garage-open {
   background: var(--ink);
   transform-origin: left;
   animation: carousel-progress 4300ms linear both;
+}
+
+.experience-controls.is-paused .experience-dots button.is-active::after {
+  animation-play-state: paused;
 }
 
 .era-marker {
@@ -3059,11 +3106,15 @@ body.garage-open {
   .experience-carousel {
     border-radius: 28px;
   }
+  .experience-card {
+    left: 11%;
+    width: 78%;
+    padding: 26px;
+  }
 
   .experience-card.is-prev,
   .experience-card.is-next {
-    opacity: 0;
-    transform: translateX(100%) scale(0.92);
+    opacity: 0.56;
   }
 
   .book-spine {
@@ -3103,9 +3154,6 @@ body.garage-open {
     left: 22px;
   }
 
-  .contact-links a {
-    min-height: 48px;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

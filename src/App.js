@@ -304,6 +304,18 @@ function App() {
   const [activeBook, setActiveBook] = useState(null);
   const [isBookClosing, setIsBookClosing] = useState(false);
   const [experienceIndex, setExperienceIndex] = useState(0);
+  const [isExperiencePlaying, setIsExperiencePlaying] = useState(true);
+  const [contactIndex, setContactIndex] = useState(0);
+
+  const contacts = [
+    { label: "GitHub", href: "https://github.com/notomer" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/notomer/" },
+    { label: "Email", href: "mailto:notomerkhan@gmail.com" },
+  ];
+
+  const moveContact = (direction) => {
+    setContactIndex((current) => (current + direction + contacts.length) % contacts.length);
+  };
 
   const openBook = (book, event) => {
     const sectionBox = event.currentTarget
@@ -336,12 +348,16 @@ function App() {
   useAnimatedBeachballFavicon();
 
   useEffect(() => {
+    if (!isExperiencePlaying) {
+      return undefined;
+    }
+
     const timer = window.setInterval(() => {
       setExperienceIndex((current) => (current + 1) % experience.length);
     }, 4300);
 
     return () => window.clearInterval(timer);
-  }, []);
+  }, [isExperiencePlaying]);
 
   useEffect(() => {
     document.title = "From, Omer";
@@ -465,7 +481,7 @@ function App() {
               const state = offset === 0 ? "active" : offset === 1 ? "next" : offset === experience.length - 1 ? "prev" : "hidden";
 
               return (
-                <article className={`experience-card experience-card-${index} is-${state}`} key={item.place}>
+                <article className={`experience-card experience-card-${index} is-${state}`} key={item.place} aria-hidden={state !== "active"}>
                   <p className="experience-role">{item.role}</p>
                   <h3>{item.place}</h3>
                   <p>{item.copy}</p>
@@ -473,17 +489,27 @@ function App() {
               );
             })}
           </div>
-          <div className="experience-dots" aria-label="Choose experience item">
-            {experience.map((item, index) => (
-              <button
-                aria-label={`Show ${item.place}`}
-                aria-current={index === experienceIndex}
-                className={index === experienceIndex ? "is-active" : ""}
-                key={item.place}
-                onClick={() => setExperienceIndex(index)}
-                type="button"
-              />
-            ))}
+          <div className={`experience-controls${isExperiencePlaying ? "" : " is-paused"}`}>
+            <div className="experience-dots" aria-label="Choose experience item">
+              {experience.map((item, index) => (
+                <button
+                  aria-label={`Show ${item.place}`}
+                  aria-current={index === experienceIndex ? "true" : undefined}
+                  className={index === experienceIndex ? "is-active" : ""}
+                  key={item.place}
+                  onClick={() => setExperienceIndex(index)}
+                  type="button"
+                />
+              ))}
+            </div>
+            <button
+              className="experience-toggle"
+              type="button"
+              aria-label={isExperiencePlaying ? "Pause experience carousel" : "Play experience carousel"}
+              onClick={() => setIsExperiencePlaying((playing) => !playing)}
+            >
+              {isExperiencePlaying ? "Ⅱ" : "▶"}
+            </button>
           </div>
         </section>
 
@@ -564,20 +590,20 @@ function App() {
               <p className="section-kicker">Contact</p>
               <h2>For meaningful software, thoughtful products, and ambitious technical work.</h2>
             </div>
-            <div className="contact-links">
-              <a href="https://github.com/notomer" target="_blank" rel="noreferrer">
-                <span>GitHub</span>
-              </a>
-              <a
-                href="https://www.linkedin.com/in/notomer/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <span>LinkedIn</span>
-              </a>
-              <a href="mailto:notomerkhan@gmail.com">
-                <span>Email</span>
-              </a>
+            <div className="contact-ipod" aria-label="Contact selector">
+              <div className="ipod-screen" aria-live="polite">
+                <span>CONTACTS</span>
+                <a href={contacts[contactIndex].href} target={contactIndex < 2 ? "_blank" : undefined} rel={contactIndex < 2 ? "noreferrer" : undefined}>
+                  {contacts[contactIndex].label}
+                </a>
+                <small>{String(contactIndex + 1).padStart(2, "0")} / {String(contacts.length).padStart(2, "0")}</small>
+              </div>
+              <div className="ipod-wheel" aria-label="Choose a contact">
+                <button type="button" aria-label="Previous contact" onClick={() => moveContact(-1)}>‹</button>
+                <span>MENU</span>
+                <button type="button" aria-label="Next contact" onClick={() => moveContact(1)}>›</button>
+                <span className="ipod-wheel-center" aria-hidden="true">●</span>
+              </div>
             </div>
           </div>
         </section>
