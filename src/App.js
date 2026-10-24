@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./App.css";
+import LiquidGlass from "./Components/LiquidGlass";
 import atomicHabitsCover from "./images/books/atomic-habits.jpg";
 import flowersForAlgernonCover from "./images/books/flowers-for-algernon.jpg";
 import howToWinFriendsCover from "./images/books/how-to-win-friends.jpg";
@@ -306,17 +307,15 @@ function App() {
   return (
     <div className="identity-site">
       <header className={`topbar${menuOpen ? " is-open" : ""}`} aria-label="Site navigation">
-        <a className="brand-chip" href="#top" aria-label="Omer home" onClick={() => setMenuOpen(false)}>
+        <LiquidGlass expanded={menuOpen} />
+        <button className="brand-chip" type="button" aria-label={menuOpen ? "Close navigation" : "Open navigation"} aria-expanded={menuOpen} aria-controls="primary-navigation" onClick={() => setMenuOpen((open) => !open)}>
           <span className="brand-monogram" aria-hidden="true">OK</span>
-          <span>Omer</span>
-        </a>
-        <button className="menu-toggle" type="button" aria-expanded={menuOpen} aria-controls="primary-navigation" onClick={() => setMenuOpen((open) => !open)}>
-          <span>{menuOpen ? "Close" : "Menu"}</span>
-          <span className="menu-icon" aria-hidden="true"><i /><i /></span>
+          <span className="brand-name">Omer</span>
+          <span className="brand-menu-indicator" aria-hidden="true">{menuOpen ? "×" : "＋"}</span>
         </button>
         <nav className="nav-links" id="primary-navigation" aria-label="Primary">
           {[["work", "Selected Work"], ["about", "About"], ["experience", "Experience"], ["reading", "On my shelf"], ["contact", "Contact"]].map(([id, label]) => (
-            <a key={id} className={activeSection === id ? "is-active" : ""} aria-current={activeSection === id ? "location" : undefined} href={`#${id}`} onClick={() => setMenuOpen(false)}>{label}</a>
+            <a key={id} className={activeSection === id ? "is-active" : ""} aria-current={activeSection === id ? "location" : undefined} href={`#${id}`} onClick={() => setMenuOpen(false)}><span className="nav-link-surface">{label}</span></a>
           ))}
         </nav>
       </header>
