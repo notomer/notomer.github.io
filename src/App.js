@@ -202,8 +202,12 @@ const BeachBall = ({ className = "" }) => (
 
 function App() {
   const [activeBook, setActiveBook] = useState(null);
+  const [revealedBook, setRevealedBook] = useState(null);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("top");
   const dialogRef = useRef(null);
   const bookTrigger = useRef(null);
+  const pointerType = useRef("");
 
   const openBook = (book, event) => {
     bookTrigger.current = event.currentTarget;
@@ -211,6 +215,53 @@ function App() {
   };
 
   const closeBook = () => setActiveBook(null);
+
+  const handleBookClick = (book, event) => {
+    if (pointerType.current === "touch") {
+      if (revealedBook === book.title) openBook(book, event);
+      else setRevealedBook(book.title);
+    } else {
+      openBook(book, event);
+    }
+    pointerType.current = "";
+  };
+
+  useEffect(() => {
+    if (!menuOpen) return undefined;
+    const onKeyDown = (event) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+    const onPointerDown = (event) => {
+      if (!event.target.closest(".topbar")) setMenuOpen(false);
+    };
+    document.addEventListener("keydown", onKeyDown);
+    document.addEventListener("pointerdown", onPointerDown);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.removeEventListener("pointerdown", onPointerDown);
+    };
+  }, [menuOpen]);
+
+  useEffect(() => {
+    const sections = document.querySelectorAll("main > section[id], footer[id]");
+    if (!("IntersectionObserver" in window)) return undefined;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) setActiveSection(entry.target.id);
+      });
+    }, { rootMargin: "-20% 0px -65% 0px" });
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!revealedBook) return undefined;
+    const reset = (event) => {
+      if (!event.target.closest(".shelf-book")) setRevealedBook(null);
+    };
+    document.addEventListener("pointerdown", reset);
+    return () => document.removeEventListener("pointerdown", reset);
+  }, [revealedBook]);
 
   useEffect(() => {
     if (!activeBook) return undefined;
@@ -254,17 +305,19 @@ function App() {
 
   return (
     <div className="identity-site">
-      <header className="topbar" aria-label="Site navigation">
-        <a className="brand-chip" href="#top" aria-label="Omer home">
+      <header className={`topbar${menuOpen ? " is-open" : ""}`} aria-label="Site navigation">
+        <a className="brand-chip" href="#top" aria-label="Omer home" onClick={() => setMenuOpen(false)}>
           <span className="brand-monogram" aria-hidden="true">OK</span>
           <span>Omer</span>
         </a>
-        <nav className="nav-links" aria-label="Primary">
-          <a href="#work">Selected Work</a>
-          <a href="#about">About</a>
-          <a href="#experience">Experience</a>
-          <a href="#reading">On my shelf</a>
-          <a href="#contact">Contact</a>
+        <button className="menu-toggle" type="button" aria-expanded={menuOpen} aria-controls="primary-navigation" onClick={() => setMenuOpen((open) => !open)}>
+          <span>{menuOpen ? "Close" : "Menu"}</span>
+          <span className="menu-icon" aria-hidden="true"><i /><i /></span>
+        </button>
+        <nav className="nav-links" id="primary-navigation" aria-label="Primary">
+          {[["work", "Selected Work"], ["about", "About"], ["experience", "Experience"], ["reading", "On my shelf"], ["contact", "Contact"]].map(([id, label]) => (
+            <a key={id} className={activeSection === id ? "is-active" : ""} aria-current={activeSection === id ? "location" : undefined} href={`#${id}`} onClick={() => setMenuOpen(false)}>{label}</a>
+          ))}
         </nav>
       </header>
 
@@ -357,13 +410,15 @@ function App() {
             <div className="bookshelf-track">
               {readingList.map((book, index) => (
                 <button
-                  className="book shelf-book"
+                  className={`book shelf-book${revealedBook === book.title ? " is-revealed" : ""}`}
                   style={{ "--spine-color": spineStyles[index][0], "--spine-ink": spineStyles[index][1], "--book-height": `${spineStyles[index][2]}px` }}
                   key={book.title}
                   type="button"
                   aria-haspopup="dialog"
+                  aria-expanded={revealedBook === book.title}
                   aria-label={`More about ${book.title} by ${book.author}`}
-                  onClick={(event) => openBook(book, event)}
+                  onPointerDown={(event) => { pointerType.current = event.pointerType; }}
+                  onClick={(event) => handleBookClick(book, event)}
                 >
                   <span className="shelf-book-object" aria-hidden="true">
                     <span className="shelf-book-pages" />
