@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./App.css";
 import atomicHabitsCover from "./images/books/atomic-habits.jpg";
 import flowersForAlgernonCover from "./images/books/flowers-for-algernon.jpg";
 import howToWinFriendsCover from "./images/books/how-to-win-friends.jpg";
-import makeSomethingWonderfulCover from "./images/books/make-something-wonderful.jpg";
+import makeSomethingWonderfulCover from "./images/books/make-something-wonderful-official.jpg";
 import shoeDogCover from "./images/books/shoe-dog.jpg";
 import steveJobsCover from "./images/books/steve-jobs.jpg";
 import surroundedByIdiotsCover from "./images/books/surrounded-by-idiots.jpg";
@@ -12,59 +12,80 @@ import theMountainIsYouCover from "./images/books/the-mountain-is-you.jpg";
 import thePsychologyOfMoneyCover from "./images/books/the-psychology-of-money.jpg";
 import zeroToOneCover from "./images/books/zero-to-one.jpg";
 
+import wonderfulSpinePhoto from "./images/books/make-something-wonderful-spine-photo.jpg";
+
 const work = [
   {
     number: "01",
-    title: "AI Systems",
-    copy:
-      "Reasoning over messy context and turning model output into decisions people can trust.",
+    title: "Engineering files, made interactive",
+    context: "Leidos · 2D / 3D visualization",
+    copy: "Built an interactive viewer for engineering and building-information-modeling files, bringing complex 2D and 3D technical data into an interface engineers can explore.",
+    detail: "The work: displaying technical files and building the interactions used to navigate them.",
   },
   {
     number: "02",
-    title: "Developer Tooling",
-    copy:
-      "Tools that make failure clearer, feedback faster, and engineering work easier to move.",
+    title: "File conversion inside a private network",
+    context: "Infrastructure · APIs & deployment",
+    copy: "Built an API-based conversion service that operates within a restricted network, with CI/CD automation for deployment.",
+    detail: "The constraint: file processing and deployment had to work within the network boundary.",
   },
   {
     number: "03",
-    title: "Product Design in Software",
-    copy: "Interface, workflow, and system behavior treated as one product surface.",
+    title: "An interface for service administration",
+    context: "Full stack · Keycloak",
+    copy: "Developed frontend and backend functionality for an administration platform, integrating Keycloak authentication and service management.",
+    detail: "The work: connecting the administrative interface to authentication and backend services.",
   },
   {
     number: "04",
-    title: "Automation & Workflow Systems",
-    copy: "Automation that removes repeat work while preserving context and control.",
-  },
-  {
-    number: "05",
-    title: "Systems-Focused Engineering",
-    copy:
-      "Engineering close to infrastructure, product requirements, and reliability expectations.",
+    title: "Build diagnostics for developers",
+    context: "Apple · Engineering internship",
+    copy: "Developed a tool to extract Clang compiler warnings and errors and email the code author based on compilation flags and build requirements.",
+    detail: "Also packaged a command-line tool with self-contained dependency resolution to simplify its setup.",
   },
 ];
 
 const experience = [
   {
     place: "Leidos",
-    role: "AI Engineer",
-    copy: "Applied AI systems, engineering systems, backend and infrastructure.",
+    role: "Software Engineer",
+    dates: "June 2026–Present",
+    copy: "Built an interactive 2D/3D viewer for engineering and BIM files.",
   },
   {
     place: "Apple",
-    role: "Software Engineering / Technical",
-    copy:
-      "Engineering experience shaped by platform quality, CI, tooling, and customer-facing systems.",
+    role: "Software Engineering Intern",
+    dates: "Jan–Jun 2023",
+    copy: "Developer infrastructure and automation supporting iOS and visionOS engineering workflows.",
+  },
+  {
+    place: "Apple",
+    role: "Quantitative Technical Expert",
+    dates: "Aug 2021–Jun 2026",
+    copy: "Technical support and troubleshooting in Apple Retail.",
   },
   {
     place: "Georgia Tech",
     role: "M.S. Computer Science",
-    copy: "Artificial intelligence and computing.",
+    dates: "In progress · OMSCS",
+    copy: "Graduate study focused on artificial intelligence and machine learning.",
   },
   {
     place: "George Mason",
-    role: "Computational & Data Sciences",
-    copy: "Undergraduate computing foundation.",
+    role: "B.S. Computational and Data Sciences",
+    dates: "Spring 2025",
+    copy: "Undergraduate study in computational and data sciences.",
   },
+];
+
+// Fallback palettes follow the installed cover editions; only sourced spines use photographs.
+const spineStyles = [
+  ["#18054c", "#d4ab55", 208], ["#e5dfd0", "#252525", 226],
+  ["#c32f70", "#ffffff", 196], ["#272f4a", "#e9c881", 218],
+  ["#24201f", "#c99b55", 212], ["#7595b4", "#101b28", 202],
+  ["#8d9daa", "#ffffff", 222], ["#eeeade", "#293d30", 210],
+  ["#eee5d1", "#835427", 216], ["#090909", "#f5f0e6", 200],
+  ["#fff9eb", "#111111", 206],
 ];
 
 const readingList = [
@@ -114,6 +135,9 @@ const readingList = [
     title: "Make Something Wonderful",
     author: "Steve Jobs Archive",
     image: makeSomethingWonderfulCover,
+    coverFrame: "244 253 1044 1655",
+    spinePhoto: wonderfulSpinePhoto,
+    spineKind: "photograph",
     summary:
       "A curated collection of Steve Jobs's words on craft, ambition, creativity, and building.",
   },
@@ -147,6 +171,23 @@ const readingList = [
   },
 ];
 
+const BookCover = ({ book, className }) => book.coverFrame ? (
+  <svg className={className} viewBox={book.coverFrame} preserveAspectRatio="none" aria-hidden="true">
+    <image href={book.image} width="1539" height="2153" />
+  </svg>
+) : <img className={className} src={book.image} alt="" loading="lazy" />;
+
+const BookSpine = ({ book }) => {
+  if (book.spineImage) return <img className="shelf-spine-image" src={book.spineImage} alt="" loading="lazy" />;
+  if (book.spinePhoto) return (
+    <svg className="shelf-spine-image" viewBox="0 0 44 222" preserveAspectRatio="none" aria-hidden="true">
+      <image href={book.spinePhoto} width="1440" height="959"
+        transform="matrix(0.19399257 0.16393371 -0.31535738 0.09803879 33.00549486 -53.76382946)" />
+    </svg>
+  );
+  return <><span className="shelf-spine-title">{book.title}</span><span className="shelf-spine-author">{book.author}</span></>;
+};
+
 const BeachBall = ({ className = "" }) => (
   <div className={`beach-ball ${className}`} aria-hidden="true">
     <div className="wheel">
@@ -159,209 +200,30 @@ const BeachBall = ({ className = "" }) => (
   </div>
 );
 
-const faviconColors = [
-  "#9ED110",
-  "#50B517",
-  "#179067",
-  "#476EAF",
-  "#9f49ac",
-  "#CC42A2",
-  "#FF3BA7",
-  "#FF5800",
-  "#FF8100",
-  "#FEAC00",
-  "#FFCC00",
-  "#EDE604",
-];
-
-const faviconSectorPaths = [
-  "M32 32 L32.00 4.00 A28 28 0 0 1 46.00 7.75 Z",
-  "M32 32 L46.00 7.75 A28 28 0 0 1 56.25 18.00 Z",
-  "M32 32 L56.25 18.00 A28 28 0 0 1 60.00 32.00 Z",
-  "M32 32 L60.00 32.00 A28 28 0 0 1 56.25 46.00 Z",
-  "M32 32 L56.25 46.00 A28 28 0 0 1 46.00 56.25 Z",
-  "M32 32 L46.00 56.25 A28 28 0 0 1 32.00 60.00 Z",
-  "M32 32 L32.00 60.00 A28 28 0 0 1 18.00 56.25 Z",
-  "M32 32 L18.00 56.25 A28 28 0 0 1 7.75 46.00 Z",
-  "M32 32 L7.75 46.00 A28 28 0 0 1 4.00 32.00 Z",
-  "M32 32 L4.00 32.00 A28 28 0 0 1 7.75 18.00 Z",
-  "M32 32 L7.75 18.00 A28 28 0 0 1 18.00 7.75 Z",
-  "M32 32 L18.00 7.75 A28 28 0 0 1 32.00 4.00 Z",
-];
-
-const createBeachballFavicon = (angle = 0) => {
-  const slices = faviconSectorPaths
-    .map(
-      (path, index) =>
-        `<path d="${path}" fill="${faviconColors[index]}" />`
-    )
-    .join("");
-
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <defs>
-    <filter id="soft" x="-12%" y="-12%" width="124%" height="124%">
-      <feGaussianBlur stdDeviation="0.45" />
-    </filter>
-    <radialGradient id="shade" cx="34%" cy="26%" r="72%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.7" />
-      <stop offset="40%" stop-color="#ffffff" stop-opacity="0.06" />
-      <stop offset="100%" stop-color="#111318" stop-opacity="0.34" />
-    </radialGradient>
-  </defs>
-  <circle cx="32" cy="32" r="30" fill="#f4f6f8" />
-  <g transform="rotate(${angle} 32 32)" filter="url(#soft)">${slices}</g>
-  <circle cx="32" cy="32" r="30" fill="url(#shade)" />
-  <ellipse cx="25" cy="18" rx="14" ry="8" fill="#ffffff" opacity="0.26" />
-  <circle cx="32" cy="32" r="30" fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.72" />
-  <circle cx="32" cy="32" r="5.2" fill="#f8fafc" opacity="0.88" />
-</svg>`;
-
-  return `data:image/svg+xml,${encodeURIComponent(svg)}`;
-};
-
-const useAnimatedBeachballFavicon = () => {
-  useEffect(() => {
-    let favicon = document.querySelector('link[rel~="icon"]');
-
-    if (!favicon) {
-      return undefined;
-    }
-
-    const originalHref = favicon.getAttribute("href");
-    const originalType = favicon.getAttribute("type");
-    const supportsMotionPreference = typeof window.matchMedia === "function";
-    const reducedMotion = supportsMotionPreference
-      ? window.matchMedia("(prefers-reduced-motion: reduce)")
-      : null;
-    let angle = 0;
-    let rafId = 0;
-    let lastTimestamp = 0;
-
-    const createFaviconLink = (href) => {
-      const link = document.createElement("link");
-      link.setAttribute("rel", "icon");
-      link.setAttribute("type", "image/svg+xml");
-      link.setAttribute("sizes", "any");
-      link.setAttribute("href", href);
-      return link;
-    };
-
-    const setFavicon = (href) => {
-      const newFavicon = createFaviconLink(href);
-      if (favicon && favicon.parentNode) {
-        favicon.parentNode.removeChild(favicon);
-      }
-      document.head.appendChild(newFavicon);
-      favicon = newFavicon;
-    };
-
-    const updateFavicon = () => {
-      setFavicon(createBeachballFavicon(angle));
-      angle = (angle + 8) % 360;
-    };
-
-    const animate = (timestamp) => {
-      if (!lastTimestamp) {
-        lastTimestamp = timestamp;
-      }
-
-      if (timestamp - lastTimestamp >= 45) {
-        updateFavicon();
-        lastTimestamp = timestamp;
-      }
-
-      rafId = window.requestAnimationFrame(animate);
-    };
-
-    updateFavicon();
-
-    if (!supportsMotionPreference || reducedMotion.matches) {
-      return () => {
-        if (favicon && originalHref) {
-          favicon.setAttribute("href", originalHref);
-        }
-        if (favicon && originalType) {
-          favicon.setAttribute("type", originalType);
-        }
-      };
-    }
-
-    rafId = window.requestAnimationFrame(animate);
-
-    return () => {
-      window.cancelAnimationFrame(rafId);
-      if (favicon && originalHref) {
-        favicon.setAttribute("href", originalHref);
-      }
-      if (favicon && originalType) {
-        favicon.setAttribute("type", originalType);
-      }
-    };
-  }, []);
-};
-
 function App() {
   const [activeBook, setActiveBook] = useState(null);
-  const [isBookClosing, setIsBookClosing] = useState(false);
-  const [experienceIndex, setExperienceIndex] = useState(0);
-  const [isExperiencePlaying, setIsExperiencePlaying] = useState(true);
-  const [contactIndex, setContactIndex] = useState(0);
-
-  const contacts = [
-    { label: "GitHub", href: "https://github.com/notomer" },
-    { label: "LinkedIn", href: "https://www.linkedin.com/in/notomer/" },
-    { label: "Email", href: "mailto:notomerkhan@gmail.com" },
-  ];
-
-  const moveContact = (direction) => {
-    setContactIndex((current) => (current + direction + contacts.length) % contacts.length);
-  };
-
-  const selectContact = (index) => {
-    setContactIndex(index);
-  };
+  const dialogRef = useRef(null);
+  const bookTrigger = useRef(null);
 
   const openBook = (book, event) => {
-    const sectionBox = event.currentTarget
-      .closest("section")
-      .getBoundingClientRect();
-    const bookBox = event.currentTarget.getBoundingClientRect();
-
-    setIsBookClosing(false);
-    setActiveBook({
-      ...book,
-      x:
-        bookBox.left +
-        bookBox.width / 2 -
-        (sectionBox.left + sectionBox.width / 2),
-      y:
-        bookBox.top +
-        bookBox.height / 2 -
-        (sectionBox.top + sectionBox.height / 2),
-    });
+    bookTrigger.current = event.currentTarget;
+    setActiveBook(book);
   };
 
-  const closeBook = () => {
-    setIsBookClosing(true);
-    window.setTimeout(() => {
-      setActiveBook(null);
-      setIsBookClosing(false);
-    }, 900);
-  };
-
-  useAnimatedBeachballFavicon();
+  const closeBook = () => setActiveBook(null);
 
   useEffect(() => {
-    if (!isExperiencePlaying) {
-      return undefined;
-    }
-
-    const timer = window.setInterval(() => {
-      setExperienceIndex((current) => (current + 1) % experience.length);
-    }, 4300);
-
-    return () => window.clearInterval(timer);
-  }, [isExperiencePlaying]);
+    if (!activeBook) return undefined;
+    const dialog = dialogRef.current;
+    const previousOverflow = document.body.style.overflow;
+    dialog.showModal();
+    document.body.style.overflow = "hidden";
+    return () => {
+      dialog.close();
+      document.body.style.overflow = previousOverflow;
+      bookTrigger.current?.focus({ preventScroll: true });
+    };
+  }, [activeBook]);
 
   useEffect(() => {
     document.title = "From, Omer";
@@ -390,21 +252,6 @@ function App() {
     return () => observer.disconnect();
   }, []);
 
-  useEffect(() => {
-    if (!activeBook) {
-      return undefined;
-    }
-
-    const closeOnEscape = (event) => {
-      if (event.key === "Escape") {
-        closeBook();
-      }
-    };
-
-    window.addEventListener("keydown", closeOnEscape);
-    return () => window.removeEventListener("keydown", closeOnEscape);
-  }, [activeBook]);
-
   return (
     <div className="identity-site">
       <header className="topbar" aria-label="Site navigation">
@@ -413,11 +260,11 @@ function App() {
           <span>Omer</span>
         </a>
         <nav className="nav-links" aria-label="Primary">
+          <a href="#work">Selected Work</a>
           <a href="#about">About</a>
-          <a href="#work">Work</a>
           <a href="#experience">Experience</a>
-          <a href="#reading">Library</a>
-          <a href="#contact">Elsewhere</a>
+          <a href="#reading">On my shelf</a>
+          <a href="#contact">Contact</a>
         </nav>
       </header>
 
@@ -429,12 +276,27 @@ function App() {
               <BeachBall className="hero-beachball-inline" />
             </div>
             <p className="hero-text hero-lede">
-              AI Engineer at Leidos. Previously Apple.
+              Software Engineer at Leidos. Previously an engineering intern at Apple.
             </p>
             <p className="hero-text">
-              I build software and spend a lot of time thinking about AI,
-              systems, and how technology can be made more useful.<span className="hero-cursor" aria-hidden="true" />
+              I build AI systems, developer tools, and software that makes complex work feel simple.
             </p>
+          </div>
+        </section>
+
+        <section className="areas band section-shell era-leopard" id="work">
+          <div className="section-heading" data-reveal>
+            <p className="section-kicker">Selected Work</p>
+            <h2>Selected engineering work.</h2>
+          </div>
+          <div className="area-list">
+            {work.map((item) => (
+              <article className="area-item" key={item.title} data-reveal>
+                <span>{item.number}</span>
+                <div><p className="work-context">{item.context}</p><h3>{item.title}</h3></div>
+                <div className="work-description"><p>{item.copy}</p><p className="work-detail">{item.detail}</p></div>
+              </article>
+            ))}
           </div>
         </section>
 
@@ -442,129 +304,92 @@ function App() {
           <div className="editorial-grid" data-reveal>
             <div>
               <p className="section-kicker">About</p>
-              <h2>Software should make difficult work feel clearer, quieter, and more deliberate.</h2>
+              <h2>Complex problems. Simple experiences.</h2>
             </div>
             <div className="editorial-copy">
               <p>
-                I'm an AI Engineer at Leidos, working on applied AI systems and
-                the infrastructure behind them.
+                I'm a software engineer interested in the intersection of
+                artificial intelligence, infrastructure, and product design.
               </p>
               <p>
-                Before Leidos, I spent several years at Apple across technical
-                and software engineering roles, including work on developer
-                infrastructure and automation.
+                At Leidos, I work on applied AI systems and engineering tools.
+                Previously, at Apple, I contributed to developer infrastructure
+                and automation supporting engineering workflows.
+              </p>
+              <p>
+                I care as much about how software feels to use as how it works
+                underneath.
               </p>
             </div>
-          </div>
-        </section>
-
-
-        <section className="areas band section-shell era-leopard" id="work">
-          <div className="section-heading" data-reveal>
-            <p className="section-kicker">Areas of Work</p>
-            <h2>Clearer systems and tools.</h2>
-          </div>
-          <div className="area-list">
-            {work.map((item) => (
-              <article className="area-item" key={item.title} data-reveal>
-                <span>{item.number}</span>
-                <h3>{item.title}</h3>
-                <p>{item.copy}</p>
-              </article>
-            ))}
           </div>
         </section>
 
         <section className="experience section-shell era-flat" id="experience">
-          <div className="section-heading centered" data-reveal>
+          <div className="section-heading" data-reveal>
+            <p className="section-kicker">Background</p>
             <h2>Experience</h2>
           </div>
-          <div className="experience-carousel" data-reveal>
-            {experience.map((item, index) => {
-              const offset = (index - experienceIndex + experience.length) % experience.length;
-              const state = offset === 0 ? "active" : offset === 1 ? "next" : offset === experience.length - 1 ? "prev" : "hidden";
-
-              return (
-                <article className={`experience-card experience-card-${index} is-${state}`} key={item.place} aria-hidden={state !== "active"}>
-                  <p className="experience-role">{item.role}</p>
-                  <h3>{item.place}</h3>
-                  <p>{item.copy}</p>
-                </article>
-              );
-            })}
-          </div>
-          <div className={`experience-controls${isExperiencePlaying ? "" : " is-paused"}`}>
-            <div className="experience-dots" aria-label="Choose experience item">
-              {experience.map((item, index) => (
-                <button
-                  aria-label={`Show ${item.place}`}
-                  aria-current={index === experienceIndex ? "true" : undefined}
-                  className={index === experienceIndex ? "is-active" : ""}
-                  key={item.place}
-                  onClick={() => setExperienceIndex(index)}
-                  type="button"
-                />
-              ))}
-            </div>
-            <button
-              className="experience-toggle"
-              type="button"
-              aria-label={isExperiencePlaying ? "Pause experience carousel" : "Play experience carousel"}
-              onClick={() => setIsExperiencePlaying((playing) => !playing)}
-            >
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                {isExperiencePlaying ? (
-                  <path d="M8 5h3v14H8zm5 0h3v14h-3z" />
-                ) : (
-                  <path d="M8 5.5a1.5 1.5 0 0 1 2.3-1.3l9 6.5a1.6 1.6 0 0 1 0 2.6l-9 6.5A1.5 1.5 0 0 1 8 18.5z" />
-                )}
-              </svg>
-            </button>
+          <ol className="career-timeline">
+            {experience.slice(0, 3).map((item) => (
+              <li key={`${item.place}-${item.role}`}>
+                <p className="career-dates">{item.dates}</p>
+                <div><h3>{item.role}</h3><p className="career-place">{item.place}</p><p>{item.copy}</p></div>
+              </li>
+            ))}
+          </ol>
+          <h3 className="education-heading">Education</h3>
+          <div className="education-grid">
+            {experience.slice(3).map((item) => (
+              <article key={item.place}>
+                <h4>{item.role}</h4><p className="career-place">{item.place}</p><p>{item.copy}</p>
+              </article>
+            ))}
           </div>
         </section>
 
         <section className="experience section-shell era-ios7" id="reading">
           <div className="section-heading" data-reveal>
             <p className="section-kicker">Library</p>
-            <h2>Books worth keeping around.</h2>
-            <p>What I'm reading and what I've finished.</p>
+            <h2>On my shelf.</h2>
+            <p>A small selection from the shelf. Select a book to look inside.</p>
           </div>
           <div className="bookshelf">
             <div className="bookshelf-track">
-              {readingList.map((book) => (
+              {readingList.map((book, index) => (
                 <button
-                  className="book"
+                  className="book shelf-book"
+                  style={{ "--spine-color": spineStyles[index][0], "--spine-ink": spineStyles[index][1], "--book-height": `${spineStyles[index][2]}px` }}
                   key={book.title}
                   type="button"
-                  data-reveal
-                  data-title={book.title}
+                  aria-haspopup="dialog"
+                  aria-label={`More about ${book.title} by ${book.author}`}
                   onClick={(event) => openBook(book, event)}
                 >
-                  <span className="book-spine">
-                    <img src={book.image} alt="" loading="lazy" />
+                  <span className="shelf-book-object" aria-hidden="true">
+                    <span className="shelf-book-pages" />
+                    <span className="shelf-book-cover"><BookCover book={book} /></span>
+                    <span className={`shelf-book-spine${book.spineKind ? " has-source-image" : ""}`} data-spine-source={book.spineKind || "cover-inspired"}>
+                      <BookSpine book={book} />
+                    </span>
                   </span>
                 </button>
-              ))}
-              {readingList.map((book) => (
-                <span className="book" key={`${book.title}-loop`} aria-hidden="true">
-                  <span className="book-spine">
-                    <img src={book.image} alt="" loading="lazy" />
-                  </span>
-                </span>
               ))}
             </div>
           </div>
           {activeBook && (
-            <div
-              className={`book-popover-backdrop${isBookClosing ? " is-closing" : ""}`}
-              onClick={closeBook}
+            <dialog
+              ref={dialogRef}
+              className="book-popover-backdrop"
+              aria-labelledby="book-popover-title"
+              onCancel={(event) => { event.preventDefault(); closeBook(); }}
+              onClick={(event) => { if (event.target === event.currentTarget) closeBook(); }}
             >
               <div
                 className="book-popover"
                 style={{
                   "--cover": `url(${activeBook.image})`,
-                  "--open-x": `${activeBook.x}px`,
-                  "--open-y": `${activeBook.y}px`,
+                  "--open-x": "0px",
+                  "--open-y": "0px",
                 }}
                 onClick={(event) => event.stopPropagation()}
               >
@@ -576,76 +401,23 @@ function App() {
                 >
                   ×
                 </button>
-                <img
-                  className="book-cover-flip"
-                  src={activeBook.image}
-                  alt=""
-                  loading="lazy"
-                />
+                <BookCover book={activeBook} className="book-detail-cover" />
                 <div className="book-page-left">
-                  <h3>{activeBook.title}</h3>
+                  <h3 id="book-popover-title">{activeBook.title}</h3>
                   <p className="book-author">{activeBook.author}</p>
                 </div>
                 <div className="book-page-right">
                   <p>{activeBook.summary}</p>
                 </div>
-              </div>
-            </div>
+                </div>
+              </dialog>
           )}
         </section>
 
-        <section className="contact section-shell era-bigsur" id="contact">
-          <div className="contact-panel" data-reveal>
-            <div>
-              <p className="section-kicker">Contact</p>
-              <h2>For meaningful software, thoughtful products, and ambitious technical work.</h2>
-            </div>
-            <div className="contact-ipod" aria-label="iPod contact menu">
-              <div className="ipod-body">
-                <div className="ipod-screen">
-                  <div className="ipod-screen-title">
-                    <span>Contacts</span>
-                    <span className="ipod-battery" aria-hidden="true" />
-                  </div>
-                  <ul className="ipod-contact-list" role="listbox" aria-label="Contact links">
-                    {contacts.map((contact, index) => (
-                      <li
-                        className={index === contactIndex ? "selected" : ""}
-                        key={contact.label}
-                        role="option"
-                        aria-selected={index === contactIndex}
-                      >
-                        <a
-                          href={contact.href}
-                          target={index < 2 ? "_blank" : undefined}
-                          rel={index < 2 ? "noreferrer" : undefined}
-                          onFocus={() => selectContact(index)}
-                          onClick={() => selectContact(index)}
-                        >
-                          {contact.label}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="ipod-wheel" aria-label="iPod click wheel">
-                  <button type="button" aria-label="Menu" onClick={() => setContactIndex(0)}>MENU</button>
-                  <button type="button" aria-label="Previous contact" onClick={() => moveContact(-1)}>‹</button>
-                  <button type="button" aria-label="Next contact" onClick={() => moveContact(1)}>›</button>
-                  <button type="button" aria-label="Playback disabled" disabled>Ⅱ</button>
-                  <a
-                    className="ipod-wheel-center"
-                    href={contacts[contactIndex].href}
-                    target={contactIndex < 2 ? "_blank" : undefined}
-                    rel={contactIndex < 2 ? "noreferrer" : undefined}
-                    aria-label={`Open ${contacts[contactIndex].label}`}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
       </main>
+      <footer className="ipod-footer" id="contact" aria-label="Contact">
+        <web-music-ipod backlit="true" aria-label="Contact and links on the iPod" />
+      </footer>
     </div>
   );
 }
