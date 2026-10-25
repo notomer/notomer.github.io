@@ -482,7 +482,6 @@ function App() {
           {activeBook && (
             <dialog
               ref={dialogRef}
-              className="book-popover-backdrop"
               aria-labelledby="book-popover-title"
               className={bookClosing ? "book-popover-backdrop is-closing" : "book-popover-backdrop"}
               onCancel={(event) => { event.preventDefault(); closeBookAnimated(); }}
