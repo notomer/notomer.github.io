@@ -312,11 +312,14 @@ function App() {
     };
   }, [activeBook]);
 
-  // Opening the site should land on the hero, not on whatever position the
-  // browser remembered from the previous visit (or a stale #section hash).
+  // Opening the site should land on the hero, not on whatever position or
+  // #section the browser remembered from the previous visit.
   useEffect(() => {
     if ("scrollRestoration" in window.history) window.history.scrollRestoration = "manual";
-    if (!window.location.hash) window.scrollTo(0, 0);
+    if (window.location.hash) {
+      window.history.replaceState(null, "", window.location.pathname + window.location.search);
+    }
+    window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {

@@ -3965,6 +3965,16 @@ a:focus-visible, button:focus-visible { outline: 3px solid #126ac6; outline-offs
   display: none;
 }
 
+/* On touch the shelf flight reads as a broken cover pop-out under the tap; a
+   tap should present the viewer immediately. Declared last so it wins over
+   the book-from-shelf rules above regardless of order. */
+@media (max-width: 680px) {
+  .book-popover.book-viewer,
+  .book-popover-backdrop.is-closing .book-popover {
+    animation: none;
+  }
+}
+
 .topbar .liquid-glass-surface::after {
   content: "";
   position: absolute;
