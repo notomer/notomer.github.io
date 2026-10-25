@@ -3872,11 +3872,10 @@ a:focus-visible, button:focus-visible { outline: 3px solid #126ac6; outline-offs
 .nav-link-surface { justify-content: center; padding: 10px 14px; }
 .topbar .nav-links a:is(:hover, :focus-visible, .is-active) .nav-link-surface {
   color: #20272c;
-  background: #ffffff69;
+  background: transparent;
   border-color: transparent;
   box-shadow: none;
 }
-.topbar .nav-links a:last-child .nav-link-surface { background: #ffffffb8; color: #283239; }
 .topbar .nav-links a:active .nav-link-surface { background: #ffffffa8; box-shadow: none; }
 @media (max-width: 760px) {
   .topbar.is-open {
@@ -3904,88 +3903,57 @@ a:focus-visible, button:focus-visible { outline: 3px solid #126ac6; outline-offs
   .topbar .liquid-glass-surface { background: #eef0f2; backdrop-filter: none; -webkit-backdrop-filter: none; }
 }
 
-/* The OK molecule: a metaball layer draws the live liquid between the ball
-   and the capsule, so opening reads as the droplet splitting off the glass
-   (the WWDC reference). The refraction surface underneath is untouched; this
-   layer only adds the glass wash and the bridged neck. */
-.goo-defs { position: fixed; width: 0; height: 0; overflow: hidden; }
-.goo-layer {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  border-radius: inherit;
-  overflow: hidden;
-  filter: url(#topbar-goo);
-  pointer-events: none;
-}
-.goo-ball,
-.goo-capsule {
-  /* Sources are opaque so they stack seamlessly — every alpha structure is
-     shaped by the filter itself (interior haze at ~.19, luminous union rim). */
-  background: #fff;
-}
-.goo-ball {
-  position: absolute;
-  top: 15px;
-  left: 9px;
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  transition: top 240ms var(--menu-ease);
-}
-/* A hairline gap between the ball and the capsule's left cap is what makes
-   the goo filter draw the thin waist of the droplet instead of fusing them
-   into one bump. */
-.goo-capsule {
-  position: absolute;
-  inset: 0;
-  left: 58px;
-  border-radius: 38px;
-}
+/* Expansion: the monogram glides left with accelerating motion, then the
+   capsule grows rightward out of it and the bar settles centered. */
 .topbar {
   /* The glide accelerates: the droplet sets off slowly and picks up speed
      before the capsule releases from it. */
   --glide-ease: cubic-bezier(.62, .03, .92, .42);
   --split-ease: linear(0, .4 9%, .74 19%, .95 29%, 1.05 40%, 1.01 51%, .99 66%, 1);
 }
-/* While split, the goo rim is the only outline: the capsule's own border and
-   ring layers collapse, otherwise they drew doubling arcs alongside the rim. */
-.topbar.is-open { border-color: transparent; }
-.topbar.is-open .liquid-glass-surface { box-shadow: none; }
-.topbar.is-open .liquid-glass-surface::after { content: none; }
-/* While split, fade the capsule's own caustics out near the droplet so the
-   ball and its neck read as one liquid body instead of crossing arcs. */
-.topbar.is-open .glass-specular {
-  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 130px);
-  mask-image: linear-gradient(90deg, transparent 0, #000 130px);
-}
 .topbar.is-open {
   transition: left 340ms var(--glide-ease), width 540ms var(--split-ease) 300ms,
     height 540ms var(--split-ease) 300ms, border-radius 540ms var(--split-ease) 300ms,
     background 220ms ease;
 }
-/* Closing: the goo layer is still mounted during the morph, so the bridge
-   melts the ball back into the capsule before unmounting. */
-.topbar:not(.is-open) .goo-ball { top: 8px; }
-/* A gentle press-and-release squash as the capsule detaches the droplet. */
-.topbar.is-splitting.is-open .goo-ball {
-  animation: goo-press 620ms var(--split-ease) both;
-  transform-origin: 40% center;
-}
-@keyframes goo-press {
-  0% { transform: scale(1.1, .9); }
-  55% { transform: scale(.97, 1.03); }
-  100% { transform: scale(1); }
-}
-@media (max-width: 760px) {
-  .goo-capsule { border-radius: 32px; }
-}
 @media (prefers-reduced-motion: reduce) {
-  .topbar.is-splitting.is-open .goo-ball { animation: none; }
   .topbar, .topbar.is-open { transition: none; }
 }
-@media (prefers-reduced-transparency: reduce) {
-  .identity-site .topbar .goo-layer { display: none; }
+
+/* The switcher ball (reference: the liquid-glass switcher pen): a translucent
+   pill that glides behind the hovered nav link — zooming up while one is
+   hovered — and rests behind the current section's link otherwise. The links
+   stay clean; the ball is the highlight. */
+.topbar .tab-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .34);
+  box-shadow: inset 0 1px 0 #ffffff78, 0 6px 16px #1c2a3a12;
+  opacity: 0;
+  z-index: 0;
+  pointer-events: none;
+  transform: scale(.7);
+  transition: left 240ms cubic-bezier(.2, .9, .22, 1), width 240ms cubic-bezier(.2, .9, .22, 1),
+    transform 250ms cubic-bezier(.2, 1.2, .3, 1), opacity 180ms ease, background-color 200ms ease;
+  will-change: left, width, transform;
+}
+.topbar .tab-indicator.is-visible { opacity: 1; transform: scale(1); }
+.topbar .tab-indicator.is-zoomed { transform: scale(1.14); background: rgba(255, 255, 255, .48); }
+.topbar .nav-links a { position: relative; z-index: 1; }
+/* Zoom hover: the hovered link itself pops while the ball glides under it. */
+.topbar .nav-links a:is(:hover, :focus-visible) .nav-link-surface { transform: scale(1.07); }
+@media (max-width: 760px) {
+  /* The vertical mobile list has its own row highlight; the gliding ball is
+     a horizontal-switcher pattern. */
+  .topbar .tab-indicator { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .topbar .tab-indicator { transition: none; }
+  .topbar .nav-links a:is(:hover, :focus-visible) .nav-link-surface { transform: none; }
 }
 
 /* Slightly translucent glass: instead of being perfectly clear, the lens picks

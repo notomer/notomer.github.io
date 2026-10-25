@@ -200,21 +200,13 @@ function App() {
   const [bookClosing, setBookClosing] = useState(false);
   const [revealedBook, setRevealedBook] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
-  // Keeps the goo split-off layer mounted while the shape is still morphing,
-  // so closing reverses the liquid neck instead of popping it away.
-  const [splitting, setSplitting] = useState(false);
-  // The initial menuOpen value is not a morph: skip it so the goo layer never
-  // flickers onto the closed dot at page load.
-  const firstEffect = useRef(true);
-  useEffect(() => {
-    if (firstEffect.current) {
-      firstEffect.current = false;
-      return undefined;
-    }
-    setSplitting(true);
-    const timer = setTimeout(() => setSplitting(false), 740);
-    return () => clearTimeout(timer);
-  }, [menuOpen]);
+  // The switcher ball: a pill that glides to the hovered nav link (zooming up
+  // while one is hovered, like the liquid-glass switcher reference) and rests
+  // behind the active section's link the rest of the time.
+  const [hoveredLink, setHoveredLink] = useState(null);
+  const navLinksRef = useRef(null);
+  const tabIndicatorRef = useRef(null);
+  const linkRefs = useRef(new Map());
   const [activeSection, setActiveSection] = useState("top");
   const dialogRef = useRef(null);
   const bookTrigger = useRef(null);
@@ -244,6 +236,31 @@ function App() {
     openBook(book, event);
     pointerType.current = "";
   };
+
+  useEffect(() => {
+    const nav = navLinksRef.current;
+    const indicator = tabIndicatorRef.current;
+    if (!nav || !indicator) return undefined;
+    // The bar keeps morphing for roughly a second after opening; re-measure
+    // the target link every frame so the ball stays glued to it as it moves.
+    let frame = window.requestAnimationFrame(function follow() {
+      const resting = linkRefs.current.has(activeSection) ? activeSection : null;
+      const targetId = hoveredLink ?? resting;
+      const link = targetId ? linkRefs.current.get(targetId) : null;
+      if (!link) {
+        indicator.classList.remove("is-visible", "is-zoomed");
+      } else {
+        const navRect = nav.getBoundingClientRect();
+        const rect = link.getBoundingClientRect();
+        indicator.style.left = `${rect.left - navRect.left}px`;
+        indicator.style.width = `${rect.width}px`;
+        indicator.classList.add("is-visible");
+        indicator.classList.toggle("is-zoomed", hoveredLink !== null);
+      }
+      if (menuOpen) frame = window.requestAnimationFrame(follow);
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [hoveredLink, activeSection, menuOpen]);
 
   useEffect(() => {
     if (!menuOpen) return undefined;
@@ -324,37 +341,34 @@ function App() {
 
   return (
     <div className="identity-site">
-      <header className={`topbar${menuOpen ? " is-open" : ""}${splitting ? " is-splitting" : ""}`} aria-label="Site navigation">
+      <header className={`topbar${menuOpen ? " is-open" : ""}`} aria-label="Site navigation">
         <LiquidGlass expanded={menuOpen} />
-        {(menuOpen || splitting) && (
-          <span className="goo-layer" aria-hidden="true">
-            <span className="goo-ball" />
-            <span className="goo-capsule" />
-          </span>
-        )}
         <button className="brand-chip" type="button" aria-label={menuOpen ? "Close navigation" : "Open navigation"} aria-expanded={menuOpen} aria-controls="primary-navigation" onClick={() => setMenuOpen((open) => !open)}>
           <span className="brand-monogram" aria-hidden="true"><Monogram /></span>
           <span className="brand-name">Omer</span>
           <span className="brand-menu-indicator" aria-hidden="true">{menuOpen ? "×" : "＋"}</span>
         </button>
-        <nav className="nav-links" id="primary-navigation" aria-label="Primary" aria-hidden={!menuOpen} inert={menuOpen ? undefined : ""}>
+        <nav className="nav-links" id="primary-navigation" ref={navLinksRef} aria-label="Primary" aria-hidden={!menuOpen} inert={menuOpen ? undefined : ""}>
+          <span className="tab-indicator" ref={tabIndicatorRef} aria-hidden="true" />
           {[["work", "Selected Work"], ["about", "About"], ["experience", "Experience"], ["reading", "On my shelf"], ["contact", "Contact"]].map(([id, label]) => (
-            <a key={id} className={activeSection === id ? "is-active" : ""} aria-current={activeSection === id ? "location" : undefined} href={`#${id}`} onClick={() => setMenuOpen(false)}><span className="nav-link-surface">{label}</span></a>
+            <a
+              key={id}
+              ref={(el) => { if (el) linkRefs.current.set(id, el); else linkRefs.current.delete(id); }}
+              className={activeSection === id ? "is-active" : ""}
+              aria-current={activeSection === id ? "location" : undefined}
+              href={`#${id}`}
+              onMouseEnter={() => setHoveredLink(id)}
+              onMouseLeave={() => setHoveredLink((hovered) => (hovered === id ? null : hovered))}
+              onFocus={() => setHoveredLink(id)}
+              onBlur={() => setHoveredLink((hovered) => (hovered === id ? null : hovered))}
+              onClick={() => setMenuOpen(false)}
+            >
+              <span className="nav-link-surface">{label}</span>
+            </a>
           ))}
         </nav>
       </header>
 
-      <svg className="goo-defs" width="0" height="0" aria-hidden="true" focusable="false">
-        <filter id="topbar-goo" x="0" y="0" width="100%" height="100%">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="6.5" result="fuzz" />
-          <feColorMatrix in="fuzz" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 30 -8.5" result="core" />
-          <feMorphology in="core" operator="erode" radius="2.5" result="core-in" />
-          <feComposite in="core" in2="core-in" operator="arithmetic" k1="0" k2="1" k3="-1" k4="0" result="edge" />
-          <feComponentTransfer in="core" result="fill"><feFuncA type="linear" slope="0.16" intercept="0.03" /></feComponentTransfer>
-          <feComponentTransfer in="edge" result="rim"><feFuncA type="linear" slope="0.62" intercept="0" /></feComponentTransfer>
-          <feMerge><feMergeNode in="fill" /><feMergeNode in="rim" /></feMerge>
-        </filter>
-      </svg>
       <main>
         <section className="hero section-shell" id="top">
           <div className="hero-copy" data-reveal>
