@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 3,
+  "language": "en-US",
+  "songs": [],
+  "artists": [
+    { "id": "steve-jobs", "name": "Steve Jobs" },
+    { "id": "marc-newson", "name": "Marc Newson" },
+    { "id": "jony-ive", "name": "Jony Ive" },
+    { "id": "sam-altman", "name": "Sam Altman" },
+    { "id": "richard-hendricks", "name": "Richard Hendricks" },
+    { "id": "jensen-huang", "name": "Jensen Huang" },
+    { "id": "tim-cook", "name": "Tim Cook" },
+    { "id": "dario-amodei", "name": "Dario Amodei" },
+    { "id": "yann-lecun", "name": "Yann LeCun" },
+    { "id": "steve-wozniak", "name": "Steve Wozniak" },
+    { "id": "linus-torvalds", "name": "Linus Torvalds" },
+    { "id": "james-dyson", "name": "James Dyson" },
+    { "id": "jack-dorsey", "name": "Jack Dorsey" },
+    { "id": "dieter-rams", "name": "Dieter Rams" }
+  ],
+  "playlists": []
+}

@@ -1291,7 +1291,7 @@ function Kl(e, { back: t = !1 }, i) {
 }
 const Rs = {
   "ASE.Web.IPod.Menu.Playlists": "Playlists",
-  "ASE.Web.IPod.Menu.Artists": "Artists",
+  "ASE.Web.IPod.Menu.Artists": "People",
   "ASE.Web.IPod.Menu.Songs": "Songs",
   "ASE.Web.IPod.Menu.Settings": "Settings",
   "ASE.Web.IPod.Menu.NowPlaying": "Now Playing",
@@ -4285,7 +4285,7 @@ function Ch({ data: e, i18n: t }) {
   const i = (l) => t.formatNumber(l, { style: "unit", unit: "gigabyte" });
   return [
     // Product names are typically not localized.
-    { id: "ipod", title: "iPod", action: "info", centered: !0 },
+    { id: "ipod", title: "iOmer", action: "info", centered: !0 },
     {
       id: "songs-count",
       title: t.t("ASE.Web.IPod.About.Songs"),

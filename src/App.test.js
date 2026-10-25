@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import App from './App';
 
 beforeAll(() => {
@@ -19,7 +19,7 @@ test('professional background is readable without carousel interaction', () => {
   expect(footer.firstElementChild.tagName).toBe('WEB-MUSIC-IPOD');
 });
 
-test('book dialog restores focus and scrolling on dismissal', () => {
+test('book dialog restores focus and scrolling on dismissal', async () => {
   render(<App />);
   const trigger = screen.getByRole('button', { name: 'More about The Mom Test by Rob Fitzpatrick' });
   trigger.focus();
@@ -28,7 +28,8 @@ test('book dialog restores focus and scrolling on dismissal', () => {
   expect(dialog).toHaveAttribute('open');
   expect(document.body.style.overflow).toBe('hidden');
   fireEvent(dialog, new Event('cancel', { bubbles: true, cancelable: true }));
-  expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+  // Dismissal animates the book back to its shelf slot before unmounting.
+  await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
   expect(trigger).toHaveFocus();
   expect(document.body.style.overflow).toBe('');
 });

@@ -1,6 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./App.css";
 import LiquidGlass from "./Components/LiquidGlass";
+import ContactIpod from "./Components/ContactIpod";
+import Monogram from "./Components/Monogram";
+import BookPreview from "./Components/BookPreview";
 import atomicHabitsCover from "./images/books/atomic-habits.jpg";
 import flowersForAlgernonCover from "./images/books/flowers-for-algernon.jpg";
 import howToWinFriendsCover from "./images/books/how-to-win-friends.jpg";
@@ -13,28 +16,27 @@ import theMountainIsYouCover from "./images/books/the-mountain-is-you.jpg";
 import thePsychologyOfMoneyCover from "./images/books/the-psychology-of-money.jpg";
 import zeroToOneCover from "./images/books/zero-to-one.jpg";
 
-import wonderfulSpinePhoto from "./images/books/make-something-wonderful-spine-photo.jpg";
 
 const work = [
   {
     number: "01",
     title: "Engineering files, made interactive",
     context: "Leidos · 2D / 3D visualization",
-    copy: "Built an interactive viewer for engineering and building-information-modeling files, bringing complex 2D and 3D technical data into an interface engineers can explore.",
+    copy: "Built and deployed full-stack applications that streamlined engineering workflows, enabled interactive visualization of complex data, and integrated AI-powered automation through scalable backend APIs.",
     detail: "The work: displaying technical files and building the interactions used to navigate them.",
   },
   {
     number: "02",
     title: "File conversion inside a private network",
     context: "Infrastructure · APIs & deployment",
-    copy: "Built an API-based conversion service that operates within a restricted network, with CI/CD automation for deployment.",
+    copy: "Streamlined engineering workflows with an API-based conversion service that operates within a restricted network, with CI/CD automation for deployment.",
     detail: "The constraint: file processing and deployment had to work within the network boundary.",
   },
   {
     number: "03",
     title: "An interface for service administration",
     context: "Full stack · Keycloak",
-    copy: "Developed frontend and backend functionality for an administration platform, integrating Keycloak authentication and service management.",
+    copy: "Integrated AI-powered automation into an administration platform, developing full-stack frontend and backend functionality and integrating Keycloak authentication and service management.",
     detail: "The work: connecting the administrative interface to authentication and backend services.",
   },
   {
@@ -51,7 +53,7 @@ const experience = [
     place: "Leidos",
     role: "Software Engineer",
     dates: "June 2026–Present",
-    copy: "Built an interactive 2D/3D viewer for engineering and BIM files.",
+    copy: "Built and deployed full-stack applications that streamlined engineering workflows, enabled interactive visualization of complex data, and integrated AI-powered automation through scalable backend APIs.",
   },
   {
     place: "Apple",
@@ -137,8 +139,6 @@ const readingList = [
     author: "Steve Jobs Archive",
     image: makeSomethingWonderfulCover,
     coverFrame: "244 253 1044 1655",
-    spinePhoto: wonderfulSpinePhoto,
-    spineKind: "photograph",
     summary:
       "A curated collection of Steve Jobs's words on craft, ambition, creativity, and building.",
   },
@@ -180,12 +180,6 @@ const BookCover = ({ book, className }) => book.coverFrame ? (
 
 const BookSpine = ({ book }) => {
   if (book.spineImage) return <img className="shelf-spine-image" src={book.spineImage} alt="" loading="lazy" />;
-  if (book.spinePhoto) return (
-    <svg className="shelf-spine-image" viewBox="0 0 44 222" preserveAspectRatio="none" aria-hidden="true">
-      <image href={book.spinePhoto} width="1440" height="959"
-        transform="matrix(0.19399257 0.16393371 -0.31535738 0.09803879 33.00549486 -53.76382946)" />
-    </svg>
-  );
   return <><span className="shelf-spine-title">{book.title}</span><span className="shelf-spine-author">{book.author}</span></>;
 };
 
@@ -203,8 +197,24 @@ const BeachBall = ({ className = "" }) => (
 
 function App() {
   const [activeBook, setActiveBook] = useState(null);
+  const [bookClosing, setBookClosing] = useState(false);
   const [revealedBook, setRevealedBook] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  // Keeps the goo split-off layer mounted while the shape is still morphing,
+  // so closing reverses the liquid neck instead of popping it away.
+  const [splitting, setSplitting] = useState(false);
+  // The initial menuOpen value is not a morph: skip it so the goo layer never
+  // flickers onto the closed dot at page load.
+  const firstEffect = useRef(true);
+  useEffect(() => {
+    if (firstEffect.current) {
+      firstEffect.current = false;
+      return undefined;
+    }
+    setSplitting(true);
+    const timer = setTimeout(() => setSplitting(false), 740);
+    return () => clearTimeout(timer);
+  }, [menuOpen]);
   const [activeSection, setActiveSection] = useState("top");
   const dialogRef = useRef(null);
   const bookTrigger = useRef(null);
@@ -212,18 +222,26 @@ function App() {
 
   const openBook = (book, event) => {
     bookTrigger.current = event.currentTarget;
-    setActiveBook(book);
+    const rect = event.currentTarget.getBoundingClientRect();
+    setActiveBook({ ...book, originX: rect.x + rect.width / 2 - window.innerWidth / 2,
+      originY: rect.y + rect.height / 2 - window.innerHeight / 2 });
   };
 
   const closeBook = () => setActiveBook(null);
 
+  // Animating the book back into its shelf slot takes a beat; keep the dialog
+  // mounted and ignore repeat close requests until the return flight lands.
+  const closeBookAnimated = () => {
+    if (bookClosing) return;
+    setBookClosing(true);
+    setTimeout(() => {
+      closeBook();
+      setBookClosing(false);
+    }, 340);
+  };
+
   const handleBookClick = (book, event) => {
-    if (pointerType.current === "touch") {
-      if (revealedBook === book.title) openBook(book, event);
-      else setRevealedBook(book.title);
-    } else {
-      openBook(book, event);
-    }
+    openBook(book, event);
     pointerType.current = "";
   };
 
@@ -306,20 +324,37 @@ function App() {
 
   return (
     <div className="identity-site">
-      <header className={`topbar${menuOpen ? " is-open" : ""}`} aria-label="Site navigation">
+      <header className={`topbar${menuOpen ? " is-open" : ""}${splitting ? " is-splitting" : ""}`} aria-label="Site navigation">
         <LiquidGlass expanded={menuOpen} />
+        {(menuOpen || splitting) && (
+          <span className="goo-layer" aria-hidden="true">
+            <span className="goo-ball" />
+            <span className="goo-capsule" />
+          </span>
+        )}
         <button className="brand-chip" type="button" aria-label={menuOpen ? "Close navigation" : "Open navigation"} aria-expanded={menuOpen} aria-controls="primary-navigation" onClick={() => setMenuOpen((open) => !open)}>
-          <span className="brand-monogram" aria-hidden="true">OK</span>
+          <span className="brand-monogram" aria-hidden="true"><Monogram /></span>
           <span className="brand-name">Omer</span>
           <span className="brand-menu-indicator" aria-hidden="true">{menuOpen ? "×" : "＋"}</span>
         </button>
-        <nav className="nav-links" id="primary-navigation" aria-label="Primary">
+        <nav className="nav-links" id="primary-navigation" aria-label="Primary" aria-hidden={!menuOpen} inert={menuOpen ? undefined : ""}>
           {[["work", "Selected Work"], ["about", "About"], ["experience", "Experience"], ["reading", "On my shelf"], ["contact", "Contact"]].map(([id, label]) => (
             <a key={id} className={activeSection === id ? "is-active" : ""} aria-current={activeSection === id ? "location" : undefined} href={`#${id}`} onClick={() => setMenuOpen(false)}><span className="nav-link-surface">{label}</span></a>
           ))}
         </nav>
       </header>
 
+      <svg className="goo-defs" width="0" height="0" aria-hidden="true" focusable="false">
+        <filter id="topbar-goo" x="0" y="0" width="100%" height="100%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="6.5" result="fuzz" />
+          <feColorMatrix in="fuzz" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 30 -8.5" result="core" />
+          <feMorphology in="core" operator="erode" radius="2.5" result="core-in" />
+          <feComposite in="core" in2="core-in" operator="arithmetic" k1="0" k2="1" k3="-1" k4="0" result="edge" />
+          <feComponentTransfer in="core" result="fill"><feFuncA type="linear" slope="0.16" intercept="0.03" /></feComponentTransfer>
+          <feComponentTransfer in="edge" result="rim"><feFuncA type="linear" slope="0.62" intercept="0" /></feComponentTransfer>
+          <feMerge><feMergeNode in="fill" /><feMergeNode in="rim" /></feMerge>
+        </filter>
+      </svg>
       <main>
         <section className="hero section-shell" id="top">
           <div className="hero-copy" data-reveal>
@@ -435,34 +470,21 @@ function App() {
               ref={dialogRef}
               className="book-popover-backdrop"
               aria-labelledby="book-popover-title"
-              onCancel={(event) => { event.preventDefault(); closeBook(); }}
-              onClick={(event) => { if (event.target === event.currentTarget) closeBook(); }}
+              className={bookClosing ? "book-popover-backdrop is-closing" : "book-popover-backdrop"}
+              onCancel={(event) => { event.preventDefault(); closeBookAnimated(); }}
+              onClick={(event) => { if (event.target === event.currentTarget) closeBookAnimated(); }}
             >
               <div
-                className="book-popover"
+                className="book-popover book-viewer"
                 style={{
                   "--cover": `url(${activeBook.image})`,
-                  "--open-x": "0px",
-                  "--open-y": "0px",
+                  "--open-x": `${activeBook.originX}px`,
+                  "--open-y": `${activeBook.originY}px`,
                 }}
                 onClick={(event) => event.stopPropagation()}
               >
-                <button
-                  className="book-popover-close"
-                  type="button"
-                  aria-label="Close book details"
-                  onClick={closeBook}
-                >
-                  ×
-                </button>
-                <BookCover book={activeBook} className="book-detail-cover" />
-                <div className="book-page-left">
-                  <h3 id="book-popover-title">{activeBook.title}</h3>
-                  <p className="book-author">{activeBook.author}</p>
-                </div>
-                <div className="book-page-right">
-                  <p>{activeBook.summary}</p>
-                </div>
+                <BookPreview book={activeBook} onClose={closeBookAnimated} />
+
                 </div>
               </dialog>
           )}
@@ -470,7 +492,7 @@ function App() {
 
       </main>
       <footer className="ipod-footer" id="contact" aria-label="Contact">
-        <web-music-ipod backlit="true" aria-label="Contact and links on the iPod" />
+        <ContactIpod />
       </footer>
     </div>
   );
