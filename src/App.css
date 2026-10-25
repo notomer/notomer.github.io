@@ -3958,12 +3958,13 @@ a:focus-visible, button:focus-visible { outline: 3px solid #126ac6; outline-offs
   .topbar .nav-links a:is(:hover, :focus-visible) .nav-link-surface { transform: none; }
 }
 
-/* Slightly translucent glass: instead of being perfectly clear, the lens picks
-   up a faint white wash so the page behind it is gently veiled, and the rim
-   carries a thin translucent band — the ball and the expanded bar alike. */
-.topbar .liquid-glass-surface {
-  background: linear-gradient(125deg, #ffffff2e, #ffffff0f 40%, #ffffff14 72%, #ffffff24);
+/* Navbar retired from the frontend: the whole topbar (OK monogram chip,
+   goo/switcher ball experiments, expand logic, mobile styles) is retained in
+   both markup and CSS, but never rendered. Delete this rule to relaunch it. */
+.identity-site .topbar {
+  display: none;
 }
+
 .topbar .liquid-glass-surface::after {
   content: "";
   position: absolute;
