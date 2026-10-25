@@ -105,7 +105,10 @@ export default function BookPreview({ book, onClose }) {
       ));
       shadow.position.set(.65, -.3, -.5);
       group.add(shadow);
-      let progress = reducedMotion ? 1 : 0;
+      // On mobile the shelf pivot is a fidgety delay: a tap should present the
+      // book already open, so coarse-pointer/small screens open at progress 1.
+      const instantOpen = window.matchMedia('(hover: none), (max-width: 680px)').matches;
+      let progress = reducedMotion || instantOpen ? 1 : 0;
       let last = performance.now();
       let start = last;
       let textureReady = false;

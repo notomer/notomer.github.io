@@ -312,6 +312,13 @@ function App() {
     };
   }, [activeBook]);
 
+  // Opening the site should land on the hero, not on whatever position the
+  // browser remembered from the previous visit (or a stale #section hash).
+  useEffect(() => {
+    if ("scrollRestoration" in window.history) window.history.scrollRestoration = "manual";
+    if (!window.location.hash) window.scrollTo(0, 0);
+  }, []);
+
   useEffect(() => {
     document.title = "From, Omer";
 
