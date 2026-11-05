@@ -2089,11 +2089,17 @@ function uo(e) {
   };
 }
 function vo(e, t) {
-  return t && e.scrollIntoView({ block: "nearest" }), {
-    update(i) {
-      i && e.scrollIntoView({ block: "nearest" });
-    }
+  const scrollSelected = (selected) => {
+    if (!selected) return;
+    // Scroll only the menu; scrollIntoView also moves the host page on startup.
+    const list = e.parentElement;
+    const top = e.offsetTop - list.offsetTop;
+    const bottom = top + e.offsetHeight;
+    if (top < list.scrollTop) list.scrollTop = top;
+    else if (bottom > list.scrollTop + list.clientHeight) list.scrollTop = bottom - list.clientHeight;
   };
+  scrollSelected(t);
+  return { update: scrollSelected };
 }
 function yo(e, t, i) {
   let l, a;
